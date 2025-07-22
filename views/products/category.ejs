@@ -1,0 +1,127 @@
+<%- include('../partials/header') %>
+    <link rel="stylesheet" href="/css/category.css">
+
+    <body>
+        <br> <br> <br><br><br> 
+        <!-- Your header/navigation -->
+
+        <main>
+            <section id="category-lander"
+                style="background: url('/images/Product_bg.jpg') center center / cover no-repeat;">
+                <div class="container-fluid">
+                    <h1>
+                        <%= category.title %>
+                    </h1>
+                    <p>
+                        <%= category.description %>
+                    </p>
+                </div>
+            </section> 
+
+            <% let sliderCount=0; %>
+                <!-- Check if category has classifications -->
+                <% if (category.hasClassifications && category.processedClassifications) { %>
+                    <!-- Classifications Section -->
+                    <section class="classifications-section">
+                        <div class="container">
+                            <% Object.keys(category.processedClassifications).forEach(classificationId=> { %>
+                                <% const classification=category.processedClassifications[classificationId]; %>
+                                    <div class="classification-section">
+                                        <div class="classification-header">
+                                            <h3>
+                                                <%= classification.title %>
+                                            </h3>
+                                            <p>
+                                                <%= classification.description %>
+                                            </p>
+                                        </div>
+                                        
+                                        <!-- Products Display -->
+                                        <div class="products-container">
+                                            <% if (classification.displayType==='slider' ) { %>
+                                                <!-- Slider Display -->
+                                                <div class="view-more-section">
+                                                    <a href="/products/category/<%= category.id %>/classification/<%= classificationId %>"
+                                                        class="btn btn-primary">View All <%= classification.title %></a>
+                                                </div>
+                                                <% sliderCount++; %>
+                                                    <%- include('./product-slider', { classification, sliderId: 'slider'
+                                                        + sliderCount }) %>
+                                                        <!-- View More Button -->
+                                                        <% } else { %>
+                                                            <section id="category-products">
+                                                                <div class="container-fluid">
+                                                                    <div class="products-grid">
+                                                                        <% classification.products.forEach(product=> {
+                                                                            %>
+                                                                            <div class="modern-card">
+                                                                                <div class="modern-card-img"
+                                                                                    style="background-image: url('<%= product.image %>');">
+                                                                                </div>
+                                                                                <div class="modern-card-content">
+                                                                                    <h3 class="modern-card-title">
+                                                                                        <%= product.title %>
+                                                                                    </h3>
+                                                                                    <p class="modern-card-description">
+                                                                                        <%= product.description.substring(0,
+                                                                                            150) %>
+                                                                                            <%
+                                                                                                if(product.description.length>
+                                                                                                150) { %>
+                                                                                                ...
+                                                                                                <% } %>
+                                                                                    </p>
+                                                                                    <a href="/products/product/<%= product.key %>"
+                                                                                        class="modern-card-button">View
+                                                                                        Details</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <% }) %>
+                                                                    </div>
+                                                                </div>
+                                                            </section>
+
+                                                            <% } %>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                        </div>
+                    </section>
+                    <% } else { %>
+
+                        <section id="category-products">
+                            <div class="container-fluid">
+                                <div class="products-grid">
+                                    <% category.products.forEach(product=> { %>
+                                        <div class="modern-card">
+                                            <div class="modern-card-img"
+                                                style="background-image: url('<%= product.image %>');"></div>
+                                            <div class="modern-card-content">
+                                                <h3 class="modern-card-title">
+                                                    <%= product.title %>
+                                                </h3>
+                                                <p class="modern-card-description">
+                                                    <%= product.description.substring(0, 150) %>
+                                                        <% if(product.description.length> 150) { %>
+                                                            ...
+                                                            <% } %>
+                                                </p>
+                                                <a href="/products/product/<%= product.key %>"
+                                                    class="modern-card-button">View Details</a>
+                                            </div>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Direct Products Display (No Classifications) -->
+
+                        <% } %>
+        </main>
+
+        <!-- Your footer -->
+
+        <!-- Your JavaScript files -->
+    </body>
+
+    <%- include('../partials/footer') %>

@@ -1,0 +1,109 @@
+<%- include('../partials/header',{currentTitle: 'Solutions'}) %>
+
+
+  <link rel="stylesheet" href="/css/about.css">
+  <br><br><br><br>
+  <!-- ...page content... -->
+
+  <!-- 1. About Us Heading (White Background) -->
+  <section class="about-heading">
+    <div class="container-fluid">
+      <h1 class="heading"> Our Solutions </h1>
+      <h4 class="mission-statement">
+        At Vardhman Airport Solutions, we don't just offer services; we deliver comprehensive solutions designed to make your critical infrastructure more reliable, efficient, and future-ready. Based in Delhi, India, our expertise reaches across the globe, ensuring your operations thrive.
+      </h4>
+    </div>
+  </section>
+
+    <!-- <style>
+        .about-parallax {
+            height: 400px;
+            background: url('/images/3.png') center center / cover no-repeat fixed;
+            background-blend-mode: darken;
+            background-color: rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+    </style>
+
+  3. Parallax Image Section
+  <section class="about-parallax">
+  </section> -->
+
+  <style>
+    .modern-card-content {
+      display: flex;
+      flex-direction: column;
+      height: 60%;
+    }
+
+    .modern-card-description {
+      flex-grow: 1;
+    }
+
+    .modern-card-button {
+      margin-top: auto;
+    }
+  </style>
+
+  <section id="products">
+    <div class="container-fluid">
+      <div class="products-grid">
+        <!-- Card 1 -->
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/solutions/1.jpg');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">System Integration</h3>
+            <p class="modern-card-description">Connecting Your World</p>
+            <a href="/solutions/system-integration" class="modern-card-button">View Details</a>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/solutions/2.jpg');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">SITC / Turnkey Projects</h3>
+            <p class="modern-card-description">Your Vision, Delivered</p>
+            <a href="/solutions/sitc-turnkey-projects" class="modern-card-button">View Details</a>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/solutions/3.png');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">O&M (Operation & Maintenance)</h3>
+            <p class="modern-card-description">Keeping You Running</p>
+            <a href="/solutions/onm" class="modern-card-button">View Details</a>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/solutions/5.jpg');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Lifecycle Services</h3>
+            <p class="modern-card-description">Maximizing Your Investment</p>
+            <a href="/solutions/lifecycle-services" class="modern-card-button">View Details</a>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/solutions/4.png');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Repair and Upgrade Services</h3>
+            <p class="modern-card-description">Future-Proofing Your Assets</p>
+            <a href="/solutions/repair-upgrade-services" class="modern-card-button">View Details</a>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/solutions/6.jpg');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">3rd Party Items & Spares</h3>
+            <p class="modern-card-description">Reliable Sourcing</p>
+            <a href="/solutions/3rd-party" class="modern-card-button">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+  <%- include('../partials/footer') %>

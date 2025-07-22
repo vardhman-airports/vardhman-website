@@ -1,0 +1,868 @@
+<%- include('partials/header',{currentTitle: 'About Us'}) %>
+
+
+  <link rel="stylesheet" href="/css/about.css">
+  <br><br><br><br>
+  <!-- ...page content... -->
+
+  <!-- 1. About Us Heading (White Background) -->
+  <section class="about-heading">
+    <div class="container-fluid">
+      <h1>About Us</h1>
+      <h4 class="mission-statement">
+      We are a rapidly growing company focused on strengthening national defense and airport infrastructure through
+      indigenous design, development, and deployment of advanced technologies. Our capabilities span modernizing air
+      traffic management systems, navigational and visual aids, secure communication platforms, and integrated airport
+      infrastructure—delivering mission-critical solutions aligned with the Make in India initiative.
+    </h4>
+    </div>
+  </section>
+  
+  
+  <!-- 3. Parallax Image Section
+  <section class="about-parallax">
+    <h1 class="heading"> About Us </h1>
+    
+  </section>  -->
+
+
+  <style>
+    .hero-section {
+      padding: 0 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 10%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: -0.025em;
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      opacity: 0.95;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .timeline-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      position: relative;
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #E2E8F0, #CBD5E0);
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      margin-bottom: 60px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item:nth-child(odd) {
+      padding-right: 50%;
+      padding-left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      padding-left: 50%;
+      padding-right: 0;
+    }
+
+    .timeline-content {
+      background: white;
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+      position: relative;
+      border: 1px solid #F7FAFC;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(74, 144, 226, 0.1);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-right: 35px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-left: 35px;
+    }
+
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border: 12px solid transparent;
+      transform: translateY(-50%);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::before {
+      right: -24px;
+      border-left: 12px solid white;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content::before {
+      left: -24px;
+      border-right: 12px solid white;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: 50%;
+      top: 45%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: white;
+      font-size: 0.9rem;
+      z-index: 10;
+      box-shadow: 0 4px 15px rgba(74, 144, 226, 0.25);
+      transition: all 0.3s ease;
+      border: 3px solid white;
+    }
+
+    .timeline-marker:hover {
+      transform: translateX(-50%) scale(1.05);
+      box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+    }
+
+    .year-badge {
+      display: inline-block;
+      background: #F0F7FF;
+      color: #4A90E2;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+      border: 1px solid #E3F2FD;
+    }
+
+    .content-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1A202C;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .content-description {
+      color: #4A5568;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .highlight {
+      background: linear-gradient(120deg, #ffe0e0 0%, #e3e4fd 100%);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+      color: #2D3748;
+      border: 1px solid #F0F7FF;
+    }
+
+    .achievement-tag {
+      display: inline-block;
+      background: #F8FAFC;
+      color: #4A90E2;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1px solid #E2E8F0;
+      transition: all 0.3s ease;
+    }
+
+    .achievement-tag:hover {
+      background: #4A90E2 !important;
+      color: white !important;
+      border-color: #4A90E2 !important;
+    }
+
+    .stats-section {
+      background: #F8FAFC;
+      padding: 70px 20px;
+      margin-top: 40px;
+      border-top: 1px solid #E2E8F0;
+    }
+
+    .stats-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat-item {
+      background: white;
+      padding: 35px 25px;
+      border-radius: 16px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+      border: 1px solid #F1F5F9;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(74, 144, 226, 0.08);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #4A90E2;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 1.2rem;
+      color: #4A5568;
+      font-weight: 500;
+    }
+
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(74, 144, 226, 0.1);
+      z-index: 1000;
+    }
+
+    .scroll-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #4A90E2 0%, #357ABD 100%);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-content p {
+        font-size: 1.1rem;
+      }
+
+      .timeline::before {
+        left: 30px;
+      }
+
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
+        padding-left: 80px;
+        padding-right: 0;
+      }
+
+      .timeline-content {
+        padding: 25px;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .timeline-content::before {
+        left: -12px !important;
+        right: auto !important;
+        border-right: 12px solid white !important;
+        border-left: 12px solid transparent !important;
+      }
+
+      .timeline-marker {
+        left: 30px;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+        font-size: 0.8rem;
+      }
+
+      .content-title {
+        font-size: 1.3rem;
+      }
+
+      .content-description {
+        font-size: 0.95rem;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .stat-item {
+        padding: 30px 20px;
+      }
+    }
+
+    .company-logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+  </style>
+  <div class="scroll-indicator">
+    <div class="scroll-progress"></div>
+  </div>
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>Our Journey of Excellence</h1>
+      <!-- <p>We are a rapidly growing company focused on strengthening national defense and airport infrastructure through
+      indigenous design, development, and deployment of advanced technologies. Our capabilities span modernizing air
+      traffic management systems, navigational and visual aids, secure communication platforms, and integrated airport
+      infrastructure—delivering mission-critical solutions aligned with the Make in India initiative.</p> -->
+    </div>
+  </div>
+  <style>
+    .timeline-container, .timeline:before{
+      max-height: 1600px;
+    }
+    .timeline-item-2{
+      position: relative;
+      bottom: 10rem;
+    }
+    .timeline-item-3{
+      position: relative;
+      bottom: 20rem;
+    }
+    .timeline-item-4{
+      position: relative;
+      bottom: 30rem;
+    }
+    .timeline-item-5{
+      position: relative;
+      bottom: 40rem;
+    }
+    .timeline-item-6{
+      position: relative;
+      bottom: 50rem;
+    }
+    .stats-section{
+      margin-top: 100px;
+    }
+
+    @media (max-width: 1050px){
+      .timeline-container, .timeline:before{
+      max-height: 1750px;
+    }
+    }
+    @media (max-width: 1000px){
+      .timeline-container, .timeline:before{
+      max-height: 1800px;
+    }
+    }
+    @media (max-width: 950px){
+      .timeline-container, .timeline:before{
+      max-height: 1850px;
+    }
+    }
+    @media (max-width: 900px){
+      .timeline-container, .timeline:before{
+      max-height: 1950px;
+    }
+    }
+    @media (max-width: 850px){
+      .timeline-container, .timeline:before{
+      max-height: 2050px;
+    }
+    }
+    @media (max-width: 800px){
+      .timeline-container, .timeline:before{
+      max-height: 2150px;
+    }
+    }
+    @media (max-width: 768px){
+      .timeline-item-2,.timeline-item-3,.timeline-item-4,.timeline-item-5,.timeline-item-6{
+        position: initial;
+      }
+      .timeline-container, .timeline:before{
+        max-height: none;
+      }
+      .stats-section{
+      margin-top: 40px;
+    }
+    }
+  </style>
+
+  <div class="timeline-container">
+    <div class="timeline">
+      <div class="timeline-item timeline-item-1">
+        <div class="timeline-marker">2017</div>
+        <div class="timeline-content">
+          <div class="year-badge">2017</div>
+          <div class="content-title">Foundation & Strategic Partnerships</div>
+          <div class="content-description">
+            Established with a vision to revolutionize airfield technology solutions.
+            <span class="highlight">Formed strategic partnerships and distribution agreements</span>
+            with leading global airfield companies including ATG, RLG Docking Corporation Taiwan, and FB Technologies.
+          </div>
+          <div class="achievement-tag">Foundation Year</div>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item-2">
+        <div class="timeline-marker">2018</div>
+        <div class="timeline-content">
+          <div class="year-badge">2018</div>
+          <div class="content-title">Technological Innovation</div>
+          <div class="content-description">
+            Achieved a ground breaking milestone by completing the
+            <span class="highlight">first-ever integration of CCR (Constant Current Regulator) with ALCMS</span>
+            (Airfield Lighting Control and Monitoring System). Successfully deployed AVDGS systems with Tata Projects
+            and Bangalore Airport.
+          </div>
+          <div class="achievement-tag">Technical Excellence</div>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item-3">
+        <div class="timeline-marker">2020</div>
+        <div class="timeline-content">
+          <div class="year-badge">2020</div>
+          <div class="content-title">Government Recognition</div>
+          <div class="content-description">
+            <span class="highlight">Officially recognized as a startup by DPIIT</span>
+            in the Aeronautics/Aerospace & Defense Industry sector. Honored with the Taxpayer Award by the Ministry of
+            Finance for outstanding contribution to nation building.
+          </div>
+          <div class="achievement-tag">National Recognition</div>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item-4">
+        <div class="timeline-marker">2023</div>
+        <div class="timeline-content">
+          <div class="year-badge">2020-2023</div>
+          <div class="content-title">Airport Infrastructure Leadership</div>
+          <div class="content-description">
+            Successfully developed and deployed cutting-edge
+            <span class="highlight">LED Taxiway lights and Elevated Runway Edge lights</span>
+            across AAI Airports. Established dominant presence in airport lighting solutions with certified performance
+            excellence.
+          </div>
+          <div class="achievement-tag">Infrastructure Excellence</div>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item-5">
+        <div class="timeline-marker">2024</div>
+        <div class="timeline-content">
+          <div class="year-badge">2024</div>
+          <div class="content-title">Defense & Smart Infrastructure</div>
+          <div class="content-description">
+            Received Service Excellence Award from Adani Jaipur International Airport for AVDGS systems.
+            <span class="highlight">Successfully entered defense sector</span> with major contracts for Dehradun (₹45
+            Cr) and Srinagar (₹29 Cr) from army aviation.
+            Expanded into MES smart metering projects worth ₹25 Crores.
+          </div>
+          <div class="achievement-tag">₹100+ Crores Portfolio</div>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item-6">
+        <div class="timeline-marker">2025</div>
+        <div class="timeline-content">
+          <div class="year-badge">2025</div>
+          <div class="content-title">Global Expansion</div>
+          <div class="content-description">
+            Marked international presence with
+            <span class="highlight">successful completion of first overseas project in Hanimadhoo, Maldives</span>.
+            Exceeded order target of ₹100 Crores in FY 2024-25, establishing strong foundation for global growth.
+          </div>
+          <div class="achievement-tag">International Success</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-section">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number">8+</div>
+        <div class="stat-label">Years of Excellence</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Crores Revenue</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Key Sectors</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">200+</div>
+        <div class="stat-label">Projects</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Smooth scroll progress indicator
+    function updateScrollProgress() {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+    }
+
+    // Intersection Observer for timeline animations
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -30px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 100);
+        }
+      });
+    }, observerOptions);
+
+    // Initialize observers
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      observer.observe(item);
+    });
+
+    document.querySelectorAll('.stat-item').forEach(item => {
+      observer.observe(item);
+    });
+
+    // Smooth hover effects
+    document.querySelectorAll('.timeline-content').forEach(content => {
+      content.addEventListener('mouseenter', function () {
+        this.style.transform = 'translateY(-4px)';
+        this.style.boxShadow = '0 10px 35px rgba(74, 144, 226, 0.12)';
+      });
+
+      content.addEventListener('mouseleave', function () {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.06)';
+      });
+    });
+
+    // Scroll event listener
+    window.addEventListener('scroll', updateScrollProgress);
+
+    // Initialize
+    updateScrollProgress();
+  </script>
+  <section id="products">
+    <div class="container-fluid">
+      <div class="products-grid">
+        <!-- Card 1 -->
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/about/1.jpg');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Airport</h3>
+            <p class="modern-card-description"> Vardhman provides turnkey solutions for AGL, VDGS, Photometric, ILCMS/ALCMS,  perimeter and Apron lighting systems. Serving AAI, Adani, GMR, GVK, and other Indian and international airports. </p>
+            <a href="/airport" class="modern-card-button">View Details</a>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/about/2.jpg');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Defense</h3>
+            <p class="modern-card-description"> Modernizing Army Aviation ATC infrastructure including VHF/UHF Radio, Radars, NDBs, CCTV. Major contracts in Dehradun ($45 Cr) and Srinagar ($29 Cr), with long-term CAMCs. </p>
+            <a href="/defense" class="modern-card-button">View Details</a>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/about/3.jpg');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Railways/MES</h3>
+            <p class="modern-card-description"> Provides Smart metering solutions with 10-year SITC + O&M contracts. Secured projects in Gangtok, Prayagraj, Lucknow ($25 Cr+). Class A MES contractor, partnered with L&T and Panasonic.
+            </p>
+            <a href="/railways" class="modern-card-button">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- <section id="products">
+    <div class="container-fluid">
+      <h1 class="heading"> Glance at Our References </h1>
+      <div class="products-grid">
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/1.png');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Military Airfield Infrastructure (MAFI)</h3>
+            <p class="modern-card-description">Supporting uptime and readiness across MAFI locations with scalable,
+              compliant systems tailored for mission continuity.</p>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/2.png');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Army Aviation Command Deployments</h3>
+            <p class="modern-card-description">End-to-end command & alert systems deployed at Dehradun, Bareilly,
+              Sharifabad & Manasbal — optimized for varied terrain. </p>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/4.png');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Air Force Base Modernizations</h3>
+            <p class="modern-card-description">Delivered automation and safety systems to Palam, Hashimara, Chabua,
+              collaborating across units with precision timelines.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+
+
+
+  <!-- <section class="director-message-section">
+      <div class="director-message-container">
+        <div class="director-message-text">
+          <h1 class="director-message-title">A word from Company Director</h1>
+          <p class="director-message-quote">
+            Our USP is the deep understanding of Airport solutions market and in-depth field experience.
+            This allows us to offer best value to our customers with superior products, solutions and services at
+            reasonable prices.
+          </p>
+          <div class="director-message-name">Anshul Jain</div>
+          <div class="director-message-role">Entrepreneur / Director - <span>Vardhman Airport Solutions</span></div>
+        </div>
+        <div class="director-message-photo">
+          <img src="/images/director/2.png" alt="Director Photo" />
+        </div>
+      </div>
+    </section> -->
+  <section id="director">
+    <div class="container-fluid">
+      <h1 class="heading"> Directors </h1>
+
+      <div class="directors-grid">
+        <!-- Card 1 -->
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/director/1.png');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Sushim Jain</h3>
+            <p class="modern-card-description">With 25+ years of experience, Sushim Jain has driven 14X revenue and 38X PAT growth at Vardhman Airport Solutions, scaling the team to 230. A former Honeywell leader, he excels in finance, strategy, product development, and project management. He is an alumnus of IIM Mumbai and MIT Manipal.</p>
+            <a target="_blank" href="https://www.linkedin.com/in/sushimjain/" class="modern-card-button">LinkedIn</a>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/director/2.png');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Anshul Jain</h3>
+            <p class="modern-card-description">Anshul Jain, Director at Vardhman Airport Solutions, specializes in airport automation, security, and lighting. Known for strategic growth and key account management, he won Honeywell’s President Club Award for exceeding targets by 347%. He leads major projects for clients like DIAL and AAI.</p>
+            <a target="_blank" href="https://www.linkedin.com/in/anshulzen/" class="modern-card-button">LinkedIn</a>
+          </div>
+        </div>
+        <div class="modern-card">
+          <div class="modern-card-img" style="background-image: url('/images/director/3.jpg');"></div>
+          <div class="modern-card-content">
+            <h3 class="modern-card-title">Praveen Dubey </h3>
+            <p class="modern-card-description">Praveen Dubey, Director of Engineering & Operations at Vardhman Airport Solutions, has 20+ years in infrastructure and project delivery. He leads AGL and VDGS projects, including IGI Airport’s CAT III Lighting. He also established Vardhman’s defense vertical, known for timely, on-budget execution.</p>
+            <a target="_blank" href="https://www.linkedin.com/in/praveen-dubey-03781117/"
+              class="modern-card-button">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="about-alt-section">
+    <!-- <div class="about-alt-row">
+        <div class="about-alt-img" style="background-image: url('/images/1.png');"></div>
+        <div class="about-alt-content">
+          <h2 class="about-alt-title">Key Offerings</h2>
+          <p>
+            Vardhman Airport Solutions delivers advanced, scalable solutions for airfield infrastructure, navigational
+            aids, and secure communications, tailored for mission-critical operations.
+          </p>
+        </div>
+      </div> -->
+
+    <div id="customerEngagementCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+      data-bs-interval="3000">
+      <h1 class="heading" style="text-align: center;"> Customer Engagement </h1>
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#customerEngagementCarousel" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#customerEngagementCarousel" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#customerEngagementCarousel" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#customerEngagementCarousel" data-bs-slide-to="3"
+          aria-label="Slide 4"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/engage1.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/engage2.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/engage3.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/engage4.jpg');"></div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#customerEngagementCarousel"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#customerEngagementCarousel"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <div id="trainingProgramsCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+      data-bs-interval="3000">
+      <h1 class="heading" style="text-align: center;"> Training Programs </h1>
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#trainingProgramsCarousel" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#trainingProgramsCarousel" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#trainingProgramsCarousel" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#trainingProgramsCarousel" data-bs-slide-to="3"
+          aria-label="Slide 4"></button>
+        <!-- <button type="button" data-bs-target="#trainingProgramsCarousel" data-bs-slide-to="4"
+          aria-label="Slide 5"></button>
+        <button type="button" data-bs-target="#trainingProgramsCarousel" data-bs-slide-to="5"
+          aria-label="Slide 6"></button> -->
+      </div>
+      <div class="carousel-inner">
+        <!-- <div class="carousel-item active">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/training/1.png');">
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/training/2.jpg');"></div>
+        </div> -->
+        <div class="carousel-item active">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/training/3.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/training/4.png');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/training/5.png');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/training/6.jpg');"></div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#trainingProgramsCarousel"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#trainingProgramsCarousel"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+
+
+
+    <!-- Example Bootstrap Carousel (right side) -->
+    <!-- <div class="about-alt-row reverse">
+        <div class="about-alt-img" style="background-image: url('/images/2.png');"></div>
+        <div class="about-alt-content">
+          <h2 class="about-alt-title">Our Portfolio</h2>
+          <p>
+            Explore our diverse portfolio through this interactive showcase of successful deployments and innovative
+            projects.
+          </p>
+
+        </div>
+      </div> -->
+    <!-- Repeat as needed -->
+  </section>
+
+
+
+
+
+
+
+
+  <%- include('partials/footer') %>

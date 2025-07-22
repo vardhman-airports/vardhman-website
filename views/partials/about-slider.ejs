@@ -1,0 +1,621 @@
+<style>
+    .solutions-slider {
+        padding: 4rem 0;
+        background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+    }
+
+    .solutions-slider .container-fluid {
+        padding: 0 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .solutions-slider .slider-heading {
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700;
+        text-align: center;
+        padding: 0 0 3rem 0;
+        margin: 0;
+        color: #1e293b;
+        font-size: 2.5rem;
+    }
+
+    /* Fixed Slider Container */
+    .solutions-slider .slider-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        padding: 1rem 0;
+    }
+
+    .solutions-slider .slider-wrapper {
+        display: flex;
+        transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    /* Card Styles */
+    .solutions-slider .solution-card {
+        min-width: 350px;
+        max-width: 400px;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e4e4e7;
+        padding: 0;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    .solution-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #2563eb, #7c3aed, #dc2626);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .solution-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .solution-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Image section */
+    .solutions-slider .solution-card-img {
+        position: relative;
+        width: 100%;
+        height: 220px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .solutions-slider .solution-card-img.integration {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .solutions-slider .solution-card-img.sitc {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .solutions-slider .solution-card-img.operation {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .solutions-slider .solution-card-img.lifecycle {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+
+    .solutions-slider .solution-card-img.repair {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    }
+
+    .solutions-slider .solution-card-img::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.1);
+        transition: background 0.3s ease;
+    }
+
+    .solutions-slider .solution-card:hover .solution-card-img::after {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Card content section */
+    .solutions-slider .solution-card-content {
+        padding: 1.8rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    /* Card title */
+    .solutions-slider .solution-card-title {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    /* Card description */
+    .solutions-slider .solution-card-description {
+        font-size: 1rem;
+        color: #64748b;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+
+    /* Card button */
+    .solutions-slider .solution-card-button {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        color: #ffffff;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .solutions-slider .solution-card-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .solutions-slider .solution-card-button:hover::before {
+        left: 100%;
+    }
+
+    .solutions-slider .solution-card-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+    }
+
+    /* Navigation Controls */
+    .solutions-slider .slider-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .solutions-slider .nav-btn {
+        background: #fff;
+        border: 2px solid #e2e8f0;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        font-size: 1.2rem;
+        color: #64748b;
+    }
+
+    .solutions-slider .nav-btn:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: white;
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    .solutions-slider .nav-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .solutions-slider .nav-btn:disabled:hover {
+        background: #fff;
+        border-color: #e2e8f0;
+        color: #64748b;
+    }
+
+    /* Dots Indicator */
+    .solutions-slider .slider-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .solutions-slider .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #cbd5e1;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .solutions-slider .dot.active {
+        background: #2563eb;
+        transform: scale(1.2);
+    }
+
+    .solutions-slider .dot:hover {
+        background: #64748b;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .solutions-slider .container-fluid {
+            padding: 0 1rem;
+        }
+
+        .solutions-slider .solution-card {
+            min-width: 280px;
+            max-width: 320px;
+        }
+
+        .solutions-slider .slider-wrapper {
+            gap: 1rem;
+        }
+
+        .solutions-slider .slider-heading {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #solutions .solution-card {
+            min-width: 85vw;
+            max-width: 85vw;
+            margin: 0 auto;
+            border-radius: 16px;
+        }
+
+        #solutions .solution-card-img {
+            height: 140px;
+            font-size: 2rem;
+        }
+
+        #solutions .solution-card-content {
+            padding: 1.2rem 0.8rem;
+        }
+
+        #solutions .solution-card-title {
+            font-size: 1.1rem;
+        }
+
+        #solutions .solution-card-description {
+            font-size: 0.95rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .solutions-slider .nav-btn {
+            width: 36px;
+            height: 36px;
+            font-size: 1.2rem;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+        }
+
+        .solutions-slider .slider-nav {
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+        }
+
+        .solutions-slider .slider-container {
+            padding: 0.5rem 0 !important;
+        }
+
+        #solutions .container-fluid {
+            padding: 0 !important;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <section id="solutions" class="solutions-slider">
+        <div class="container-fluid">
+            <h1 class="slider-heading">Our Solutions</h1>
+
+            <div class="slider-container">
+                <div class="slider-wrapper" id="sliderWrapper">
+                    <div class="solution-card">
+                        <div class="solution-card-img integration">
+                            <span>🔧</span>
+                        </div>
+                        <div class="solution-card-content">
+                            <h3 class="solution-card-title">System Integration</h3>
+                            <p class="solution-card-description">
+                                Delivering seamless integration of multi-vendor systems for airfields, defense, and
+                                railway infrastructure. Ensuring interoperability, centralized control, and reliability.
+                            </p>
+                            <a href="/solutions/system-integration" class="solution-card-button">View Details</a>
+                        </div>
+                    </div>
+
+                    <div class="solution-card">
+                        <div class="solution-card-img sitc">
+                            <span>🏗️</span>
+                        </div>
+                        <div class="solution-card-content">
+                            <h3 class="solution-card-title">SITC / Turnkey Projects</h3>
+                            <p class="solution-card-description">
+                                Comprehensive Supply, Installation, Testing, and Commissioning (SITC) of end-to-end
+                                infrastructure projects. From design to deployment — we handle everything under one
+                                roof.
+                            </p>
+                            <a href="/solutions/sitc-turnkey-projects" class="solution-card-button">View Details</a>
+                        </div>
+                    </div>
+
+                    <div class="solution-card">
+                        <div class="solution-card-img operation">
+                            <span>⚙️</span>
+                        </div>
+                        <div class="solution-card-content">
+                            <h3 class="solution-card-title">O&M (Operation & Maintenance)</h3>
+                            <p class="solution-card-description">
+                                Long-term operation and maintenance of critical infrastructure systems, ensuring uptime,
+                                safety, and regulatory compliance.
+                            </p>
+                            <a href="/solutions/onm" class="solution-card-button">View Details</a>
+                        </div>
+                    </div>
+
+                    <div class="solution-card">
+                        <div class="solution-card-img lifecycle">
+                            <span>🔄</span>
+                        </div>
+                        <div class="solution-card-content">
+                            <h3 class="solution-card-title">Lifecycle Services</h3>
+                            <p class="solution-card-description">
+                                End-to-end Lifecycle Management of infrastructure assets, covering planning, deployment,
+                                monitoring, and retirement — ensuring maximum ROI.
+                            </p>
+                            <a href="/solutions/lifecycle-services" class="solution-card-button">View Details</a>
+                        </div>
+                    </div>
+
+                    <div class="solution-card">
+                        <div class="solution-card-img repair">
+                            <span>🔨</span>
+                        </div>
+                        <div class="solution-card-content">
+                            <h3 class="solution-card-title">Repair and Upgrade Services</h3>
+                            <p class="solution-card-description">
+                                Extend the life and performance of your existing systems with timely repairs, retrofits,
+                                hardware upgrades, and software updates.
+                            </p>
+                            <a href="/solutions/repair-upgrade-services" class="solution-card-button">View Details</a>
+                        </div>
+                    </div>
+                    <div class="solution-card">
+                        <div class="solution-card-img repair">
+                            <span>🔨</span>
+                        </div>
+                        <div class="solution-card-content">
+                            <h3 class="solution-card-title">3rd Party Items & Spares</h3>
+                            <p class="solution-card-description">
+                                Procurement and supply of genuine 3rd party components, spare parts, and accessories from trusted global OEMs. Full support for legacy and modern systems alike.
+                            </p>
+                            <a href="/solutions/3rd-party" class="solution-card-button">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="slider-nav">
+                <button class="nav-btn" id="prevBtn">‹</button>
+                <div class="slider-dots" id="dotsContainer"></div>
+                <button class="nav-btn" id="nextBtn">›</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        class SolutionSlider {
+            constructor() {
+                this.slider = document.getElementById('sliderWrapper');
+                this.cards = this.slider.querySelectorAll('.solution-card');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.dotsContainer = document.getElementById('dotsContainer');
+
+                this.currentIndex = 0;
+                this.cardWidth = 0;
+                this.visibleCards = 1;
+                this.maxIndex = 0;
+
+                this.init();
+            }
+
+            init() {
+                this.calculateDimensions();
+                this.createDots();
+                this.updateSlider();
+                this.bindEvents();
+                this.startAutoPlay();
+            }
+
+            calculateDimensions() {
+                const containerWidth = this.slider.parentElement.clientWidth;
+
+                if (containerWidth > 1200) {
+                    this.visibleCards = 3;
+                } else if (containerWidth > 768) {
+                    this.visibleCards = 2;
+                } else {
+                    this.visibleCards = 1;
+                }
+
+                const cardElement = this.cards[0];
+                this.cardWidth = cardElement.offsetWidth + 32; // including gap
+                this.maxIndex = Math.max(0, this.cards.length - this.visibleCards);
+            }
+
+            createDots() {
+                this.dotsContainer.innerHTML = '';
+
+                for (let i = 0; i <= this.maxIndex; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'dot';
+                    if (i === this.currentIndex) dot.classList.add('active');
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.dotsContainer.appendChild(dot);
+                }
+            }
+
+            updateSlider() {
+                let translateX;
+
+                if (this.visibleCards === 1) {
+                    // For mobile: Start from the beginning of the screen for better readability
+                    const containerWidth = this.slider.parentElement.clientWidth;
+                    const cardWidth = this.cards[0].offsetWidth;
+                    const gap = 16; // 1rem gap for mobile
+                    const padding = 16; // Small padding from edge
+
+                    translateX = padding - (this.currentIndex * (cardWidth + gap));
+                } else {
+                    // For desktop: align left
+                    translateX = -this.currentIndex * this.cardWidth;
+                }
+
+                this.slider.style.transform = `translateX(${translateX}px)`;
+
+                // Update navigation states
+                this.prevBtn.disabled = this.currentIndex === 0;
+                this.nextBtn.disabled = this.currentIndex === this.maxIndex;
+
+                // Update dots
+                this.dotsContainer.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentIndex);
+                });
+            }
+
+            goToSlide(index) {
+                this.currentIndex = Math.max(0, Math.min(index, this.maxIndex));
+                this.updateSlider();
+                this.resetAutoPlay();
+            }
+
+            nextSlide() {
+                if (this.currentIndex < this.maxIndex) {
+                    this.currentIndex++;
+                } else {
+                    this.currentIndex = 0; // Loop back to start
+                }
+                this.updateSlider();
+            }
+
+            prevSlide() {
+                if (this.currentIndex > 0) {
+                    this.currentIndex--;
+                } else {
+                    this.currentIndex = this.maxIndex; // Loop to end
+                }
+                this.updateSlider();
+            }
+
+            bindEvents() {
+                this.prevBtn.addEventListener('click', () => {
+                    this.prevSlide();
+                    this.resetAutoPlay();
+                });
+
+                this.nextBtn.addEventListener('click', () => {
+                    this.nextSlide();
+                    this.resetAutoPlay();
+                });
+
+                // Touch/swipe support
+                let startX = 0;
+                let startY = 0;
+                let distX = 0;
+                let distY = 0;
+
+                this.slider.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                });
+
+                this.slider.addEventListener('touchend', (e) => {
+                    distX = e.changedTouches[0].clientX - startX;
+                    distY = e.changedTouches[0].clientY - startY;
+
+                    if (Math.abs(distX) > Math.abs(distY) && Math.abs(distX) > 50) {
+                        if (distX > 0) {
+                            this.prevSlide();
+                        } else {
+                            this.nextSlide();
+                        }
+                        this.resetAutoPlay();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') {
+                        this.prevSlide();
+                        this.resetAutoPlay();
+                    } else if (e.key === 'ArrowRight') {
+                        this.nextSlide();
+                        this.resetAutoPlay();
+                    }
+                });
+
+                // Resize handler
+                window.addEventListener('resize', () => {
+                    this.calculateDimensions();
+                    this.createDots();
+                    this.updateSlider();
+                });
+
+                // Pause on hover
+                this.slider.addEventListener('mouseenter', () => this.stopAutoPlay());
+                this.slider.addEventListener('mouseleave', () => this.startAutoPlay());
+            }
+
+            startAutoPlay() {
+                this.stopAutoPlay();
+                this.autoPlayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 4000);
+            }
+
+            stopAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                    this.autoPlayInterval = null;
+                }
+            }
+
+            resetAutoPlay() {
+                this.stopAutoPlay();
+                setTimeout(() => this.startAutoPlay(), 1000);
+            }
+        }
+
+        // Initialize slider when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new SolutionSlider();
+        });
+    </script>

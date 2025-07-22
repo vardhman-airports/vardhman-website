@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg" href="/favicon/1.jpg">
+    <title>
+        <% if(locals.currentTitle){ %>
+            <%= currentTitle %> |
+        <% } %>
+        Vardhman Airport Solutions
+    </title>
+    <!-- Bootstrap CSS and JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <!-- Font Awesome -->
+    <script defer src="https://kit.fontawesome.com/3f1edf2db4.js" crossorigin="anonymous"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-expand-xl navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <!-- Brand (Logo + Line + DEFENCE) -->
+            <a class="navbar-brand" href="/">
+                <div class="navbar-brand-wrapper">
+                    <img class="mobile-logo"
+                        src="/favicon/1.svg"
+                        alt="Vardhman Airport Solutions">
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Navigation</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item dropdown">
+                            <div class="dropdown-toggle-wrapper">
+                                <a class="nav-link" href="#" id="searchToggle">
+                                    <i class="fas fa-search"></i>
+                                </a>
+                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                            </div> 
+                            <div class="dropdown-menu search-dropdown" aria-labelledby="searchToggle">
+                                <div class="search-container">
+                                    <input type="text" id="searchInput" class="form-control search-input"
+                                        placeholder="Search products, solutions..." autocomplete="off">
+                                    <button type="button" class="btn btn-primary search-btn" id="searchBtn">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                                <div id="searchResults" class="search-results"></div>
+                                <div id="searchLoading" class="search-loading d-none">
+                                    <i class="fas fa-spinner fa-spin"></i> Searching...
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About Us</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <div class="dropdown-toggle-wrapper">
+                                <a class="nav-link" href="/our-products" id="productsDropdown">
+                                    Our Products
+                                </a>
+                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="productsDropdown">
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/airfield-ground-lights">Airfield Ground
+                                            Lights</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li class="dropdown-submenu">
+                                            <div class="dropdown-toggle-wrapper">
+                                                <a class="dropdown-item" href="/approach-lighting">Approach Lighting</a>
+                                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                                    <i class="fa fa-caret-down"></i>
+                                                </span>
+                                            </div>
+                                            <ul class="dropdown-menu submenu-level-2">
+                                                <li><a class="dropdown-item" href="/led-approach-light">LED Approach
+                                                        Light</a></li>
+                                                <li><a class="dropdown-item" href="/led-threshold-light">LED Threshold
+                                                        Light</a></li>
+                                                <li><a class="dropdown-item" href="/led-runway-end-light">LED Runway End
+                                                        Light</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="/elevated-approach-siderow-barrette">Halogen Approach &
+                                                        Side Row</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="/elevated-threshold-threshold-wingbar">Halogen Threshold
+                                                        & Threshold Wingbar</a></li>
+                                                <li><a class="dropdown-item" href="/elevated-runway-end-light">Halogen
+                                                        Runway End Light</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="/inset-approach-siderow-barrette">Inset LED Approach Light</a></li>
+                                                <li><a class="dropdown-item" href="/inset-threshold-light">Inset
+                                                        Threshold Light</a></li>
+                                                <li><a class="dropdown-item" href="/inset-runway-end-light">Inset Runway
+                                                        End Light</a></li>
+                                                <li><a class="dropdown-item" href="/inset-threshold-wingbar">Inset
+                                                        Threshold Wingbar</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="/inset-threshold-runway-end-lights">Inset Threshold Runway
+                                                        End Lights</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <div class="dropdown-toggle-wrapper">
+                                                <a class="dropdown-item" href="/papi-lighting">PAPI Lighting</a>
+                                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                                    <i class="fa fa-caret-down"></i>
+                                                </span>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <div class="dropdown-toggle-wrapper">
+                                                <a class="dropdown-item" href="/runway-lighting">Runway Lighting</a>
+                                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                                    <i class="fa fa-caret-down"></i>
+                                                </span>
+                                            </div>
+                                            <ul class="dropdown-menu submenu-level-2">
+                                                <li><a class="dropdown-item" href="/elevated-runway-edge-light">Elevated
+                                                        Runway Edge Light</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="/centerline-tdz-high-intensity-light">Inset LED Runway Centreline Light</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="/centerline-tdz-bi-directional-light">Inset LED TDZ Uni-Directional Light</a></li>
+                                                <li><a class="dropdown-item" href="/inset-runway-edge-light">Inset
+                                                        Runway Edge Light</a></li>
+                                                <li><a class="dropdown-item" href="/runway-edge-light">Inset LED Turn Pad Light</a></li>
+                                                <li><a class="dropdown-item" href="/runway-centerline-light">Runway
+                                                        Centerline Light</a></li>
+                                                <li><a class="dropdown-item" href="/runway-tdz-light">Runway TDZ
+                                                        Light</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <div class="dropdown-toggle-wrapper">
+                                                <a class="dropdown-item" href="/taxiway-lighting">Taxiway Lighting</a>
+                                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                                    <i class="fa fa-caret-down"></i>
+                                                </span>
+                                            </div>
+                                            <ul class="dropdown-menu submenu-level-2">
+                                                <li><a class="dropdown-item" href="/taxiway-centerline-lighting">Taxiway
+                                                        Centerline Lighting</a></li>
+                                                <li><a class="dropdown-item" href="/taxiway-stopbar">Taxiway Stopbar</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="/taxiway-indicator">Taxiway Indicator Light</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="/taxiway-indermediate">Intermediate Holding Position Light</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="/high-intensity-runway-guard-light">High Intensity Runway Guard Light</a></li>
+                                                <li><a class="dropdown-item" href="/elevated-omni-directional-light">Halogen Taxiway Edge Light</a></li>
+                                                <li><a class="dropdown-item" href="/taxiway-apron-edge-elevated-omni-directional-light">Taxiway & apron edge Light</a></li>
+                                                <li><a class="dropdown-item" href="/inset-omni-directional-apron-light">Aircraft Stand Manoeuvring Guidance Light</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <div class="dropdown-toggle-wrapper">
+                                                <a class="dropdown-item" href="/airfield-guidance-signs">Airfield
+                                                    Guidance Signs</a>
+                                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                                    <i class="fa fa-caret-down"></i>
+                                                </span>
+                                            </div>
+                                            <ul class="dropdown-menu submenu-level-2">
+                                                <li><a class="dropdown-item"
+                                                        href="/mandatory-information-signs">Mandatory Information
+                                                        Signs</a></li>
+                                                <li><a class="dropdown-item" href="/runway-distance-marker">Runway
+                                                        Distance Marker</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <div class="dropdown-toggle-wrapper">
+                                                <a class="dropdown-item"
+                                                    href="/transformers-connector-kits">Transformers & Connector
+                                                    Kits</a>
+                                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                                    <i class="fa fa-caret-down"></i>
+                                                </span>
+                                            </div>
+                                            <ul class="dropdown-menu submenu-level-2">
+                                                <li><a class="dropdown-item"
+                                                        href="/series-circuit-isolating-transformers">Series Circuit
+                                                        Isolating Transformers</a></li>
+                                                <li><a class="dropdown-item" href="/primary-connector-kits-2">Primary
+                                                        Connector Kits</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="/primary-connector-kits-resin-type">Primary Connector Kits
+                                                        Resin Type</a></li>
+                                                <li><a class="dropdown-item" href="/secondary-connector-kits">Secondary
+                                                        Connector Kits</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <div class="dropdown-toggle-wrapper">
+                                                <a class="dropdown-item" href="/ccrs-accessories">CCRs & Accessories</a>
+                                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                                    <i class="fa fa-caret-down"></i>
+                                                </span>
+                                            </div>
+                                            <ul class="dropdown-menu submenu-level-2">
+                                                <li><a class="dropdown-item" href="/micro-100-ccr">Micro Processor Controlled CCR</a>
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        href="/multiway-circuit-selector-switch">Multiway Circuit
+                                                        Selector Switch</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="/series-circuit-cut-out-switch">Series Circuit Cut Out
+                                                        Switch</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <div class="dropdown-toggle-wrapper">
+                                                <a class="dropdown-item" href="/portable-lighting">Portable Lighting</a>
+                                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                                    <i class="fa fa-caret-down"></i>
+                                                </span>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-submenu">
+                                            <div class="dropdown-toggle-wrapper">
+                                                <a class="dropdown-item" href="/windsock-mast">Windsock Mast</a>
+                                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                                    <i class="fa fa-caret-down"></i>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/avdgs"> AVDGS </a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/photometric-system">Photometric System</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/photometric-workshop-equipment">Photometric
+                                                Workshop Equipment</a></li>
+                                        <li><a class="dropdown-item" href="/workshop-photometry-controller">Workshop photometry controller</a></li>
+                                        <li><a class="dropdown-item" href="/m-tac">m-TAC</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="/pac-matrix">PAC Matrix</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="/photometric-airfield-calibration">Photometric Airfield
+                                                Calibration</a></li>
+                                        <li><a class="dropdown-item" href="/papi-photometric-calibration-system">PAPI
+                                                Photometric Calibration System</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="/airfield-guidance-signs-calibration-system">Airfield Guidance
+                                                Signs Calibration System</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="/sodice-airfield-lighting-soda-powder-cleaning-equipment">SODICE
+                                                Airfield Lighting Soda Powder Cleaning Equipment</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/ilcms">ALCMS</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/heliport-lighting">Heliport Lighting</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/aiming-point-lights">HAPI</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/approach-steady">Helipad Elevated Light</a></li>
+                                        <li><a class="dropdown-item" href="/heliport-beacon">Heliport Beacon</a></li>
+                                        <li><a class="dropdown-item" href="/fato">Heliport Inset Light</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="/floodlight-helipad-lighting-system">Floodlight Helipad Lighting
+                                                System</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/air-traffic-management">Air Traffic
+                                            Management</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/air-traffic-management-system">Air Traffic
+                                                Management System</a></li>
+                                        <li><a class="dropdown-item" href="/trailer-mounted-mobile-atc">Trailer Mounted
+                                                Mobile ATC</a></li>
+                                        <li><a class="dropdown-item" href="/digital-voice-recorder-system">Digital Voice
+                                                Recorder System</a></li>
+                                        <li><a class="dropdown-item" href="/airfield-alarm-system"> Airfield Alarm System </a></li>
+                                        <li><a class="dropdown-item" href="/airfield-road-traffic-management">Airfield Road Traffic Management</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/navigation-tracking">Navigation Aids</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/portable-tracking-system">Portable Tracking
+                                                System</a></li>
+                                        <li><a class="dropdown-item" href="/ndb-beacon">NDB Beacon</a></li>
+                                        <li><a class="dropdown-item" href="/cadf-system">CADF System</a></li>
+                                        <li><a class="dropdown-item" href="/aircraft-monitoring-system">Aircraft
+                                                Monitoring System</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/weather-communication">Weather &
+                                            Communication</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item"
+                                                href="/automatic-weather-observation-system">Automatic Weather
+                                                Observation System</a></li>
+                                        <li><a class="dropdown-item" href="/weather-radar">Weather Radar</a></li>
+                                        <li><a class="dropdown-item" href="/voice-communication-control-system">Voice
+                                                Communication Control System</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/support-equipment">Smart Equipment</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/power-generation-system">Power Generation
+                                                System</a></li>
+                                        <li><a class="dropdown-item" href="/equipment-shelter">Equipment Shelter</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/runway-miscellaneous-equipment">Runway
+                                                Miscellaneous Equipment</a></li>
+                                        <li><a class="dropdown-item" href="/external-pilot-cage-protection">External Pilot Cage Protection</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/emergency-alert-system">Emergency Alert
+                                                System</a></li> 
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/smart-metering">Smart Metering</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/smart-energy-meter">Smart Energy Meter</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <div class="dropdown-toggle-wrapper">
+                                <a class="nav-link" href="/solutions" id="solutionsDropdown">
+                                    Our Solutions
+                                </a>
+                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="productsDropdown">
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/solutions/system-integration"> System Integration </a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/solutions/sitc-turnkey-projects"> SITC / Turnkey Projects </a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/solutions/onm"> O&M </a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/solutions/lifecycle-services"> Lifecycle Services </a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/solutions/repair-upgrade-services"> Repair and Upgrade Services </a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/solutions/3rd-party"> 3rd Party Items & Spares </a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/news">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/pov">Discover</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/careers">Careers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>

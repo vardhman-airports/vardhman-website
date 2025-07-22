@@ -1,0 +1,251 @@
+<%- include('../partials/header',{currentTitle: 'Our Products'}) %>
+
+    <link rel="stylesheet" href="/css/products.css">
+
+    <br><br><br>
+
+    <!-- Hero Section -->
+    <!-- <section id="products-lander" style="background: url('/images/Product_bg.jpg') center center / cover no-repeat;">
+    <div class="container-fluid">
+        <h1>Products</h1>
+        <p>Vardhman Airport Solutions Limited, part of the "Make in India" initiative, manufactures Airfield Ground
+            Lighting (AGL) lights, signs, AVDGS units, CCRs, ALCMS, and accessories. The company focuses on
+            high-quality, cost-effective products integrated with installations and services.</p>
+    </div>
+</section> -->
+
+    <!-- Products Section with Sidebar -->
+    <section id="products-main">
+        <div class="container-fluid">
+            <div class="products-layout">
+
+                <!-- Sidebar -->
+                <div class="products-sidebar">
+                    <div class="sidebar-sticky">
+                        <h3>Filter Products</h3>
+                        <div class="filter-section">
+                            <button id="clear-filters" class="clear-btn">Clear All Filters</button>
+                        </div>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="filter-section">
+                        <label>Search Products</label>
+                        <div class="products-filter-search-container">
+                            <input type="text" id="products-filter-search-input" placeholder="Search products..."
+                                value="<%= filters.search || '' %>">
+                            <button type="button" id="products-filter-search-btn" class="products-filter-search-btn">
+                                <i class="fas fa-search"></i>                                
+                            </button>
+                        </div>
+                    </div>
+
+                    <style>
+                        .products-filter-search-container {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        .products-filter-search-container input {
+                            flex: 1;
+                            padding-right: 40px;
+                            /* Make room for the button */
+                        }
+
+                        .products-filter-search-btn {
+                            position: absolute;
+                            right: 5px;
+                            background: none;
+                            border: none;
+                            color: #666;
+                            cursor: pointer;
+                            padding: 5px;
+                            border-radius: 3px;
+                            transition: color 0.3s ease;
+                        }
+
+                        .products-filter-search-btn:hover {
+                            color: #333;
+                            background-color: #f0f0f0;
+                        }
+                    </style>
+
+                    <!-- Sectors -->
+                    <div class="filter-section">
+                        <div class="filter-header" data-filter="sectors">
+                            <span>Sectors</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-content" id="sectors-content">
+                            <% sidebar.sectors.forEach(sector=> { %>
+                                <div class="filter-item">
+                                    <input type="radio" id="sector-<%= sector %>" name="sector" value="<%= sector %>"
+                                        <%=filters.sector===sector ? 'checked' : '' %>>
+                                    <label for="sector-<%= sector %>">
+                                        <%= sector.charAt(0).toUpperCase() + sector.slice(1) %>
+                                    </label>
+                                </div>
+                                <% }); %>
+                        </div>
+                    </div>
+
+                    <!-- Categories -->
+                    <!-- Categories -->
+                    <div class="filter-section">
+                        <div class="filter-header" data-filter="categories">
+                            <span>Categories</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="filter-content" id="categories-content">
+                            <% Object.entries(sidebar.categories).forEach(([categoryId, category])=> { %>
+                                <div class="filter-item">
+                                    <div class="main-category-item"> <!-- Add wrapper div -->
+                                        <input type="radio" id="category-<%= categoryId %>" name="category"
+                                            value="<%= categoryId %>" <%=filters.category===categoryId ? 'checked' : ''
+                                            %>>
+                                        <label for="category-<%= categoryId %>">
+                                            <%= category.title %>
+                                        </label>
+                                    </div>
+
+                                    <!-- Classifications (subcategories) -->
+                                    <% if (category.hasClassifications && Object.keys(category.classifications).length>
+                                        0) { %>
+                                        <div class="sub-filter-content" id="classifications-<%= categoryId %>"
+                                            style="display: none;">
+                                            <% Object.entries(category.classifications).forEach(([classificationId,
+                                                classification])=> { %>
+                                                <div class="sub-filter-item">
+                                                    <input type="radio" id="classification-<%= classificationId %>"
+                                                        name="classification" value="<%= classificationId %>"
+                                                        data-parent-category="<%= categoryId %>"
+                                                        <%=filters.classification===classificationId ? 'checked' : ''
+                                                        %>>
+                                                    <label for="classification-<%= classificationId %>">
+                                                        <%= classification.title %>
+                                                    </label>
+                                                </div>
+                                                <% }); %>
+                                        </div>
+                                        <% } %>
+                                </div>
+                                <% }); %>
+                        </div>
+                    </div>
+
+                    <!-- Markets -->
+                    <% if(sidebar.markets && sidebar.markets.length> 0) { %>
+                        <div class="filter-section">
+                            <div class="filter-header" data-filter="markets">
+                                <span>Markets</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="filter-content" id="markets-content">
+                                <% sidebar.markets.forEach(market=> { %>
+                                    <div class="filter-item">
+                                        <input type="radio" id="market-<%= market %>" name="market"
+                                            value="<%= market %>" <%=filters.market===market ? 'checked' : '' %>>
+                                        <label for="market-<%= market %>">
+                                            <%= market %>
+                                        </label>
+                                    </div>
+                                    <% }); %>
+                            </div>
+                        </div>
+                        <% } %>
+
+                            <!-- Types -->
+                            <div class="filter-section">
+                                <div class="filter-header" data-filter="types">
+                                    <span>Product Types</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <div class="filter-content" id="types-content">
+                                    <% sidebar.types.forEach(type=> { %>
+                                        <div class="filter-item">
+                                            <input type="radio" id="type-<%= type %>" name="type" value="<%= type %>"
+                                                <%=filters.type===type ? 'checked' : '' %>>
+                                            <label for="type-<%= type %>">
+                                                <%= type %>
+                                            </label>
+                                        </div>
+                                        <% }); %>
+                                </div>
+                            </div>
+
+
+                            <!-- Clear Filters -->
+                </div>
+
+                <!-- Main Content -->
+                <div class="products-content">
+                    <div class="products-header">
+                        <h2>
+                            <%= title %>
+                        </h2>
+
+                        <div class="results-info">
+                            <span>Results: <%= totalResults %></span>
+                            <div class="view-toggle">
+                                <button id="grid-view" class="view-btn active">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button id="list-view" class="view-btn">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <% if(locals.description) { %>
+                        <p class="products-description">
+                            <%= description %>
+                        </p>
+                        <% } %>
+
+                            <!-- Products Grid -->
+                            <div class="products-grid" id="products-grid">
+                                <% if (products.length> 0) { %>
+                                    <% products.forEach(product=> { %>
+                                        <div class="modern-card">
+                                            <div class="modern-card-content">
+                                                <h3 class="modern-card-title">
+                                                    <%= product.title %>
+                                                </h3>
+                                                <p class="modern-card-description">
+                                                    <%= product.description.substring(0, 150) %>
+                                                        <% if(product.description.length> 150) { %>
+                                                            ...
+                                                            <% } %>
+                                                </p>
+                                                <div class="product-meta">
+                                                    <% if(product.type) { %>
+                                                        <span class="product-type">
+                                                            <%= product.type %>
+                                                        </span>
+                                                        <% } %>
+                                                            <% if (Array.isArray(product.sector)) { %>
+                                                                <span class="product-sector">
+                                                                    <%= product.sector.join(', ') %></span>
+                                        <% } else { %>
+                                            <span class="product-sector"><%= product.sector %></span>
+                                        <% } %>
+                                    </div>
+                                    <a href="/<%= product.key %>" class="modern-card-button">View Details</a>
+                                </div>
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <div class="no-products">
+                            <h3>No products found</h3>
+                            <p>Try adjusting your filters to see more products.</p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/js/products.js"></script>
+<%- include('../partials/footer') %>

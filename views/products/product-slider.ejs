@@ -1,0 +1,359 @@
+<style>
+    .product-slider {
+        padding: 4rem 0;
+        background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+    }
+
+    .product-slider .container-fluid {
+        padding: 0 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .product-slider .heading {
+        font-family: "Playfair Display", Georgia, serif;
+        font-weight: 700;
+        text-align: center;
+        padding: 0 0 3rem 0;
+        margin: 0;
+        color: #1e293b;
+        font-size: 2.5rem;
+    }
+
+    /* Slider Container */
+    .product-slider .slider-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        padding: 1rem 0;
+    }
+
+    .product-slider .slider-wrapper {
+        display: flex;
+        transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+
+    /* Card Styles */
+    .product-slider .modern-card {
+        min-width: 350px;
+        max-width: 400px;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e4e4e7;
+        padding: 0;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+    }
+
+    .modern-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #2563eb, #7c3aed, #dc2626);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .modern-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .modern-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Image section */
+    .product-slider .modern-card-img {
+        position: relative;
+        width: 100%;
+        height: 220px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .product-slider .modern-card-img.aviation {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .product-slider .modern-card-img.defense {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .product-slider .modern-card-img.mes {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .product-slider .modern-card-img::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.1);
+        transition: background 0.3s ease;
+    }
+
+    .product-slider .modern-card:hover .modern-card-img::after {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Card content section */
+    .product-slider .modern-card-content {
+        padding: 1.8rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    /* Card title */
+    .product-slider .modern-card-title {
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    /* Card description */
+    .product-slider .modern-card-description {
+        font-size: 1rem;
+        color: #64748b;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+    }
+
+    /* Card button */
+    .product-slider .modern-card-button {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.5rem;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        color: #ffffff;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .product-slider .modern-card-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .product-slider .modern-card-button:hover::before {
+        left: 100%;
+    }
+
+    .product-slider .modern-card-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+    }
+
+    /* Navigation Controls */
+    .product-slider .slider-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .product-slider .nav-btn {
+        background: #fff;
+        border: 2px solid #e2e8f0;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-slider .nav-btn:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: white;
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    .product-slider .nav-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .product-slider .nav-btn:disabled:hover {
+        background: #fff;
+        border-color: #e2e8f0;
+        color: #64748b;
+    }
+
+    /* Dots Indicator */
+    .product-slider .slider-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .product-slider .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #cbd5e1;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .product-slider .dot.active {
+        background: #2563eb;
+        transform: scale(1.2);
+    }
+
+    .product-slider .dot:hover {
+        background: #64748b;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .product-slider .container-fluid {
+            padding: 0 1rem;
+        }
+
+        .product-slider .modern-card {
+            min-width: 280px;
+            max-width: 320px;
+        }
+
+        .product-slider .slider-wrapper {
+            gap: 1rem;
+        }
+
+        .product-slider .heading {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #products .modern-card {
+            min-width: 85vw;
+            max-width: 85vw;
+            margin: 0 auto;
+            border-radius: 16px;
+        }
+
+        #products .modern-card-img {
+            height: 140px;
+            font-size: 2rem;
+        }
+
+        #products .modern-card-content {
+            padding: 1.2rem 0.8rem;
+        }
+
+        #products .modern-card-title {
+            font-size: 1.1rem;
+        }
+
+        #products .modern-card-description {
+            font-size: 0.95rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .product-slider .nav-btn {
+            width: 36px;
+            height: 36px;
+            font-size: 1.2rem;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+        }
+
+        .product-slider .slider-nav {
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+        }
+
+        .product-slider .slider-container {
+            padding: 0.5rem 0 !important;
+        }
+
+        #products .container-fluid {
+            padding: 0 !important;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <section id="products" class="product-slider">
+        <div class="container-fluid">
+
+            <div class="slider-container">
+                <div class="slider-wrapper" id="sliderWrapper-<%= sliderId %>">
+                    <% classification.products.forEach(product=> { %>
+                        <div class="modern-card">
+                            <div class="modern-card-img" style="background-image: url('<%= product.image %>');"></div>
+                            <div class="modern-card-content">
+                                <h3 class="modern-card-title">
+                                    <%= product.title %>
+                                </h3>
+                                <p class="modern-card-description">
+                                    <%= product.description.substring(0, 150) %>
+                                        <% if(product.description.trim().length> 150) { %>
+                                            ...
+                                            <% } %>
+                                </p>
+                                <a href="/products/product/<%= product.key %>" class="modern-card-button">View
+                                    Details</a>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="slider-nav">
+                <button class="nav-btn" id="prevBtn-<%= sliderId %>">‹</button>
+                <div class="slider-dots" id="dotsContainer-<%= sliderId %>"></div>
+                <button class="nav-btn" id="nextBtn-<%= sliderId %>">›</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Initialize slider when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new CardSlider('<%= sliderId %>');
+        });
+    </script>

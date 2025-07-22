@@ -1,0 +1,16 @@
+# Ignore node_modules (if not already present)
+node_modules/
+*node_modules/
+public/videos/
+
+
+# Ignore specific folders in public/ (if you want some parts but not others)
+# Example:
+# public/data/
+# public/images/
+
+# Ignore other folders/files if needed
+*.log
+.env
+.DS_Store
+Thumbs.db

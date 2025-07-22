@@ -1,0 +1,151 @@
+<%- include('../partials/header',{currentTitle: 'Careers'}) %>
+
+<link rel="stylesheet" href="/css/careers.css">
+<br><br><br><br><br>
+
+<section id="careers-grid">
+    <div class="container-fluid">
+        <h1 class="heading" style="padding-bottom: 0;">Join Our Team</h1>
+        <p style="text-align: center; font-size: x-large; padding: .5rem 0 2rem; color: #0077b6;"> Reach out to us at <a href="mailto:careers@vardhmanairports.com">careers@vardhmanairports.com</a></p>
+        <div class="careers-grid">
+            <% if (careers.length === 0) { %>
+                <div class="no-jobs">
+                    <h3>No Openings Available</h3>
+                    <p>We don't have any open positions at the moment, but we're always looking for talented individuals. Check back soon!</p>
+                </div>
+            <% } else { %>
+                <% careers.forEach(job => { %>
+                    <% if (job.status === 'active') { %>
+                        <div class="job-card">
+                            <div class="job-status <%= job.status %>"><%= job.status %></div>
+                            <div class="job-card-header">
+                                <h3 class="job-title"><%= job.title %></h3>
+                                <p class="job-department"><%= job.department %></p>
+                            </div>
+                            <div class="job-card-content">
+                                <!-- <p class="job-description"><%= job.description %></p> -->
+                                <div class="job-details">
+                                    <div class="job-detail-item">
+                                        <svg class="job-detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        </svg>
+                                        <span><%= job.location %></span>
+                                    </div>
+                                    <div class="job-detail-item">
+                                        <svg class="job-detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6"/>
+                                        </svg>
+                                        <span><%= job.type %></span>
+                                    </div>
+                                    <% if (job.experience) { %>
+                                        <!-- <div class="job-detail-item">
+                                            <svg class="job-detail-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            <span><%= job.experience %></span>
+                                        </div> -->
+                                    <% } %>
+                                </div>
+                            </div>
+                            <div class="job-card-actions">
+                                <button class="job-card-button view-btn" onclick="showJobDetails('<%= job.id %>')">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                    View Details
+                                </button>
+                                <button class="job-card-button apply-btn" onclick="showApplicationForm('<%= job.id %>', '<%= job.title %>')">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                    Apply Now
+                                </button>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }) %>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<!-- Job Details Modal -->
+<div id="jobModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <div id="modalHeader">
+                <!-- Job header content will be loaded here -->
+            </div>
+        </div>
+        <div class="modal-body">
+            <div id="modalBody">
+                <!-- Job details content will be loaded here -->
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button class="modal-btn modal-apply-btn" id="modalApplyBtn">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Apply for this Position
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Application Form Modal -->
+<div id="applicationModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="closeApplicationModal()">&times;</span>
+            <h2 class="modal-job-title" id="applicationJobTitle">Apply for Position</h2>
+        </div>
+        <div class="modal-body">
+            <form id="applicationForm" class="application-form" enctype="multipart/form-data">
+                <div id="applicationAlert"></div>
+                
+                <div class="form-group">
+                    <label for="applicantName">Full Name *</label>
+                    <input type="text" id="applicantName" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="applicantEmail">Email Address *</label>
+                    <input type="email" id="applicantEmail" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="applicantMobile">Mobile Number *</label>
+                    <input type="tel" id="applicantMobile" name="mobile" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="applicantResume">Resume/CV * (PDF, DOC, DOCX - Max 5MB)</label>
+                    <input type="file" id="applicantResume" name="resume" accept=".pdf,.doc,.docx" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="applicantMessage">Cover Letter/Message</label>
+                    <textarea id="applicantMessage" name="message" placeholder="Tell us why you're interested in this position and what makes you a great fit..."></textarea>
+                </div>
+                
+                <div class="form-group optional">
+                    <label for="applicantReference">Reference</label>
+                    <input type="text" id="applicantReference" name="reference" placeholder="If you were referred by someone, please mention their name">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" onclick="closeApplicationModal()">Cancel</button>
+                    <button type="submit" class="submit-btn">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/js/careers.js"></script>
+
+<%- include('../partials/footer') %>

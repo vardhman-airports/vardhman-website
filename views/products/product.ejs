@@ -1,0 +1,559 @@
+<%- include('../partials/header',{currentTitle: product.title}) %>
+    <link rel="stylesheet" href="/css/product.css">
+
+    <br><br><br><br><br>
+
+    <main>
+        <!-- Product Detail Section -->
+        <section class="product-detail-section">
+            <div class="container">
+                <div class="product-detail-wrapper">
+                    <!-- Main Product Content (Left Side) -->
+                    <div class="product-main-content">
+                        <!-- Product Images -->
+                        <% if(product.image){ %>
+                        <div class="product-images">
+                            <div class="main-image">
+                                <img src="<%= product.image %>" alt="<%= product.title %>" id="mainProductImage">
+                            </div>
+                            <% if (product.portfolioImage) { %>
+                                <div class="thumbnail-images">
+                                    <img src="<%= product.image %>" alt="<%= product.title %>"
+                                        onclick="changeMainImage(this.src)" class="thumbnail active">
+                                    <img src="<%= product.portfolioImage %>" alt="<%= product.title %>"
+                                        onclick="changeMainImage(this.src)" class="thumbnail">
+                                </div>
+                                <% } %>
+                        </div>
+                        <% } %>
+
+                        <!-- Product Information -->
+                        <div class="product-info">
+                            <h1 class="product-title">
+                                <%= product.title %>
+                            </h1>
+
+                            <div class="product-description">
+                                <p>
+                                    <%= product.description %>
+                                </p>
+                            </div>
+
+                            <!-- Custom Sections -->
+
+
+
+                            <!-- Portfolio Lines -->
+                            <% if (product.portfolioLines && product.portfolioLines.length> 0) { %>
+                                <div class="content-section">
+                                    <h3 class="section-heading">Key Highlights</h3>
+                                    <ul class="content-list">
+                                        <% product.portfolioLines.forEach(line=> { %>
+                                            <li>
+                                                <%= line %>
+                                            </li>
+                                            <% }) %>
+                                    </ul>
+                                </div>
+                                <% } %>
+
+                                    <!-- Features -->
+                                    <% if (product.features && product.features.length> 0) { %>
+                                        <div class="content-section">
+                                            <h3 class="section-heading">Features</h3>
+                                            <ul class="content-list">
+                                                <% product.features.forEach(feature=> { %>
+                                                    <li>
+                                                        <%= feature %>
+                                                    </li>
+                                                    <% }) %>
+                                            </ul>
+                                        </div>
+                                        <% } %>
+
+                                            <!-- Key Functionalities -->
+                                            <% if (product.key_functionalities && product.key_functionalities.length> 0)
+                                                { %>
+                                                <div class="content-section">
+                                                    <h3 class="section-heading">Key Functionalities</h3>
+                                                    <ul class="content-list">
+                                                        <% product.key_functionalities.forEach(func=> { %>
+                                                            <li>
+                                                                <%= func %>
+                                                            </li>
+                                                            <% }) %>
+                                                    </ul>
+                                                </div>
+                                                <% } %>
+
+                                                    <!-- Main Equipment -->
+                                                    <% if (product.main_equipment && product.main_equipment.length> 0) {
+                                                        %>
+                                                        <div class="content-section">
+                                                            <h3 class="section-heading">Main Equipment</h3>
+                                                            <ul class="content-list equipment-list">
+                                                                <% product.main_equipment.forEach(equipment=> { %>
+                                                                    <li>
+                                                                        <%= equipment %>
+                                                                    </li>
+                                                                    <% }) %>
+                                                            </ul>
+                                                        </div>
+                                                        <% } %>
+
+                                                            <!-- Equipment List -->
+                                                            <% if (product.equipment_list &&
+                                                                product.equipment_list.length> 0) { %>
+                                                                <div class="content-section">
+                                                                    <h3 class="section-heading">Equipment Specifications
+                                                                    </h3>
+                                                                    <div class="equipment-specs">
+                                                                        <% product.equipment_list.forEach(item=> { %>
+                                                                            <div class="equipment-item">
+                                                                                <h4 class="equipment-name">
+                                                                                    <%= item.name %>
+                                                                                </h4>
+                                                                                <p class="equipment-spec">
+                                                                                    <%= item.spec %>
+                                                                                </p>
+                                                                            </div>
+                                                                            <% }) %>
+                                                                    </div>
+                                                                </div>
+                                                                <% } %>
+
+                                                                    <!-- Components -->
+                                                                    <% if (product.components &&
+                                                                        product.components.length> 0) { %>
+                                                                        <div class="content-section">
+                                                                            <h3 class="section-heading">Components</h3>
+                                                                            <div class="components-grid">
+                                                                                <%
+                                                                                    product.components.forEach(component=>
+                                                                                    { %>
+                                                                                    <div class="component-item">
+                                                                                        <h4 class="component-name">
+                                                                                            <%= component.name %>
+                                                                                        </h4>
+                                                                                        <p
+                                                                                            class="component-description">
+                                                                                            <%= component.description %>
+                                                                                        </p>
+                                                                                    </div>
+                                                                                    <% }) %>
+                                                                            </div>
+                                                                        </div>
+                                                                        <% } %>
+
+                                                                            <% if (product.relatedProducts &&
+                                                                                product.relatedProducts.length> 0) { %>
+                                                                                <div class="content-section">
+                                                                                    <div class="simple-cards-grid">
+                                                                                        <%
+                                                                                            product.relatedProducts.forEach(relatedProduct=>
+                                                                                            { %>
+                                                                                            <div
+                                                                                                class="simple-product-card">
+                                                                                                <div
+                                                                                                    class="simple-card-image">
+                                                                                                    <img src="<%= relatedProduct.image %>"
+                                                                                                        alt="<%= relatedProduct.title %>">
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="simple-card-content">
+                                                                                                    <h4
+                                                                                                        class="simple-card-title">
+                                                                                                        <%= relatedProduct.title
+                                                                                                            %>
+                                                                                                    </h4>
+                                                                                                    <a href="/<%= relatedProduct.key %>"
+                                                                                                        class="simple-card-button">View
+                                                                                                        Details</a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <% }) %>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <% } %>
+
+
+                                                                                    <% if (product.sections &&
+                                                                                        product.sections.length> 0) { %>
+                                                                                        <%
+                                                                                            product.sections.forEach(section=>
+                                                                                            { %>
+                                                                                            <div
+                                                                                                class="content-section custom-section">
+                                                                                                <% if (section.title) {
+                                                                                                    %>
+                                                                                                    <h3
+                                                                                                        class="section-heading">
+                                                                                                        <%= section.title
+                                                                                                            %>
+                                                                                                    </h3>
+                                                                                                    <% } %>
+
+                                                                                                        <% if
+                                                                                                            (section.para)
+                                                                                                            { %>
+                                                                                                            <div
+                                                                                                                class="section-paragraph">
+                                                                                                                <p>
+                                                                                                                    <%= section.para
+                                                                                                                        %>
+                                                                                                                </p>
+                                                                                                            </div>
+                                                                                                            <% } %>
+
+                                                                                                                <% if
+                                                                                                                    (section.bullets
+                                                                                                                    &&
+                                                                                                                    section.bullets.length>
+                                                                                                                    0) {
+                                                                                                                    %>
+                                                                                                                    <ul
+                                                                                                                        class="content-list section-bullets">
+                                                                                                                        <%
+                                                                                                                            section.bullets.forEach(bullet=>
+                                                                                                                            {
+                                                                                                                            %>
+                                                                                                                            <li>
+                                                                                                                                <%= bullet
+                                                                                                                                    %>
+                                                                                                                            </li>
+                                                                                                                            <% })
+                                                                                                                                %>
+                                                                                                                    </ul>
+                                                                                                                    <% }
+                                                                                                                        %>
+
+                                                                                                                        <% if
+                                                                                                                            (section.image)
+                                                                                                                            {
+                                                                                                                            %>
+                                                                                                                            <div
+                                                                                                                                class="section-image">
+                                                                                                                                <img src="<%= section.image %>"
+                                                                                                                                    alt="<%= section.title || 'Section Image' %>"
+                                                                                                                                    class="section-img">
+                                                                                                                            </div>
+                                                                                                                            <% }
+                                                                                                                                %>
+                                                                                            </div>
+                                                                                            <% }) %>
+                                                                                                <% } %>
+                                                                                                    <div
+                                                                                                        class="downloads-section">
+                                                                                                        <div
+                                                                                                            class="download-tabs">
+                                                                                                            <button
+                                                                                                                class="download-tab active"
+                                                                                                                data-tab="datasheet">
+                                                                                                                <span>Data
+                                                                                                                    Sheet</span>
+                                                                                                            </button>
+                                                                                                            <button
+                                                                                                                class="download-tab"
+                                                                                                                data-tab="manual">
+                                                                                                                <span>Manual</span>
+                                                                                                            </button>
+                                                                                                            <button
+                                                                                                                class="download-tab"
+                                                                                                                data-tab="certification">
+                                                                                                                <span>Certification</span>
+                                                                                                            </button>
+                                                                                                        </div>
+
+                                                                                                        <div
+                                                                                                            class="download-content">
+                                                                                                            <!-- Data Sheet Tab -->
+                                                                                                            <div class="download-panel active"
+                                                                                                                id="datasheet-panel">
+                                                                                                                <% if
+                                                                                                                    (product.downloads
+                                                                                                                    &&
+                                                                                                                    product.downloads.datasheet
+                                                                                                                    &&
+                                                                                                                    product.downloads.datasheet.length>
+                                                                                                                    0) {
+                                                                                                                    %>
+                                                                                                                    <%
+                                                                                                                        product.downloads.datasheet.forEach((file, index)=>
+                                                                                                                        {
+                                                                                                                        %>
+                                                                                                                        <div
+                                                                                                                            class="download-item">
+                                                                                                                            <div
+                                                                                                                                class="download-info">
+                                                                                                                                <span
+                                                                                                                                    class="download-title">
+                                                                                                                                    <%= file.title
+                                                                                                                                        %>
+                                                                                                                                </span>
+                                                                                                                                <% if
+                                                                                                                                    (file.languages)
+                                                                                                                                    {
+                                                                                                                                    %>
+                                                                                                                                    <div
+                                                                                                                                        class="language-flags">
+                                                                                                                                        <%
+                                                                                                                                            file.languages.forEach(lang=>
+                                                                                                                                            {
+                                                                                                                                            %>
+                                                                                                                                            <span
+                                                                                                                                                class="flag <%= lang.code %>">
+                                                                                                                                                <%= lang.code.toUpperCase()
+                                                                                                                                                    %>
+                                                                                                                                            </span>
+                                                                                                                                            <% })
+                                                                                                                                                %>
+                                                                                                                                    </div>
+                                                                                                                                    <% }
+                                                                                                                                        %>
+                                                                                                                            </div>
+                                                                                                                            <button
+                                                                                                                                class="download-btn"
+                                                                                                                                onclick="downloadFile('<%= product.key || productId %>', 'datasheet', '<%= index %>')">
+                                                                                                                                DOWNLOAD
+                                                                                                                                FILES
+
+                                                                                                                            </button>
+                                                                                                                        </div>
+                                                                                                                        <% })
+                                                                                                                            %>
+                                                                                                                            <% } else
+                                                                                                                                {
+                                                                                                                                %>
+                                                                                                                                <div
+                                                                                                                                    class="no-files">
+                                                                                                                                    <p>No
+                                                                                                                                        data
+                                                                                                                                        sheets
+                                                                                                                                        available
+                                                                                                                                    </p>
+                                                                                                                                    <button
+                                                                                                                                        class="enquiry-btn"
+                                                                                                                                        onclick="window.location.href='/contact'">Send
+                                                                                                                                        Enquiry</button>
+                                                                                                                                </div>
+                                                                                                                                <% }
+                                                                                                                                    %>
+                                                                                                            </div>
+
+                                                                                                            <!-- Manual Tab -->
+                                                                                                            <div class="download-panel"
+                                                                                                                id="manual-panel">
+                                                                                                                <% if
+                                                                                                                    (product.downloads
+                                                                                                                    &&
+                                                                                                                    product.downloads.manual
+                                                                                                                    &&
+                                                                                                                    product.downloads.manual.length>
+                                                                                                                    0) {
+                                                                                                                    %>
+                                                                                                                    <%
+                                                                                                                        product.downloads.manual.forEach((file, index)=>
+                                                                                                                        {
+                                                                                                                        %>
+                                                                                                                        <div
+                                                                                                                            class="download-item">
+                                                                                                                            <div
+                                                                                                                                class="download-info">
+                                                                                                                                <span
+                                                                                                                                    class="download-title">
+                                                                                                                                    <%= file.title
+                                                                                                                                        %>
+                                                                                                                                </span>
+                                                                                                                                <% if
+                                                                                                                                    (file.languages)
+                                                                                                                                    {
+                                                                                                                                    %>
+                                                                                                                                    <div
+                                                                                                                                        class="language-flags">
+                                                                                                                                        <%
+                                                                                                                                            file.languages.forEach(lang=>
+                                                                                                                                            {
+                                                                                                                                            %>
+                                                                                                                                            <span
+                                                                                                                                                class="flag <%= lang.code %>">
+                                                                                                                                                <%= lang.code.toUpperCase()
+                                                                                                                                                    %>
+                                                                                                                                            </span>
+                                                                                                                                            <% })
+                                                                                                                                                %>
+                                                                                                                                    </div>
+                                                                                                                                    <% }
+                                                                                                                                        %>
+                                                                                                                            </div>
+                                                                                                                            <button
+                                                                                                                                class="download-btn"
+                                                                                                                                onclick="downloadFile('<%= product.key || productId %>', 'manual', '<%= index %>')">
+                                                                                                                                DOWNLOAD
+                                                                                                                                FILES
+
+                                                                                                                            </button>
+                                                                                                                        </div>
+                                                                                                                        <% })
+                                                                                                                            %>
+                                                                                                                            <% } else
+                                                                                                                                {
+                                                                                                                                %>
+                                                                                                                                <div
+                                                                                                                                    class="no-files">
+                                                                                                                                    <p>No
+                                                                                                                                        manuals
+                                                                                                                                        available
+                                                                                                                                    </p>
+                                                                                                                                    <button
+                                                                                                                                        class="enquiry-btn"
+                                                                                                                                        onclick="window.location.href='/contact'">Send
+                                                                                                                                        Enquiry</button>
+                                                                                                                                </div>
+                                                                                                                                <% }
+                                                                                                                                    %>
+                                                                                                            </div>
+
+                                                                                                            <!-- Certification Tab -->
+                                                                                                            <div class="download-panel"
+                                                                                                                id="certification-panel">
+                                                                                                                <% if
+                                                                                                                    (product.downloads
+                                                                                                                    &&
+                                                                                                                    product.downloads.certification
+                                                                                                                    &&
+                                                                                                                    product.downloads.certification.length>
+                                                                                                                    0) {
+                                                                                                                    %>
+                                                                                                                    <%
+                                                                                                                        product.downloads.certification.forEach((file, index)=>
+                                                                                                                        {
+                                                                                                                        %>
+                                                                                                                        <div
+                                                                                                                            class="download-item">
+                                                                                                                            <div
+                                                                                                                                class="download-info">
+                                                                                                                                <span
+                                                                                                                                    class="download-title">
+                                                                                                                                    <%= file.title
+                                                                                                                                        %>
+                                                                                                                                </span>
+                                                                                                                                <% if
+                                                                                                                                    (file.languages)
+                                                                                                                                    {
+                                                                                                                                    %>
+                                                                                                                                    <div
+                                                                                                                                        class="language-flags">
+                                                                                                                                        <%
+                                                                                                                                            file.languages.forEach(lang=>
+                                                                                                                                            {
+                                                                                                                                            %>
+                                                                                                                                            <span
+                                                                                                                                                class="flag <%= lang.code %>">
+                                                                                                                                                <%= lang.code.toUpperCase()
+                                                                                                                                                    %>
+                                                                                                                                            </span>
+                                                                                                                                            <% })
+                                                                                                                                                %>
+                                                                                                                                    </div>
+                                                                                                                                    <% }
+                                                                                                                                        %>
+                                                                                                                            </div>
+                                                                                                                            <button
+                                                                                                                                class="download-btn"
+                                                                                                                                onclick="downloadFile('<%= product.key || productId %>', 'certification', '<%= index %>')">
+                                                                                                                                DOWNLOAD
+                                                                                                                                FILES
+
+                                                                                                                            </button>
+                                                                                                                        </div>
+                                                                                                                        <% })
+                                                                                                                            %>
+                                                                                                                            <% } else
+                                                                                                                                {
+                                                                                                                                %>
+                                                                                                                                <div
+                                                                                                                                    class="no-files">
+                                                                                                                                    <p>No
+                                                                                                                                        certifications
+                                                                                                                                        available
+                                                                                                                                    </p>
+                                                                                                                                    <button
+                                                                                                                                        class="enquiry-btn"
+                                                                                                                                        onclick="window.location.href='/contact'">Send
+                                                                                                                                        Enquiry</button>
+                                                                                                                                </div>
+                                                                                                                                <% }
+                                                                                                                                    %>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                        </div>
+                    </div>
+
+                    <!-- Similar Products Sidebar (Right Side) -->
+                    <div class="product-sidebar">
+                        <div class="sidebar-content">
+                            <h3 class="sidebar-heading">Similar Products</h3>
+                            <div class="similar-products">
+                                <% if (similarProducts && similarProducts.length> 0) { %>
+                                    <% similarProducts.forEach(similarProduct=> { %>
+                                        <div class="similar-product-card">
+                                            <div class="similar-product-image">
+                                                <img src="<%= similarProduct.image %>"
+                                                    alt="<%= similarProduct.title %>">
+                                            </div>
+                                            <div class="similar-product-info">
+                                                <h4 class="similar-product-title">
+                                                    <%= similarProduct.title %>
+                                                </h4>
+                                                <p class="similar-product-description">
+                                                    <%= similarProduct.description.substring(0, 100) %>...
+                                                </p>
+                                                <a href="/<%= similarProduct.key %>" class="similar-product-link">View
+                                                    Details</a>
+                                            </div>
+                                        </div>
+                                        <% }) %>
+                                            <% } else { %>
+                                                <p class="no-similar-products">No similar products found.</p>
+                                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        function changeMainImage(src) {
+            document.getElementById('mainProductImage').src = src;
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumb => {
+                thumb.classList.remove('active');
+                if (thumb.src === src) {
+                    thumb.classList.add('active');
+                }
+            });
+        }
+
+        // Download tabs functionality
+        document.querySelectorAll('.download-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                const tabName = this.dataset.tab;
+
+                // Remove active class from all tabs and panels
+                document.querySelectorAll('.download-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.download-panel').forEach(p => p.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding panel
+                this.classList.add('active');
+                document.getElementById(tabName + '-panel').classList.add('active');
+            });
+        });
+
+        function downloadFile(productId, fileType, fileIndex) {
+            window.location.href = `/products/download/${productId}/${fileType}/${fileIndex}`;
+        }
+    </script>
+
+    <%- include('../partials/footer') %>

@@ -1,0 +1,166 @@
+<%- include('../partials/header',{currentTitle: pageTitle}) %>
+
+<link rel="stylesheet" href="/css/about.css">
+<link rel="stylesheet" href="/css/case-studies.css">
+<br><br><br><br>
+
+<!-- About Us Heading -->
+<section class="about-heading">
+    <div class="container-fluid">
+        <h1 class="heading"><%= pageTitle || 'Our Solutions' %></h1>
+        <h4 class="mission-statement">
+            <%= pageDescription || 'Delivering comprehensive solutions for modern infrastructure challenges.' %>
+        </h4>
+    </div>
+</section>
+
+<!-- Parallax Image Section -->
+<!-- <section class="about-parallax" style="background-image: url(<%= pageImage %>);">
+</section> -->
+
+<!-- Key Features Section -->
+<section class="key-features">
+    <div class="container-fluid">
+        <% if (typeof pageBullets !== 'undefined' && pageBullets && pageBullets.length > 0) { %>
+            <div class="features-grid">
+                <% pageBullets.forEach((bullet) => { %>
+                    <div class="feature-item">
+                        <!-- <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20,6 9,17 4,12"></polyline>
+                            </svg>
+                        </div> -->
+                        <div class="feature-content">
+                            <% 
+                            const colonIndex = bullet.indexOf(':');
+                            if (colonIndex > 0) {
+                                const title = bullet.substring(0, colonIndex);
+                                const description = bullet.substring(colonIndex + 1).trim();
+                            %>
+                                <h3><%= title %></h3>
+                                <p><%= description %></p>
+                            <% } else { %>
+                                <p><%= bullet %></p>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+    </div>
+</section>
+
+<!-- Case Studies Section -->
+<section id="case-studies" class="case-studies-section">
+    <div class="container-fluid">
+        <div class="section-header">
+            <h2 class="section-title">Our Case Studies</h2>
+            <p class="section-subtitle">Explore our successful project implementations across various industries</p>
+            
+            <!-- Search Bar -->
+            <div class="case-studies-search">
+                <input type="text" id="caseStudySearch" placeholder="Search case studies..." />
+            </div>
+        </div>
+        
+        <div class="case-studies-grid">
+            <% if (typeof caseStudiesData !== 'undefined' && caseStudiesData) { %>
+                <% Object.entries(caseStudiesData).forEach(([key, caseStudy]) => { %>
+                    <div class="case-study-card" data-case="<%= key %>">
+                        <div class="case-study-image">
+                            <img src="<%= caseStudy.image %>" alt="<%= caseStudy.title %>">
+                            <div class="case-study-overlay">
+                                <div class="case-study-badge"><%= caseStudy.badge %></div>
+                            </div>
+                        </div>
+                        <div class="case-study-content">
+                            <h3 class="case-study-title"><%= caseStudy.title %></h3>
+                            <p class="case-study-description">
+                                <% 
+                                // Dynamic descriptions based on case study key
+                                let description = '';
+                                if (key.includes('airport')) {
+                                    description = 'Advanced airport infrastructure solutions ensuring safe and efficient operations with cutting-edge technology and compliance standards.';
+                                } else if (key.includes('metro') || key.includes('railway')) {
+                                    description = 'Comprehensive metro and railway infrastructure solutions delivering enhanced passenger experience and operational efficiency.';
+                                } else if (key.includes('defense')) {
+                                    description = 'Specialized defense system solutions providing secure, reliable, and mission-critical infrastructure for enhanced operational capabilities.';
+                                } else if (key.includes('port')) {
+                                    description = 'Complete port infrastructure solutions optimizing cargo handling, operational efficiency, and maritime safety standards.';
+                                } else if (key.includes('smart')) {
+                                    description = 'Innovative smart city solutions integrating IoT, AI, and modern technology for sustainable urban development.';
+                                } else {
+                                    description = 'Comprehensive infrastructure solutions delivering excellence in design, implementation, and operational performance.';
+                                }
+                                %>
+                                <%= description %>
+                            </p>
+                            <div class="case-study-stats">
+                                <% if (caseStudy.stats && caseStudy.stats.length > 0) { %>
+                                    <% caseStudy.stats.slice(0, 3).forEach((stat, index) => { %>
+                                        <div class="stat-item">
+                                            <span class="stat-value"><%= stat.value %></span>
+                                            <span class="stat-label"><%= stat.label %></span>
+                                        </div>
+                                    <% }); %>
+                                <% } %>
+                            </div>
+                            <button class="case-study-btn" data-case="<%= key %>">View Details</button>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <div class="no-case-studies">
+                    <p>No case studies available at the moment.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<!-- Case Study Modal -->
+<div class="case-study-modal" id="caseStudyModal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+        
+        <div class="modal-header">
+            <div class="modal-image">
+                <img id="modalImage" src="" alt="">
+                <div class="modal-badge" id="modalBadge"></div>
+            </div>
+            <div class="modal-title-section">
+                <h2 id="modalTitle"></h2>
+            </div>
+        </div>
+        
+        <div class="modal-body">
+            <div class="modal-section">
+                <h3>Challenge</h3>
+                <div id="modalChallenge"></div>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Solution</h3>
+                <div id="modalSolution"></div>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Results</h3>
+                <div id="modalResults"></div>
+            </div>
+            
+            <div class="modal-section">
+                <h3>Project Gallery</h3>
+                <div class="modal-gallery" id="modalGallery"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pass case studies data to JavaScript -->
+<script>
+    window.caseStudiesData = <%- JSON.stringify(caseStudiesData || {}) %>;
+</script>
+<script src="/js/case-studies.js"></script>
+<%- include('../partials/footer') %>

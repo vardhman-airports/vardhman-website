@@ -1,0 +1,247 @@
+
+/* public/css/pov.css */
+#pov-grid {
+    padding: 4rem 0;
+    background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+}
+
+#pov-grid .container-fluid {
+    padding: 0 5rem;
+}
+
+#pov-grid .heading {
+    font-family: "Playfair Display", Georgia, serif;
+    font-weight: 700;
+    text-align: center;
+    padding: 0 0 2rem 0;
+    margin: 0;
+    color: #1e293b;
+}
+
+#pov-grid .pov-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#pov-grid .modern-card {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e4e4e7;
+    padding: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#pov-grid .modern-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+#pov-grid .modern-card-content {
+    padding: 1.4rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+#pov-grid .modern-card-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.7rem;
+}
+
+#pov-grid .modern-card-description {
+    font-size: 1rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+#pov-grid .modern-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin-bottom: 1rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 0.8rem;
+}
+
+#pov-grid .modern-card-meta .author {
+    font-weight: 500;
+    color: #6b7280;
+}
+
+#pov-grid .modern-card-meta .date {
+    font-size: 0.8rem;
+}
+
+#pov-grid .modern-card-actions {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+#pov-grid .modern-card-button {
+    display: inline-block;
+    padding: 0.6rem 1.3rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+#pov-grid .view-btn {
+    background-color: #2563eb;
+    color: #ffffff;
+    flex: 1;
+}
+
+#pov-grid .view-btn:hover {
+    background-color: #1e40af;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+#pov-grid .download-btn {
+    background-color: #059669;
+    color: #ffffff;
+    flex: 1;
+}
+
+#pov-grid .download-btn:hover {
+    background-color: #047857;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+#pov-grid .no-posts {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    color: #6b7280;
+    font-size: 1.1rem;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 2% auto;
+    margin-top: 10rem;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #6b7280;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #1e293b;
+}
+
+.modal-post-title {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    padding-right: 3rem;
+}
+
+.modal-post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.modal-post-author {
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.modal-post-date {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.modal-post-content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #374151;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 768px) {
+    #pov-grid .pov-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    #pov-grid .container-fluid {
+        padding: 0 2rem;
+    }
+    
+    #pov-grid .modern-card-actions {
+        flex-direction: column;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+        margin-top : 5rem;
+        padding: 1.5rem;
+    }
+    
+    .modal-post-title {
+        font-size: 1.5rem;
+    }
+    
+    .modal-post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}

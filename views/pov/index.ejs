@@ -1,0 +1,63 @@
+<%- include('../partials/header',{currentTitle: 'POV'}) %>
+
+    <link rel="stylesheet" href="/css/pov.css">
+    <br><br><br><br><br>
+
+    <section id="pov-grid">
+        <div class="container-fluid">
+            <h1 class="heading">Discover</h1>
+            <div class="pov-grid">
+                <% if (povPosts.length===0) { %>
+                    <div class="no-posts">
+                        <p>No posts available at the moment.</p>
+                    </div>
+                    <% } else { %>
+                        <% povPosts.forEach(post=> { %>
+                            <div class="modern-card">
+                                <div class="modern-card-content">
+                                    <h3 class="modern-card-title">
+                                        <%= post.title %>
+                                    </h3>
+                                    <p class="modern-card-description">
+                                        <%= post.description %>
+                                    </p>
+                                    <div class="modern-card-meta">
+                                        <span class="author">By <%= post.author %></span>
+                                        <span class="date">
+                                            <%= new Date(post.createdAt).toLocaleDateString() %>
+                                        </span>
+                                    </div>
+                                    <div class="modern-card-actions">
+                                        <button class="modern-card-button view-btn"
+                                            onclick="showPost('<%= post.id %>')">
+                                            View Details
+                                        </button>
+                                        <% if (post.pdfFile) { %>
+                                            <a href="/pov/download/<%= post.id %>"
+                                                class="modern-card-button download-btn">
+                                                Download PDF
+                                            </a>
+                                            <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                                <% } %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for post details -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- Post content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/js/pov.js"></script>
+
+    <%- include('../partials/footer') %>

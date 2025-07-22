@@ -1,0 +1,62 @@
+<%- include('../partials/header') %>
+
+<body>
+    <!-- Your header/navigation -->
+    
+    <main>
+        <!-- Categories Grid Section -->
+        <section class="categories-section">
+            <div class="container">
+                <h2>Our Product Categories</h2>
+                <div class="categories-grid">
+                    <% Object.keys(categories).forEach(categoryId => { %>
+                        <div class="category-card">
+                            <div class="category-image">
+                                <img src="<%= categories[categoryId].image %>" alt="<%= categories[categoryId].title %>">
+                            </div>
+                            <div class="category-content">
+                                <h3><%= categories[categoryId].title %></h3>
+                                <p><%= categories[categoryId].description %></p>
+                                <a href="/products/category/<%= categoryId %>" class="btn btn-primary">View More</a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products Slider Section -->
+        <section class="featured-products-section">
+            <div class="container">
+                <h2>Featured Products</h2>
+                <div class="products-slider">
+                    <div class="slider-container">
+                        <% randomProducts.forEach(product => { %>
+                            <div class="product-slide">
+                                <div class="product-card">
+                                    <div class="product-image">
+                                        <img src="<%= product.image %>" alt="<%= product.title %>">
+                                    </div>
+                                    <div class="product-content">
+                                        <h4><%= product.title %></h4>
+                                        <p><%= product.description.substring(0, 150) %>..</p>
+                                        <a href="/products/product/<%= product.key %>" class="btn btn-secondary">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                    <!-- Slider navigation buttons -->
+                    <button class="slider-prev" onclick="previousSlide()">❮</button>
+                    <button class="slider-next" onclick="nextSlide()">❯</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Your footer -->
+    
+    <!-- Your JavaScript files -->
+</body>
+
+<%- include('../partials/footer') %>

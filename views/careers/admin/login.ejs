@@ -1,0 +1,95 @@
+<%- include('../../partials/header') %>
+
+    <link rel="stylesheet" href="/css/admin.css">
+    <br><br><br>
+    <style>
+        /* Header styles */
+        .login-header{
+            text-align: center;
+        }
+        .login-header h1 {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .login-header p {
+            color: #64748b;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        /* Back to Careers link */
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: text-decoration 0.2s;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            background-color: #2563eb;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-btn:hover {
+            background-color: #1d4ed8;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.18);
+            transform: translateY(-1px);
+        }
+
+        @media(max-width: 768px) {
+            .login-form{
+                margin: 2rem auto;
+            }
+            
+        }
+    </style>
+
+    <div class="admin-container">
+        <div class="login-header">
+            <h1>Admin Login</h1>
+            <p>Career Management System</p>
+        </div>
+
+        <% if (locals.error) { %>
+            <div class="error">
+                <%= error %>
+            </div>
+            <% } %>
+
+                <form class="login-form" method="POST" action="/careers/admin/login">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+
+                <div class="back-link">
+                    <a href="/careers">← Back to Careers</a>
+                </div>
+    </div>
+    <br><br>
+
+    <%- include('../../partials/footer') %>
