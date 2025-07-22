@@ -39,14 +39,15 @@ try {
   console.log('Falling back to memory store...');
 }
 
-const PORT = 4444;
+const PORT = process.env.PORT || 4444;
 const app = express();
 
 const fileStore = FileStore(session);
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10000, // limit each IP to 100 requests
+  windowMs: 15 * 60 * 1000,
+  max: 10000,
+  skip: (req) => req.path === '/health' // Skip rate limiting for health checks
 });
 
 app.disable('x-powered-by');
@@ -128,16 +129,29 @@ try {
 }
 
 app.use(session({
-  secret: 'vardhman-secret-key',
+  secret: process.env.SESSION_SECRET || 'vardhman-secret-key',
   resave: false,
   saveUninitialized: false,
-  store: sessionStore, // This will be file store or undefined (memory store)
+  store: process.env.NODE_ENV === 'production' ? undefined : sessionStore, // Use memory store in production
   cookie: {
-    secure: false, // Set to false for development, true for production with HTTPS
+    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
     httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24 // 1 day
+    maxAge: 1000 * 60 * 60 * 24
   }
 }));
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+
+// Also add a root health check in case that's what's being used
+app.get('/healthz', (req, res) => {
+  res.status(200).send('OK');
+});
 
 app.use("/", homeRouter);
 app.use("/about", aboutRouter);
