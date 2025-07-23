@@ -67,7 +67,8 @@ app.use(
           "https://ajax.googleapis.com",
           "https://code.jquery.com",
           "https://widgets.sociablekit.com",
-          "https://www.googletagmanager.com"
+          "https://www.googletagmanager.com",
+          "https://www.google-analytics.com" 
         ],
         // ✅ THIS IS THE IMPORTANT ONE FOR `onclick=""` SUPPORT
         scriptSrcAttr: ["'unsafe-inline'"],
