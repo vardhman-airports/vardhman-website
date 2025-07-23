@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="
+    <% if(locals.currentTitle){ %>
+            <%= currentTitle %> |
+        <% } %>
+        Vardhman Airport Solutions
+    ">
     <link rel="icon" type="image/svg" href="/favicon/1.jpg">
     <title>
         <% if(locals.currentTitle){ %>
@@ -32,15 +38,6 @@
         rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4W9G8MND65"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-4W9G8MND65');
-    </script>
 </head>
 
 <body>
@@ -52,11 +49,12 @@
                 <div class="navbar-brand-wrapper">
                     <img class="mobile-logo"
                         src="/favicon/1.svg"
-                        alt="Vardhman Airport Solutions">
+                        alt="Vardhman Airport Solutions"
+                        width="60" height="60">
                 </div>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar">
+            <button id="navbarToggleLabel" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation menu">
+    <!-- Icon or hamburger menu here -->
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
