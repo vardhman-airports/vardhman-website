@@ -18,6 +18,11 @@ import searchRouter from './routes/search.routes.js'
 import homeRouter from './routes/home.routes.js'
 import povRouter from './routes/pov.routes.js'
 
+const PORT = process.env.PORT || 4444;
+const app = express();
+app.set('trust proxy', 1);
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -39,8 +44,7 @@ try {
   console.log('Falling back to memory store...');
 }
 
-const PORT = process.env.PORT || 4444;
-const app = express();
+
 
 const fileStore = FileStore(session);
 
