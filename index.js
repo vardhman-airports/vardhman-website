@@ -51,7 +51,64 @@ const limiter = rateLimit({
 });
 
 app.disable('x-powered-by');
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        "scriptSrc": [
+          "'self'",
+          "'unsafe-inline'",
+          "'unsafe-eval'",
+          "https://kit.fontawesome.com",
+          "https://ka-f.fontawesome.com",
+          "https://cdnjs.cloudflare.com",
+          "https://cdn.jsdelivr.net",
+          "https://ajax.googleapis.com",
+          "https://code.jquery.com",
+          "https://widgets.sociablekit.com",
+          "https://www.googletagmanager.com",   // ✅ add this line
+          "https://www.google-analytics.com"    // ✅ add if you're using Google Analytics
+        ],
+        // ✅ THIS IS THE IMPORTANT ONE FOR `onclick=""` SUPPORT
+        scriptSrcAttr: ["'unsafe-inline'"],
 
+        styleSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "https://kit.fontawesome.com",
+          "https://ka-f.fontawesome.com",
+          "https://fonts.googleapis.com",
+          "https://cdnjs.cloudflare.com",
+          "https://cdn.jsdelivr.net",
+          "https://widgets.sociablekit.com"
+        ],
+        fontSrc: [
+          "'self'",
+          "https://kit.fontawesome.com",
+          "https://ka-f.fontawesome.com",
+          "https://fonts.gstatic.com",
+          "data:"
+        ],
+        imgSrc: ["'self'", "data:", "https:", "http:"],
+        "connectSrc": [
+          "'self'",
+          "https://kit.fontawesome.com",
+          "https://ka-f.fontawesome.com",
+          "https://widgets.sociablekit.com",
+          "https://data.accentapi.com",
+          "https://api.sociablekit.com",
+          "https://www.googletagmanager.com",   // ✅ add this
+          "https://www.google-analytics.com"    // ✅ if needed
+        ],
+        frameSrc: ["'self'", "https://www.google.com"],
+        objectSrc: ["'none'"],
+        mediaSrc: ["'self'"],
+        childSrc: ["'self'"]
+      }
+    }
+  })
+);
 
 app.use(limiter);
 app.use(express.static(path.join(__dirname, "public")))
