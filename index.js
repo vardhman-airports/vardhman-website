@@ -66,7 +66,8 @@ app.use(
           "https://cdn.jsdelivr.net",
           "https://ajax.googleapis.com",
           "https://code.jquery.com",
-          "https://widgets.sociablekit.com"
+          "https://widgets.sociablekit.com",
+          "https://www.googletagmanager.com"
         ],
         // ✅ THIS IS THE IMPORTANT ONE FOR `onclick=""` SUPPORT
         scriptSrcAttr: ["'unsafe-inline'"],
@@ -91,12 +92,14 @@ app.use(
         imgSrc: ["'self'", "data:", "https:", "http:"],
         connectSrc: [
           "'self'",
+          "https://www.googletagmanager.com",
+          "https://www.google-analytics.com",
           "https://kit.fontawesome.com",
           "https://ka-f.fontawesome.com",
           "https://widgets.sociablekit.com",
-          "https://data.accentapi.com",          // ✅ Add this
+          "https://data.accentapi.com",
           "https://api.sociablekit.com",
-          "https://widgets.sociablekit.com"          // ✅ And this
+          "https://widgets.sociablekit.com"
         ],
         frameSrc: ["'self'", "https://www.google.com"],
         objectSrc: ["'none'"],
