@@ -220,7 +220,7 @@ function initializeViewToggle() {
 
 function initializeProductsSearch() {
     // Get the correct search input element
-    const searchInput = document.getElementById('products-filter-search-input'); // Fixed ID
+    const searchInput = document.getElementById('products-filter-search-input');
     const searchBtn = document.getElementById('products-filter-search-btn');
     let searchTimeout;
 
@@ -234,16 +234,59 @@ function initializeProductsSearch() {
         if (e.key === 'Enter') {
             e.preventDefault(); // Prevent form submission
             clearTimeout(searchTimeout);
-            updateProductsFilters();
+            
+            // Add visual feedback for Enter key search
+            if (searchBtn) {
+                triggerSearchAnimation(searchBtn);
+            }
+            
+            // Delay the actual search to show animation
+            setTimeout(() => {
+                updateProductsFilters();
+            }, 300);
         }
     });
 
-    // Search on button click
+    // Enhanced search on button click with visual feedback
     if (searchBtn) {
         searchBtn.addEventListener('click', function (e) {
             e.preventDefault();
             clearTimeout(searchTimeout);
-            updateProductsFilters();
+            
+            // Trigger enhanced visual feedback
+            triggerSearchAnimation(this);
+            
+            // Delay the actual search to show animation
+            setTimeout(() => {
+                updateProductsFilters();
+            }, 800); // Increased delay to show full animation
+        });
+
+        // Add mousedown/mouseup effects for immediate feedback
+        searchBtn.addEventListener('mousedown', function() {
+            this.style.transform = 'scale(0.95)';
+            this.style.backgroundColor = '#3b82f6';
+            this.style.color = 'white';
+        });
+        
+        searchBtn.addEventListener('mouseup', function() {
+            // Don't reset immediately if we're in animation
+            if (!this.classList.contains('searching')) {
+                this.style.transform = 'scale(1)';
+                setTimeout(() => {
+                    this.style.backgroundColor = '';
+                    this.style.color = '';
+                }, 100);
+            }
+        });
+
+        // Handle mouse leave to reset states
+        searchBtn.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('searching')) {
+                this.style.transform = 'scale(1)';
+                this.style.backgroundColor = '';
+                this.style.color = '';
+            }
         });
     }
 
@@ -254,6 +297,63 @@ function initializeProductsSearch() {
             updateProductsFilters();
         }, 100);
     });
+}
+
+function triggerSearchAnimation(searchBtn) {
+    // Add searching state
+    searchBtn.classList.add('searching');
+    
+    // Change icon to spinner
+    const icon = searchBtn.querySelector('i');
+    const originalIconClass = icon ? icon.className : 'fas fa-search';
+    
+    if (icon) {
+        icon.className = 'fas fa-spinner';
+    }
+    
+    // Reset any inline styles from mousedown
+    searchBtn.style.transform = 'scale(1)';
+    searchBtn.style.backgroundColor = '';
+    searchBtn.style.color = '';
+    
+    // Remove searching state and show success after delay
+    setTimeout(() => {
+        // Remove searching state
+        searchBtn.classList.remove('searching');
+        
+        // Add success state briefly
+        searchBtn.classList.add('search-success');
+        
+        // Restore original icon
+        if (icon) {
+            icon.className = originalIconClass;
+        }
+        
+        // Remove success state after brief moment
+        setTimeout(() => {
+            searchBtn.classList.remove('search-success');
+        }, 500);
+        
+    }, 600); // Show searching animation for 600ms
+}
+
+// Alternative simpler approach - add this after the DOMContentLoaded event listener
+// if you prefer immediate feedback without loading states
+function addSimpleSearchFeedback() {
+    const searchBtn = document.getElementById('products-filter-search-btn');
+    
+    if (searchBtn) {
+        // Add click ripple effect
+        searchBtn.addEventListener('click', function(e) {
+            // Add clicked class for ripple effect
+            this.classList.add('clicked');
+            
+            // Remove class after animation
+            setTimeout(() => {
+                this.classList.remove('clicked');
+            }, 600);
+        });
+    }
 }
 
 function initializeClearProductsFilters() {
