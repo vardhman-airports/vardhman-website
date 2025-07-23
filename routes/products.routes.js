@@ -370,7 +370,7 @@ router.get('/products/download/:productId/:fileType/:fileIndex', (req, res) => {
   const file = downloads[parseInt(fileIndex)];
   const filePath = path.join(UPLOADS_DIR, file.url);
   console.log('Looking for file at:', filePath);
-console.log('File object:', file);
+  console.log('File object:', file);
 
   // Use existsSync which is now properly imported
   if (!existsSync(filePath)) {
@@ -378,7 +378,7 @@ console.log('File object:', file);
   }
   
 
-  res.download(filePath);
+  res.download(filePath,file.title + '.pdf');
 });
 
 export default router;
