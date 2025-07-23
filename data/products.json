@@ -747,7 +747,7 @@
             "type" : "LED Elevated"
         },
         "centerline-tdz-high-intensity-light": {
-            "title": "z",
+            "title": "LED Inset Runway Centreline Light",
             "description": "Uni or bi-directional inset fitting suitable for use in category I, II and III all weather operation as: Runway centreline fitting.",
             "sections": [
                 {
