@@ -222,6 +222,12 @@
                                                             <%= product.type %>
                                                         </span>
                                                         <% } %>
+                                                            <% if (Array.isArray(product.sector)) { %>
+                                                                <span class="product-sector">
+                                                                    <%= product.sector.join(', ') %></span>
+                                        <% } else { %>
+                                            <span class="product-sector"><%= product.sector %></span>
+                                        <% } %>
                                     </div>
                                     <a href="/<%= product.key %>" class="modern-card-button">View Details</a>
                                 </div>
