@@ -120,7 +120,7 @@ router.post('/apply/:id', upload.single('resume'), async (req, res) => {
 
             await transporter.sendMail({
                 from: `"Careers Portal" <${process.env.EMAIL_USER}>`,
-                to: 'aryankansal15@gmail.com',
+                to: 'careers@vardhmanairports.com',
                 subject: `New Application for ${job.title}`,
                 html: `
                     <h2>New Job Application Received</h2>
