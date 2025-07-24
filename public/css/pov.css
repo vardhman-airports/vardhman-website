@@ -47,8 +47,10 @@
 }
 
 #pov-grid .modern-card-content {
+    height: 100%;
     padding: 1.4rem 1.2rem;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
     gap: 0.8rem;
 }

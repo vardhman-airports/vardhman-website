@@ -1,4 +1,4 @@
-<%- include('../partials/header',{currentTitle: 'POV'}) %>
+<%- include('../partials/header',{currentTitle: 'POV' }) %>
 
     <link rel="stylesheet" href="/css/pov.css">
     <br><br><br><br><br>
@@ -15,30 +15,36 @@
                         <% povPosts.forEach(post=> { %>
                             <div class="modern-card">
                                 <div class="modern-card-content">
-                                    <h3 class="modern-card-title">
-                                        <%= post.title %>
-                                    </h3>
-                                    <p class="modern-card-description">
-                                        <%= post.description %>
-                                    </p>
-                                    <div class="modern-card-meta">
-                                        <span class="author">By <%= post.author %></span>
-                                        <span class="date">
-                                            <%= new Date(post.created_at_display).toLocaleDateString() %>
-                                        </span>
+                                    <div>
+                                        <h3 class="modern-card-title">
+                                            <%= post.title %>
+                                        </h3>
+                                        <p class="modern-card-description">
+                                            <%= post.description %>
+                                        </p>
                                     </div>
-                                    <div class="modern-card-actions">
-                                        <button class="modern-card-button view-btn"
-                                            onclick="showPost('<%= post.id %>')">
-                                            View Details
-                                        </button>
-                                        <% if (post.has_pdf) { %>
-                                            <a href="/pov/download/<%= post.id %>"
-                                                class="modern-card-button download-btn">
-                                                Download PDF
-                                            </a>
-                                            <% } %>
+                                    <div>
+                                        <div class="modern-card-meta">
+                                            <span class="author">By <%= post.author %></span>
+                                            <span class="date">
+                                                <%= new Date(post.created_at_display).toLocaleDateString() %>
+                                            </span>
+                                        </div>
+                                        <div class="modern-card-actions">
+                                            <button class="modern-card-button view-btn"
+                                                onclick="showPost('<%= post.id %>')">
+                                                View Details
+                                            </button>
+                                            <% if (post.has_pdf) { %>
+                                                <a href="/pov/download/<%= post.id %>"
+                                                    class="modern-card-button download-btn">
+                                                    Download PDF
+                                                </a>
+                                                <% } %>
+                                        </div>
                                     </div>
+
+
                                 </div>
                             </div>
                             <% }) %>
