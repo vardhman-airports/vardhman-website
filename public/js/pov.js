@@ -55,7 +55,7 @@ async function showPost(postId) {
                 <span class="modal-post-author">By ${escapeHtml(post.author)}</span>
                 <span class="modal-post-date">${formatDate(post.created_at_display)}</span>
             </div>
-            <div class="modal-post-content">${escapeHtml(post.content)}</div>
+            <div class="modal-post-content">${escapeHtml(post.description + '\n'+ '\n' + post.content)}</div>
             ${post.has_pdf ? `
                 <div class="modal-post-actions" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
                     <a href="/pov/download/${post.id}" class="btn-primary">Download PDF</a>
