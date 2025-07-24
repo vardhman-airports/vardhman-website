@@ -40,10 +40,10 @@
                                             <%= post.author %>
                                         </td>
                                         <td>
-                                            <%= new Date(post.createdAt).toLocaleDateString() %>
+                                            <%= new Date(post.created_at_display).toLocaleDateString() %>
                                         </td>
                                         <td>
-                                            <% if (post.pdfFile) { %>
+                                            <% if (post.pdf_status) { %>
                                                 <span class="has-pdf">✓</span>
                                                 <% } else { %>
                                                     <span class="no-pdf">✗</span>

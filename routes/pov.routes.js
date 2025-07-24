@@ -1,472 +1,268 @@
 import express from 'express';
-import fs from 'fs';
-import path from 'path';
 import bcrypt from 'bcrypt';
 import multer from 'multer';
-import { fileURLToPath } from 'url';
+import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-
-// For __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const router = express.Router();
 
-// File paths
-const POV_DATA_FILE = path.join(__dirname, '../out/pov.json');
-const ADMIN_PASSWORD_FILE = path.join(__dirname, '../data/admin.json');
-const UPLOADS_DIR = path.join(__dirname, '../out');
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-// =================== SAFE FILE HANDLER ===================
-class SafeFileHandler {
-  // Ensure directory exists
-  async ensureDirectory(dirPath) {
-    try {
-      await fs.promises.mkdir(dirPath, { recursive: true });
-    } catch (error) {
-      if (error.code !== 'EEXIST') {
-        console.error('Error creating directory:', error);
-        throw error;
-      }
-    }
-  }
-
-  // Safe read with automatic file creation
-  async readJSONFile(filePath, defaultData = []) {
-    try {
-      // Ensure the directory exists first
-      await this.ensureDirectory(path.dirname(filePath));
-      
-      // Try to read the file
-      const data = await fs.promises.readFile(filePath, 'utf8');
-      return JSON.parse(data);
-    } catch (error) {
-      if (error.code === 'ENOENT') {
-        // File doesn't exist, create it with default data
-        console.log(`File ${path.basename(filePath)} not found. Creating with default data.`);
-        await this.writeJSONFile(filePath, defaultData);
-        return defaultData;
-      } else if (error instanceof SyntaxError) {
-        // Invalid JSON, backup the corrupted file and create new one
-        console.error(`Invalid JSON in ${path.basename(filePath)}. Creating backup and new file.`);
-        const backupPath = filePath + '.backup.' + Date.now();
-        try {
-          await fs.promises.copyFile(filePath, backupPath);
-        } catch (backupError) {
-          console.error('Could not create backup:', backupError);
-        }
-        await this.writeJSONFile(filePath, defaultData);
-        return defaultData;
-      } else {
-        console.error('Error reading file:', error);
-        throw error;
-      }
-    }
-  }
-
-  // Safe write
-  async writeJSONFile(filePath, data) {
-    try {
-      // Ensure the directory exists
-      await this.ensureDirectory(path.dirname(filePath));
-      
-      // Write the file with pretty formatting
-      await fs.promises.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8');
-      return true;
-    } catch (error) {
-      console.error('Error writing file:', error);
-      return false;
-    }
-  }
-
-  // Synchronous versions for compatibility with existing code
-  readJSONFileSync(filePath, defaultData = []) {
-    try {
-      // Ensure the directory exists first
-      if (!fs.existsSync(path.dirname(filePath))) {
-        fs.mkdirSync(path.dirname(filePath), { recursive: true });
-      }
-      
-      // Try to read the file
-      if (fs.existsSync(filePath)) {
-        const data = fs.readFileSync(filePath, 'utf8');
-        return JSON.parse(data);
-      } else {
-        // File doesn't exist, create it with default data
-        console.log(`File ${path.basename(filePath)} not found. Creating with default data.`);
-        this.writeJSONFileSync(filePath, defaultData);
-        return defaultData;
-      }
-    } catch (error) {
-      if (error instanceof SyntaxError) {
-        // Invalid JSON, backup the corrupted file and create new one
-        console.error(`Invalid JSON in ${path.basename(filePath)}. Creating backup and new file.`);
-        const backupPath = filePath + '.backup.' + Date.now();
-        try {
-          fs.copyFileSync(filePath, backupPath);
-        } catch (backupError) {
-          console.error('Could not create backup:', backupError);
-        }
-        this.writeJSONFileSync(filePath, defaultData);
-        return defaultData;
-      } else {
-        console.error('Error reading file:', error);
-        return defaultData;
-      }
-    }
-  }
-
-  // Synchronous write
-  writeJSONFileSync(filePath, data) {
-    try {
-      // Ensure the directory exists
-      if (!fs.existsSync(path.dirname(filePath))) {
-        fs.mkdirSync(path.dirname(filePath), { recursive: true });
-      }
-      
-      // Write the file with pretty formatting
-      fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
-      return true;
-    } catch (error) {
-      console.error('Error writing file:', error);
-      return false;
-    }
-  }
-}
-
-// Create global file handler instance
-const fileHandler = new SafeFileHandler();
-
-// Ensure directories exist on startup
-try {
-  fileHandler.ensureDirectory(path.dirname(POV_DATA_FILE));
-  fileHandler.ensureDirectory(UPLOADS_DIR);
-} catch (error) {
-  console.error('Error creating directories:', error);
-}
-
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        // Ensure directory exists
-        if (!fs.existsSync(UPLOADS_DIR)) {
-            fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-        }
-        cb(null, UPLOADS_DIR);
-    },
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + path.extname(file.originalname));
-    }
-});
-
+// Configure multer
 const upload = multer({ 
-    storage: storage,
+    storage: multer.memoryStorage(),
     fileFilter: (req, file, cb) => {
-        if (file.mimetype === 'application/pdf') {
-            cb(null, true);
-        } else {
-            cb(new Error('Only PDF files are allowed'), false);
-        }
-    }
+        cb(file.mimetype === 'application/pdf' ? null : new Error('Only PDF files allowed'), file.mimetype === 'application/pdf');
+    },
+    limits: { fileSize: 10 * 1024 * 1024 }
 });
 
-// =================== HELPER FUNCTIONS (UPDATED) ===================
-const readPOVData = () => {
-    return fileHandler.readJSONFileSync(POV_DATA_FILE, []);
-};
-
-const writePOVData = (data) => {
-    return fileHandler.writeJSONFileSync(POV_DATA_FILE, data);
-};
-
-const readAdminData = () => {
-    try { 
-        // Use safe file handler for admin data too
-        const adminData = fileHandler.readJSONFileSync(ADMIN_PASSWORD_FILE, null);
-        
-        if (adminData === null || !adminData.password) {
-            // Default admin password: use environment variable or "admin123" (hashed)
-            const defaultPasswordPlain = ADMIN_PASSWORD || "admin123";
-            const defaultPassword = bcrypt.hashSync(defaultPasswordPlain, 10);
-            const defaultData = { password: defaultPassword };
-            
-            fileHandler.writeJSONFileSync(ADMIN_PASSWORD_FILE, defaultData);
-            return defaultData;
-        }
-        
-        return adminData;
-    } catch (error) {
-        console.error('Error reading admin data:', error);
-        return null;
-    }
-};
-
-// Middleware to check if user is admin
-function requireAdmin(req, res, next) {
-    // Check if session exists and user is admin
-    if (req.session && req.session.isPOVAdmin === true) {
-        return next();
-    }
-    
-    // If session might not be fully loaded, try to reload it
-    if (req.session) {
-        req.session.reload((err) => {
-            if (err) {
-                console.error('Session reload error:', err);
-            }
-            
-            // Check again after reload
-            if (req.session && req.session.isPOVAdmin === true) {
-                return next();
-            }
-            
-            // Not authenticated, redirect to login
-            res.redirect('/pov/admin/login');
+// Helper functions
+const formatDate = (dateString) => {
+    if (!dateString) return 'Not available';
+    try {
+        const date = new Date(dateString);
+        return isNaN(date.getTime()) ? 'Invalid Date' : date.toLocaleDateString('en-US', {
+            year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
         });
-    } else {
-        // No session at all, redirect to login
-        res.redirect('/pov/admin/login');
+    } catch { return 'Invalid Date'; }
+};
+
+const getAdminData = async () => {
+    try {
+        let { data, error } = await supabase.from('admin_users').select('*').eq('role', 'pov_admin').single();
+        
+        if (!data) {
+            const { data: newAdmin } = await supabase.from('admin_users').insert([{
+                role: 'pov_admin',
+                password_hash: bcrypt.hashSync(ADMIN_PASSWORD, 10),
+                created_at: new Date().toISOString()
+            }]).select().single();
+            return newAdmin;
+        }
+        return data;
+    } catch { return null; }
+};
+
+// Middleware
+const requireAdmin = (req, res, next) => {
+    if (req.session?.isPOVAdmin) return next();
+    res.redirect('/pov/admin/login');
+};
+
+// Public Routes
+router.get('/', async (req, res) => {
+    try {
+        const { data: povPosts } = await supabase.from('pov_posts').select('*').order('created_at', { ascending: false });
+        
+        const formattedPosts = (povPosts || []).map(post => ({
+            ...post,
+            created_at_display: formatDate(post.created_at),
+            updated_at_display: formatDate(post.updated_at),
+            has_pdf: !!post.pdf_file
+        }));
+        
+        res.render('pov/index', { povPosts: formattedPosts, title: 'Point of View' });
+    } catch {
+        res.render('pov/index', { povPosts: [], title: 'Point of View' });
     }
-}
-
-// =================== PUBLIC ROUTES ===================
-
-// Display all POV posts
-router.get('/', (req, res) => {
-    const povPosts = readPOVData();
-    res.render('pov/index', { povPosts, title: 'Point of View' });
 });
 
-// Get single POV post (for popup modal)
-router.get('/post/:id', (req, res) => {
-    const povPosts = readPOVData();
-    const post = povPosts.find(p => p.id === req.params.id);
-    
-    if (!post) {
-        return res.status(404).json({ error: 'Post not found' });
+router.get('/post/:id', async (req, res) => {
+    try {
+        const { data: post } = await supabase.from('pov_posts').select('*').eq('id', req.params.id).single();
+        
+        if (!post) return res.status(404).json({ error: 'Post not found' });
+        
+        res.json({
+            ...post,
+            created_at_display: formatDate(post.created_at),
+            updated_at_display: formatDate(post.updated_at),
+            has_pdf: !!post.pdf_file
+        });
+    } catch {
+        res.status(500).json({ error: 'Internal server error' });
     }
-    
-    res.json(post);
 });
 
-// Download PDF
-router.get('/download/:id', (req, res) => {
-    const povPosts = readPOVData();
-    const post = povPosts.find(p => p.id === req.params.id);
-    
-    if (!post || !post.pdfFile) {
-        return res.status(404).json({ error: 'PDF not found' });
+router.get('/download/:id', async (req, res) => {
+    try {
+        const { data: post } = await supabase.from('pov_posts').select('*').eq('id', req.params.id).single();
+        
+        if (!post?.pdf_file) return res.status(404).json({ error: 'PDF not found' });
+        
+        try {
+            const { data: fileData } = await supabase.storage.from('pov-pdfs').download(post.pdf_file);
+            const buffer = Buffer.from(await fileData.arrayBuffer());
+            
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', `attachment; filename="${post.title.replace(/[^a-zA-Z0-9.-]/g, '_')}.pdf"`);
+            res.send(buffer);
+        } catch {
+            const { data: signedUrlData } = await supabase.storage.from('pov-pdfs').createSignedUrl(post.pdf_file, 300);
+            res.redirect(signedUrlData.signedUrl);
+        }
+    } catch {
+        res.status(500).json({ error: 'Internal server error' });
     }
-    
-    const filePath = path.join(UPLOADS_DIR, post.pdfFile);
-    
-    if (!fs.existsSync(filePath)) {
-        return res.status(404).json({ error: 'PDF file not found' });
-    }
-    
-    res.download(filePath, post.title + '.pdf');
 });
 
-// =================== ADMIN ROUTES ===================
-
-// Admin login page
+// Admin Routes
 router.get('/admin/login', (req, res) => {
     res.render('pov/admin/login', { error: null, title: 'Admin Login' });
 }); 
 
-// Admin login process
 router.post('/admin/login', async (req, res) => {
     try {
-        const { password } = req.body;
-        const adminData = readAdminData();
-        
-        if (!adminData || !adminData.password) {
-            return res.render('pov/admin/login', { error: 'Admin not configured', title: 'Admin Login' });
-        }
-        
-        const match = await bcrypt.compare(password, adminData.password);
+        const adminData = await getAdminData();
+        const match = adminData && await bcrypt.compare(req.body.password, adminData.password_hash);
         
         if (match) {
-            // Set session data
             req.session.isPOVAdmin = true;
-            
-            // IMPORTANT: Save the session before redirecting
-            req.session.save((err) => {
-                if (err) {
-                    console.error('Session save error:', err);
-                    return res.render('pov/admin/login', { error: 'Login failed. Please try again.', title: 'Admin Login' });
-                }
-                
-                // Session is now saved, safe to redirect
-                res.redirect('/pov/admin');
-            });
+            req.session.save(() => res.redirect('/pov/admin'));
         } else {
             res.render('pov/admin/login', { error: 'Invalid password', title: 'Admin Login' });
         }
-    } catch (error) {
-        console.error('Login error:', error);
-        res.render('pov/admin/login', { error: 'An error occurred. Please try again.', title: 'Admin Login' });
+    } catch {
+        res.render('pov/admin/login', { error: 'An error occurred', title: 'Admin Login' });
     }
 });
 
-// Admin dashboard
-router.get('/admin', requireAdmin, (req, res) => {
-    const povPosts = readPOVData();
-    res.render('pov/admin/dashboard', { povPosts, title: 'Admin Dashboard' });
+router.get('/admin', requireAdmin, async (req, res) => {
+    try {
+        const { data: povPosts } = await supabase.from('pov_posts').select('*').order('created_at', { ascending: false });
+        
+        const formattedPosts = (povPosts || []).map(post => ({
+            ...post,
+            created_at_display: formatDate(post.created_at),
+            updated_at_display: formatDate(post.updated_at),
+            has_pdf: !!post.pdf_file,
+            pdf_status: post.pdf_file ? '✓' : '✗'
+        }));
+        
+        res.render('pov/admin/dashboard', { povPosts: formattedPosts, title: 'Admin Dashboard' });
+    } catch {
+        res.render('pov/admin/dashboard', { povPosts: [], title: 'Admin Dashboard' });
+    }
 });
 
-// Admin logout
 router.post('/admin/logout', (req, res) => {
-    if (req.session) {
-        req.session.destroy((err) => {
-            if (err) {
-                console.error('Session destroy error:', err);
-                // Even if destroy fails, clear the session data
-                req.session = null;
-            }
-            // Clear the session cookie
-            res.clearCookie('connect.sid'); // Default session cookie name
-            res.redirect('/pov');
-        });
-    } else {
+    req.session?.destroy(() => {
+        res.clearCookie('connect.sid');
         res.redirect('/pov');
-    }
+    });
 });
 
-// Add new post page
 router.get('/admin/add', requireAdmin, (req, res) => {
-    res.render('pov/admin/add', { title: 'Add New Post' });
+    res.render('pov/admin/add', { title: 'Add New Post', error: null });
 });
 
-// Add new post
-router.post('/admin/add', requireAdmin, upload.single('pdf'), (req, res) => {
+router.post('/admin/add', requireAdmin, upload.single('pdf'), async (req, res) => {
     try {
         const { title, description, content, author } = req.body;
-        const povPosts = readPOVData();
         
-        const newPost = {
-            id: Date.now().toString(),
-            title: title || '',
-            description: description || '',
-            content: content || '',
-            author: author || '',
-            createdAt: new Date().toISOString(),
-            pdfFile: req.file ? req.file.filename : null
-        };
-        
-        povPosts.push(newPost);
-        
-        if (writePOVData(povPosts)) {
-            res.redirect('/pov/admin');
-        } else {
-            res.render('pov/admin/add', { error: 'Error saving post', title: 'Add New Post' });
+        if (!title || !description || !content || !author) {
+            return res.render('pov/admin/add', { error: 'All fields required', title: 'Add New Post' });
         }
-    } catch (error) {
-        console.error('Error adding post:', error);
-        res.render('pov/admin/add', { error: 'Error saving post', title: 'Add New Post' });
-    }
-});
 
-// Edit post page
-router.get('/admin/edit/:id', requireAdmin, (req, res) => {
-    try {
-        const povPosts = readPOVData();
-        const post = povPosts.find(p => p.id === req.params.id);
+        let pdfFileName = null;
         
-        if (!post) {
-            return res.redirect('/pov/admin');
-        }
-        
-        res.render('pov/admin/edit', { post, title: 'Edit Post' });
-    } catch (error) {
-        console.error('Error loading post for edit:', error);
-        res.redirect('/pov/admin');
-    }
-});
-
-// Update post
-router.post('/admin/edit/:id', requireAdmin, upload.single('pdf'), (req, res) => {
-    try {
-        const { title, description, content, author } = req.body;
-        const povPosts = readPOVData();
-        const postIndex = povPosts.findIndex(p => p.id === req.params.id);
-        
-        if (postIndex === -1) {
-            return res.redirect('/pov/admin');
-        }
-        
-        const post = povPosts[postIndex];
-        
-        // Update post data
-        post.title = title || post.title;
-        post.description = description || post.description;
-        post.content = content || post.content;
-        post.author = author || post.author;
-        post.updatedAt = new Date().toISOString();
-        
-        // Handle PDF file update
         if (req.file) {
-            // Delete old PDF if exists
-            if (post.pdfFile) {
-                const oldFilePath = path.join(UPLOADS_DIR, post.pdfFile);
-                if (fs.existsSync(oldFilePath)) {
-                    try {
-                        fs.unlinkSync(oldFilePath);
-                    } catch (deleteError) {
-                        console.warn('Could not delete old PDF:', deleteError);
-                    }
-                }
-            }
-            post.pdfFile = req.file.filename;
+            const fileName = `${Date.now()}-${req.file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+            const { data: uploadData, error } = await supabase.storage
+                .from('pov-pdfs')
+                .upload(fileName, req.file.buffer, { contentType: req.file.mimetype });
+                
+            if (error) return res.render('pov/admin/add', { error: 'Error uploading PDF', title: 'Add New Post' });
+            pdfFileName = uploadData.path;
         }
         
-        if (writePOVData(povPosts)) {
-            res.redirect('/pov/admin');
-        } else {
-            res.render('pov/admin/edit', { post, error: 'Error updating post', title: 'Edit Post' });
+        const currentTime = new Date().toISOString();
+        const { error } = await supabase.from('pov_posts').insert([{
+            title, description, content, author, pdf_file: pdfFileName,
+            created_at: currentTime, updated_at: currentTime
+        }]);
+            
+        if (error) {
+            if (pdfFileName) await supabase.storage.from('pov-pdfs').remove([pdfFileName]);
+            return res.render('pov/admin/add', { error: 'Error saving post', title: 'Add New Post' });
         }
-    } catch (error) {
-        console.error('Error updating post:', error);
-        const povPosts = readPOVData();
-        const post = povPosts.find(p => p.id === req.params.id);
-        res.render('pov/admin/edit', { post: post || {}, error: 'Error updating post', title: 'Edit Post' });
+        
+        res.redirect('/pov/admin');
+    } catch {
+        res.render('pov/admin/add', { error: 'Unexpected error', title: 'Add New Post' });
     }
 });
 
-// Delete post
-router.post('/admin/delete/:id', requireAdmin, (req, res) => {
+router.get('/admin/edit/:id', requireAdmin, async (req, res) => {
     try {
-        const povPosts = readPOVData();
-        const postIndex = povPosts.findIndex(p => p.id === req.params.id);
+        const { data: post } = await supabase.from('pov_posts').select('*').eq('id', req.params.id).single();
         
-        if (postIndex !== -1) {
-            const post = povPosts[postIndex];
-            
-            // Delete PDF file if exists
-            if (post.pdfFile) {
-                const filePath = path.join(UPLOADS_DIR, post.pdfFile);
-                if (fs.existsSync(filePath)) {
-                    try {
-                        fs.unlinkSync(filePath);
-                    } catch (deleteError) {
-                        console.warn('Could not delete PDF file:', deleteError);
-                    }
-                }
+        if (!post) return res.redirect('/pov/admin');
+        
+        res.render('pov/admin/edit', {
+            post: { ...post, has_pdf: !!post.pdf_file, created_at_display: formatDate(post.created_at), updated_at_display: formatDate(post.updated_at) },
+            title: 'Edit Post',
+            error: null
+        });
+    } catch {
+        res.redirect('/pov/admin');
+    }
+});
+
+router.post('/admin/edit/:id', requireAdmin, upload.single('pdf'), async (req, res) => {
+    try {
+        const { title, description, content, author } = req.body;
+        
+        if (!title || !description || !content || !author) {
+            const { data: post } = await supabase.from('pov_posts').select('*').eq('id', req.params.id).single();
+            return res.render('pov/admin/edit', { post, error: 'All fields required', title: 'Edit Post' });
+        }
+        
+        const { data: existingPost } = await supabase.from('pov_posts').select('*').eq('id', req.params.id).single();
+        if (!existingPost) return res.redirect('/pov/admin');
+        
+        let pdfFileName = existingPost.pdf_file;
+        
+        if (req.file) {
+            const fileName = `${Date.now()}-${req.file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+            const { data: uploadData, error } = await supabase.storage
+                .from('pov-pdfs')
+                .upload(fileName, req.file.buffer, { contentType: req.file.mimetype });
+                
+            if (error) {
+                return res.render('pov/admin/edit', { post: existingPost, error: 'Error uploading PDF', title: 'Edit Post' });
             }
             
-            povPosts.splice(postIndex, 1);
-            writePOVData(povPosts);
+            if (existingPost.pdf_file) await supabase.storage.from('pov-pdfs').remove([existingPost.pdf_file]);
+            pdfFileName = uploadData.path;
+        }
+        
+        const { error } = await supabase.from('pov_posts').update({
+            title, description, content, author, pdf_file: pdfFileName, updated_at: new Date().toISOString()
+        }).eq('id', req.params.id);
+            
+        if (error) {
+            return res.render('pov/admin/edit', { post: existingPost, error: 'Error updating post', title: 'Edit Post' });
         }
         
         res.redirect('/pov/admin');
-    } catch (error) {
-        console.error('Error deleting post:', error);
+    } catch {
         res.redirect('/pov/admin');
     }
+});
+
+router.post('/admin/delete/:id', requireAdmin, async (req, res) => {
+    try {
+        const { data: post } = await supabase.from('pov_posts').select('*').eq('id', req.params.id).single();
+        
+        if (post?.pdf_file) await supabase.storage.from('pov-pdfs').remove([post.pdf_file]);
+        await supabase.from('pov_posts').delete().eq('id', req.params.id);
+    } catch {}
+    
+    res.redirect('/pov/admin');
 });
 
 export default router;

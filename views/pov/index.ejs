@@ -24,7 +24,7 @@
                                     <div class="modern-card-meta">
                                         <span class="author">By <%= post.author %></span>
                                         <span class="date">
-                                            <%= new Date(post.createdAt).toLocaleDateString() %>
+                                            <%= new Date(post.created_at_display).toLocaleDateString() %>
                                         </span>
                                     </div>
                                     <div class="modern-card-actions">
@@ -32,7 +32,7 @@
                                             onclick="showPost('<%= post.id %>')">
                                             View Details
                                         </button>
-                                        <% if (post.pdfFile) { %>
+                                        <% if (post.has_pdf) { %>
                                             <a href="/pov/download/<%= post.id %>"
                                                 class="modern-card-button download-btn">
                                                 Download PDF
