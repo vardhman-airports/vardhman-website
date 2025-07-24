@@ -14,3 +14,15 @@ public/videos/
 .env
 .DS_Store
 Thumbs.db
+
+# Data files that should persist on server
+out/careers.json
+out/pov.json
+out/sessions/*.json
+out/sessions/
+
+# But keep the folder structure in git
+!out/
+!out/.gitkeep
+!out/sessions/
+!out/sessions/.gitkeep
