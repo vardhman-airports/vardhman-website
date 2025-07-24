@@ -27,7 +27,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Create session directory with better error handling
-const sessionDir = path.join(__dirname, 'sessions');
+const sessionDir = path.join(__dirname, 'out/sessions');
 try {
   if (!fs.existsSync(sessionDir)) {
     fs.mkdirSync(sessionDir, { recursive: true });

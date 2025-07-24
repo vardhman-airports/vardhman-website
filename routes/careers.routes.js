@@ -17,14 +17,14 @@ const __dirname = path.dirname(__filename);
 const router = express.Router();
 
 // File paths
-const CAREERS_FILE = path.join(__dirname, '../data/careers.json');
-const APPLICATIONS_FILE = path.join(__dirname, '../data/applications.json');
+const CAREERS_FILE = path.join(__dirname, '../out/careers.json');
+const APPLICATIONS_FILE = path.join(__dirname, '../out/applications.json');
 const ADMIN_FILE = path.join(__dirname, '../data/admin.json');
 
 // Multer config for resume uploads
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = path.join(__dirname, '../public/uploads/resumes');
+        const uploadDir = path.join(__dirname, '../out');
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }

@@ -16,9 +16,9 @@ const __dirname = path.dirname(__filename);
 const router = express.Router();
 
 // File paths
-const POV_DATA_FILE = path.join(__dirname, '../data/pov.json');
+const POV_DATA_FILE = path.join(__dirname, '../out/pov.json');
 const ADMIN_PASSWORD_FILE = path.join(__dirname, '../data/admin.json');
-const UPLOADS_DIR = path.join(__dirname, '../public/uploads/pov');
+const UPLOADS_DIR = path.join(__dirname, '../out');
 
 // Ensure directories exist
 if (!fs.existsSync(path.dirname(POV_DATA_FILE))) {
