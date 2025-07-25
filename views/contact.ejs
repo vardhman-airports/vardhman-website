@@ -95,7 +95,7 @@
                 </div>
 
                 <!-- Contact Form -->
-                <div class="contact-form-container">
+                <div id="contactFormContainer" class="contact-form-container">
                     <div class="form-header">
                         <h2>Send Us a Message</h2>
                         <p>Fill out the form below</p>
@@ -112,8 +112,8 @@
                                 <span class="error-message" id="firstNameError"></span>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">Last Name *</label>
-                                <input type="text" id="lastName" name="lastName" required>
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName">
                                 <span class="error-message" id="lastNameError"></span>
                             </div>
                         </div>
@@ -125,8 +125,8 @@
                                 <span class="error-message" id="emailError"></span>
                             </div>
                             <div class="form-group">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" id="phone" name="phone">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
                                 <span class="error-message" id="phoneError"></span>
                             </div>
                         </div>
@@ -143,8 +143,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="subject">Subject *</label>
-                            <select id="subject" name="subject" required>
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject">
                                 <option value="">Select a subject</option>
                                 <option value="product-inquiry">Product Inquiry</option>
                                 <option value="quote-request">Quote Request</option>
@@ -160,10 +160,9 @@
 
 
                         <div class="form-group">
-                            <label for="message">Message *</label>
+                            <label for="message">Message</label>
                             <textarea id="message" name="message" rows="15"
-                                placeholder="Please provide details about your requirements, project scope, or any specific questions you have..."
-                                required></textarea>
+                                placeholder="Please provide details about your requirements, project scope, or any specific questions you have..."></textarea>
                             <span class="error-message" id="messageError"></span>
                         </div>
 
@@ -754,12 +753,11 @@
 
                 switch (name) {
                     case 'firstName':
-                    case 'lastName':
                         if (!value) {
-                            errorMessage = `${name === 'firstName' ? 'First' : 'Last'} name is required`;
+                            errorMessage = 'First name is required';
                             isValid = false;
                         } else if (value.length < 2) {
-                            errorMessage = `${name === 'firstName' ? 'First' : 'Last'} name must be at least 2 characters`;
+                            errorMessage = 'First name must be at least 2 characters';
                             isValid = false;
                         }
                         break;
@@ -775,24 +773,17 @@
                         break;
 
                     case 'phone':
-                        if (value && !this.isValidPhone(value)) {
+                        if (!value) {
+                            errorMessage = 'Phone number is required';
+                            isValid = false;
+                        } else if (!this.isValidPhone(value)) {
                             errorMessage = 'Please enter a valid phone number';
                             isValid = false;
                         }
                         break;
 
-                    case 'subject':
-                        if (!value) {
-                            errorMessage = 'Please select a subject';
-                            isValid = false;
-                        }
-                        break;
-
                     case 'message':
-                        if (!value) {
-                            errorMessage = 'Message is required';
-                            isValid = false;
-                        } else if (value.length < 10) {
+                        if (value && value.length < 10) {
                             errorMessage = 'Message must be at least 10 characters';
                             isValid = false;
                         }
@@ -833,7 +824,7 @@
             }
 
             validateForm() {
-                const requiredFields = ['firstName', 'lastName', 'email', 'subject', 'message'];
+                const requiredFields = ['firstName', 'email', 'phone'];
                 let isValid = true;
 
                 requiredFields.forEach(fieldName => {

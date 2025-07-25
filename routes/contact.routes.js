@@ -44,13 +44,11 @@ router.post('/', async (req, res) => {
         console.log('Extracted fields:', { firstName, lastName, email, phone, company, position, subject, message });
         
         // Validation
-        if (!firstName || !lastName || !email || !subject || !message) {
+        if (!firstName || !email || !phone) {
             const missing = [];
             if (!firstName) missing.push('firstName');
-            if (!lastName) missing.push('lastName');
             if (!email) missing.push('email');
-            if (!subject) missing.push('subject');
-            if (!message) missing.push('message');
+            if (!phone) missing.push('phone');
             
             console.log('Missing required fields:', missing);
             return res.status(400).json({ 
