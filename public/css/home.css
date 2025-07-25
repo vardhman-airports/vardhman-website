@@ -622,7 +622,6 @@
     padding: 0 0 2rem 0;
     margin: 0;
     color: #1e293b;
-    font-size: 2.5rem;
 }
 
 #certifications {
@@ -935,6 +934,7 @@
         margin-bottom: 2.5rem;
         color: #1e293b;
         font-family: "Lato", sans-serif;
+        font-size: 1.2rem;
     }
 
     .feature-card {
@@ -962,5 +962,12 @@
 
     .feature-card {
         padding: 1.2rem 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mission-statement{
+        font-size: 1rem;
+        padding: 0 1rem 2rem;
     }
 }

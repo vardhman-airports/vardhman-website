@@ -1,12 +1,16 @@
 <%- include('../partials/header',{currentTitle: 'Careers'}) %>
 
 <link rel="stylesheet" href="/css/careers.css">
-<br><br><br><br><br>
+<br><br><br>
+    <div class="top-br">
+        <br>
+        <br>
+    </div>
 
 <section id="careers-grid">
     <div class="container-fluid">
         <h1 class="heading" style="padding-bottom: 0;">Join Our Team</h1>
-        <p style="text-align: center; font-size: x-large; padding: .5rem 0 2rem; color: #0077b6;"> Reach out to us at <a href="mailto:careers@vardhmanairports.com">careers@vardhmanairports.com</a></p>
+        <p class="top-p" style="text-align: center; font-size: x-large; padding: .5rem 0 2rem; color: #0077b6;"> Reach out to us at <a href="mailto:careers@vardhmanairports.com">careers@vardhmanairports.com</a></p>
         <div class="careers-grid">
             <% if (careers.length === 0) { %>
                 <div class="no-jobs">

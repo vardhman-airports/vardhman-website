@@ -902,6 +902,10 @@ mark {
         margin: 0.25rem 0 0.25rem 0.75rem;
         width: calc(100% - 0.75rem);
     }
+
+    .top-br{
+        display: none;
+    }
 }
 
 /* High contrast mode support */
