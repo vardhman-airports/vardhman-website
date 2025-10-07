@@ -97,7 +97,7 @@ app.use(
           "https://fonts.gstatic.com",
           "data:"
         ],
-        imgSrc: ["'self'", "data:", "https:", "http:"],
+        imgSrc: ["'self'", "data:", "blob:", "https:", "http:"],
         "connectSrc": [
           "'self'",
           "https://kit.fontawesome.com",
@@ -108,7 +108,13 @@ app.use(
           "https://www.googletagmanager.com",   // ✅ add this
           "https://www.google-analytics.com"    // ✅ if needed
         ],
-        frameSrc: ["'self'", "https://www.google.com"],
+        frameSrc: [
+          "'self'",
+          "https://www.google.com",
+          "https://open.spotify.com",
+          "https://www.youtube.com",
+          "https://youtu.be"
+        ],
         objectSrc: ["'none'"],
         mediaSrc: ["'self'"],
         childSrc: ["'self'"]
@@ -159,7 +165,7 @@ app.use(session({
 }));
 
 app.get('/health', (req, res) => {
-  res.status(200).json({ 
+  res.status(200).json({
     status: 'healthy',
     timestamp: new Date().toISOString(),
     uptime: process.uptime()
