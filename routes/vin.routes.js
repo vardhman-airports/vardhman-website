@@ -11,8 +11,7 @@ router.use(express.urlencoded({ extended: true, limit: '20mb' }));
 /** ---------- DB connection (loud + reusable, single file) ---------- */
 
 const MONGODB_URI =
-  process.env.MONGODB_URI ??
-  "mongodb+srv://aryankansal15_db_user:GHFtE72xBIx3rguw@cluster0.lhgu7za.mongodb.net/vinBlog?retryWrites=true&w=majority&appName=Cluster0";
+  process.env.MONGODB_URI;
 
 let connecting = null; // Promise or null
 
