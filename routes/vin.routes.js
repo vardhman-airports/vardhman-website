@@ -169,8 +169,8 @@ router.get("/images/:id", async (req, res) => {
 
 /** ---------- Popups & Visits ---------- */
 
-// POST /visits/next
-router.post("/visits/next", async (req, res) => {
+// Handler supports both POST and GET to be resilient behind strict proxies/CDNs
+async function handleNextVisit(req, res) {
   try {
     const { clientId } = req.body || {};
     const key = clientId && String(clientId).trim() ? String(clientId).trim() : "__global__";
@@ -193,7 +193,12 @@ router.post("/visits/next", async (req, res) => {
     console.error("[/visits/next] failed:", e);
     res.status(500).json({ error: "server_error" });
   }
-});
+}
+
+// POST /visits/next (primary)
+router.post("/visits/next", handleNextVisit);
+// GET /visits/next (fallback for environments blocking POST)
+router.get("/visits/next", handleNextVisit);
 
 // Debug: peek next popup (no increment)
 async function handlePeek(req, res) {
