@@ -6,6 +6,7 @@ import session from 'express-session';
 import FileStore from 'session-file-store';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import cors from "cors";
 
 import productsRouter from './routes/products.routes.js'
 import aboutRouter from './routes/about.routes.js'
@@ -17,6 +18,7 @@ import searchRouter from './routes/search.routes.js'
 // import METARRouter from './routes/METAR.routes.js'
 import homeRouter from './routes/home.routes.js'
 import povRouter from './routes/pov.routes.js'
+import vinRouter from './routes/vin.routes.js'
 
 const PORT = process.env.PORT || 4444;
 const app = express();
@@ -54,6 +56,7 @@ const limiter = rateLimit({
   skip: (req) => req.path === '/health' // Skip rate limiting for health checks
 });
 
+app.use(cors());
 app.disable('x-powered-by');
 app.use(
   helmet({
@@ -116,8 +119,16 @@ app.use(
 
 app.use(limiter);
 app.use(express.static(path.join(__dirname, "public")))
-app.use(express.urlencoded({ extended: true, limit: '10kb' }))
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(express.json({ limit: '10kb' }));
+
+// mount the blog API with higher limits so posts aren't rejected
+app.use(
+  '/api',
+  express.json({ limit: '5mb' }),
+  express.urlencoded({ extended: true, limit: '5mb' }),
+  vinRouter
+);
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
@@ -161,6 +172,7 @@ app.get('/healthz', (req, res) => {
 });
 
 app.use("/", homeRouter);
+app.use("/api", vinRouter);
 app.use("/about", aboutRouter);
 app.use("/solutions", solutionsRouter);
 app.use("/news", newsRouter);
