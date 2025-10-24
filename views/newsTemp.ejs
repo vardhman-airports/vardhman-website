@@ -1,0 +1,34 @@
+<%- include('partials/header',{currentTitle: 'News'}) %>
+
+    <br><br><br>
+    <div class="top-br">
+        <br>
+        <br>
+    </div>
+
+    <style>
+        .sk-posts-header{
+            visibility: hidden !important;
+            position: absolute !important;
+        }
+         .sk-post-footer{
+            visibility: hidden !important;
+            position: absolute !important;
+        }
+        .sk-posts-body {
+            padding: 0 5rem;
+        }
+
+        @media (max-width: 480px) {
+            .sk-posts-body {
+                padding: 0 1rem !important;
+            }
+        }
+    </style>
+
+    <!-- <div class='sk-ww-linkedin-page-post' data-embed-id='25580533'></div><script src='https://widgets.sociablekit.com/linkedin-page-posts/widget.js' defer></script> -->
+     <!-- Elfsight LinkedIn Feed | Untitled LinkedIn Feed -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-a3d0f109-a7bf-450e-a2f0-c4c8d52375bb" data-elfsight-app-lazy></div>
+    
+    <%- include('partials/footer') %>
