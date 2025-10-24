@@ -1,4 +1,4 @@
-<%- include('partials/header',{currentTitle: 'News' }) %>
+<%- include('partials/header',{currentTitle: 'News'}) %>
 
     <br><br><br>
     <div class="top-br">
@@ -7,16 +7,14 @@
     </div>
 
     <style>
-        .sk-posts-header {
+        .sk-posts-header{
             visibility: hidden !important;
             position: absolute !important;
         }
-
-        .sk-post-footer {
+         .sk-post-footer{
             visibility: hidden !important;
             position: absolute !important;
         }
-
         .sk-posts-body {
             padding: 0 5rem;
         }
@@ -28,61 +26,7 @@
         }
     </style>
 
-    <!-- <div class='sk-ww-linkedin-page-post' data-embed-id='25580533'></div><script src='https://widgets.sociablekit.com/linkedin-page-posts/widget.js' defer></script> -->
-    <!-- Elfsight LinkedIn Feed | Untitled LinkedIn Feed -->
-    <script src="https://elfsightcdn.com/platform.js" async></script>
-    <div class="elfsight-app-a3d0f109-a7bf-450e-a2f0-c4c8d52375bb" data-elfsight-app-lazy></div>
-
-    <style>
-        .fHXPoA {
-            padding: 0 1rem;
-        }
-/* Keep the link for Elfsight's JS, but make it fully invisible */
-.elfsight-app-a3d0f109-a7bf-450e-a2f0-c4c8d52375bb 
-  a[href*="elfsight.com/linkedin-feed-widget"] {
-  position: absolute !important;
-  left: -9999px !important; /* move it off-screen */
-  top: auto !important;
-  width: 0 !important;
-  height: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-  color: transparent !important;
-  background: none !important;
-  border: none !important;
-  font-size: 0 !important;
-  line-height: 0 !important;
-  z-index: -9999 !important;
-}
-</style>
-
-<script>
-window.addEventListener("load", () => {
-  // Function to keep the badge invisible & textless
-  const clearBadge = () => {
-    const badge = document.querySelector(
-      '.elfsight-app-a3d0f109-a7bf-450e-a2f0-c4c8d52375bb a[href*="elfsight.com/linkedin-feed-widget"]'
-    );
-    if (badge) {
-      badge.textContent = ""; // remove text nodes like "ked"
-      badge.innerHTML = "";   // remove any leftover children
-      badge.style.setProperty("left", "-9999px", "important");
-      badge.style.setProperty("opacity", "0", "important");
-    }
-  };
-
-  // Run immediately and repeatedly to handle re-injections
-  clearBadge();
-  const interval = setInterval(clearBadge, 1000);
-
-  // Optional: stop after 10s to save resources
-  setTimeout(() => clearInterval(interval), 10000);
-});
-</script>
-
-
-
-
+    <div class='sk-ww-linkedin-page-post' data-embed-id='25580533'></div>
+    <script src='https://widgets.sociablekit.com/linkedin-page-posts/widget.js' defer></script>
+    
     <%- include('partials/footer') %>
