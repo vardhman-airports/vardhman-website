@@ -63,7 +63,8 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        "scriptSrc": [
+
+        scriptSrc: [
           "'self'",
           "'unsafe-inline'",
           "'unsafe-eval'",
@@ -74,10 +75,12 @@ app.use(
           "https://ajax.googleapis.com",
           "https://code.jquery.com",
           "https://widgets.sociablekit.com",
-          "https://www.googletagmanager.com",   // ✅ add this line
-          "https://www.google-analytics.com"    // ✅ add if you're using Google Analytics
+          "https://elfsightcdn.com",
+          "https://static.elfsight.com",
+          "https://*.elfsight.com",
+          "https://www.googletagmanager.com",
+          "https://www.google-analytics.com"
         ],
-        // ✅ THIS IS THE IMPORTANT ONE FOR `onclick=""` SUPPORT
         scriptSrcAttr: ["'unsafe-inline'"],
 
         styleSrc: [
@@ -88,8 +91,11 @@ app.use(
           "https://fonts.googleapis.com",
           "https://cdnjs.cloudflare.com",
           "https://cdn.jsdelivr.net",
-          "https://widgets.sociablekit.com"
+          "https://widgets.sociablekit.com",
+          "https://elfsightcdn.com",
+          "https://static.elfsight.com"
         ],
+
         fontSrc: [
           "'self'",
           "https://kit.fontawesome.com",
@@ -97,31 +103,61 @@ app.use(
           "https://fonts.gstatic.com",
           "data:"
         ],
-        imgSrc: ["'self'", "data:", "blob:", "https:", "http:"],
-        "connectSrc": [
+
+        imgSrc: [
+          "'self'",
+          "data:",
+          "blob:",
+          "https:",
+          "http:",
+          "https://storage.elfsight.com"
+        ],
+
+        connectSrc: [
           "'self'",
           "https://kit.fontawesome.com",
           "https://ka-f.fontawesome.com",
           "https://widgets.sociablekit.com",
           "https://data.accentapi.com",
+          "https://elfsightcdn.com",
+          "https://static.elfsight.com",
+          "https://core.service.elfsight.com",
+          "https://widget-data.service.elfsight.com",
+          "https://storage.elfsight.com",
+          "https://*.service.elfsight.com",
+          "https://*.elfsight.com",
           "https://api.sociablekit.com",
-          "https://www.googletagmanager.com",   // ✅ add this
-          "https://www.google-analytics.com"    // ✅ if needed
+          "https://www.googletagmanager.com",
+          "https://www.google-analytics.com"
         ],
+
         frameSrc: [
           "'self'",
+          "https://elfsightcdn.com",
+          "https://static.elfsight.com",
+          "https://*.elfsightcdn.com",
+          "https://*.elfsight.com",
           "https://www.google.com",
           "https://open.spotify.com",
           "https://www.youtube.com",
           "https://youtu.be"
         ],
+
         objectSrc: ["'none'"],
         mediaSrc: ["'self'"],
-        childSrc: ["'self'"]
+        childSrc: [
+          "'self'",
+          "https://elfsightcdn.com",
+          "https://static.elfsight.com",
+          "https://*.elfsightcdn.com",
+          "https://*.elfsight.com"
+        ]
       }
     }
   })
 );
+
+
 
 app.use(limiter);
 app.use(express.static(path.join(__dirname, "public")))
