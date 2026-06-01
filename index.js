@@ -170,16 +170,19 @@ app.use(
 app.use(limiter);
 
 // Transparently serve .webp to browsers that support it.
-// Falls back to the original .jpg/.png automatically — no template changes needed.
-// Non-tech staff can drop any image format; if they run the converter bat file the
-// WebP version is picked up here on the next request with no further action required.
-app.use((req, res, next) => {
-  if (/^\/images\/.+\.(jpe?g|png)$/i.test(req.path)) {
+// Mounted at /images so req.path is the sub-path (e.g. /6.jpg).
+// Uses res.sendFile() directly — no req.url rewriting, guaranteed to work.
+// Falls back to the original via next() if WebP is unavailable or unsupported.
+// Vary: Accept tells CDNs to cache WebP and non-WebP responses separately.
+app.use('/images', (req, res, next) => {
+  if (/\.(jpe?g|png)$/i.test(req.path)) {
     const accept = req.headers['accept'] || '';
     if (accept.includes('image/webp')) {
       const webpPath = req.path.replace(/\.(jpe?g|png)$/i, '.webp');
-      if (fs.existsSync(path.join(__dirname, 'public', webpPath))) {
-        req.url = webpPath;
+      const fullPath = path.join(__dirname, 'public', 'images', webpPath);
+      if (fs.existsSync(fullPath)) {
+        res.set('Vary', 'Accept');
+        return res.sendFile(fullPath);
       }
     }
   }
