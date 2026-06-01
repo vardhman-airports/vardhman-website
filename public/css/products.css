@@ -3,6 +3,17 @@
     background: linear-gradient(to bottom right, #f8fafc, #e2e8f0);
 }
 
+/* Prevent aspect-ratio distortion on product and category card images */
+.category-image img,
+.product-image img,
+.product-card img,
+.product-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
 #products-main .container-fluid {
     padding: 0 2rem;
 }

@@ -18,7 +18,6 @@ import searchRouter from './routes/search.routes.js'
 // import METARRouter from './routes/METAR.routes.js'
 import homeRouter from './routes/home.routes.js'
 import povRouter from './routes/pov.routes.js'
-import vinRouter from './routes/vin.routes.js'
 
 const PORT = process.env.PORT || 4444;
 const app = express();
@@ -84,6 +83,7 @@ app.use(
           "https://code.jquery.com",
           "https://widgets.sociablekit.com",
           "https://elfsightcdn.com",
+          "https://*.elfsightcdn.com",
           "https://static.elfsight.com",
           "https://*.elfsight.com",
           "https://www.googletagmanager.com",
@@ -176,8 +176,7 @@ app.use(express.json({ limit: '10kb' }));
 app.use(
   '/api',
   express.json({ limit: '5mb' }),
-  express.urlencoded({ extended: true, limit: '5mb' }),
-  vinRouter
+  express.urlencoded({ extended: true, limit: '5mb' })
 );
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
@@ -222,7 +221,6 @@ app.get('/healthz', (req, res) => {
 });
 
 app.use("/", homeRouter);
-app.use("/api", vinRouter);
 app.use("/about", aboutRouter);
 app.use("/solutions", solutionsRouter);
 app.use("/news", newsRouter);

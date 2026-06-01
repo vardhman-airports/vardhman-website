@@ -20,6 +20,11 @@
     <!-- Canonical -->
     <link rel="canonical" href="<%= _canonical %>">
 
+    <!-- LCP image preload (passed per-page as preloadImage variable) -->
+    <% if (locals.preloadImage) { %>
+    <link rel="preload" as="image" href="<%= preloadImage %>">
+    <% } %>
+
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Vardhman Airport Solutions">

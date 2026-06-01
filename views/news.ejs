@@ -62,27 +62,35 @@
 </style>
 
 <script>
-window.addEventListener("load", () => {
-  // Function to keep the badge invisible & textless
-  const clearBadge = () => {
-    const badge = document.querySelector(
-      '.elfsight-app-a3d0f109-a7bf-450e-a2f0-c4c8d52375bb a[href*="elfsight.com/linkedin-feed-widget"]'
-    );
-    if (badge) {
-      badge.textContent = ""; // remove text nodes like "ked"
-      badge.innerHTML = "";   // remove any leftover children
-      badge.style.setProperty("left", "-9999px", "important");
-      badge.style.setProperty("opacity", "0", "important");
-    }
-  };
+(function () {
+  const HIDE = 'position:absolute!important;left:-9999px!important;top:auto!important;' +
+               'width:0!important;height:0!important;overflow:hidden!important;' +
+               'opacity:0!important;visibility:hidden!important;font-size:0!important;' +
+               'line-height:0!important;pointer-events:none!important;color:transparent!important;';
 
-  // Run immediately and repeatedly to handle re-injections
-  clearBadge();
-  const interval = setInterval(clearBadge, 1000);
+  function clearBadge() {
+    document.querySelectorAll(
+      '.elfsight-app-a3d0f109-a7bf-450e-a2f0-c4c8d52375bb a[href*="elfsight.com"]'
+    ).forEach(function (el) {
+      el.textContent = '';
+      el.setAttribute('style', HIDE);
+    });
+  }
 
-  // Optional: stop after 10s to save resources
-  setTimeout(() => clearInterval(interval), 10000);
-});
+  // Watch for the badge being injected and kill it immediately
+  var observer = new MutationObserver(clearBadge);
+
+  function startObserver() {
+    observer.observe(document.body, { childList: true, subtree: true });
+    setTimeout(function () { observer.disconnect(); }, 15000);
+  }
+
+  if (document.body) {
+    startObserver();
+  } else {
+    document.addEventListener('DOMContentLoaded', startObserver);
+  }
+})();
 </script>
 
 
