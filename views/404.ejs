@@ -1,0 +1,82 @@
+<%- include('partials/header', {
+  currentTitle: 'Page Not Found',
+  metaDescription: 'The page you are looking for could not be found. Browse Vardhman Airport Solutions products, airfield lighting systems, and defense solutions.',
+  canonicalUrl: 'https://vardhmanairports.com/'
+}) %>
+
+<link rel="stylesheet" href="/css/navbar.css">
+
+<style>
+  .error-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1rem 4rem;
+    text-align: center;
+    background: #f8f9fa;
+  }
+  .error-page__inner {
+    max-width: 600px;
+  }
+  .error-page__code {
+    font-size: 7rem;
+    font-weight: 800;
+    color: #133b5c;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .error-page__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+  .error-page__text {
+    color: #555;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+  }
+  .error-page__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  .error-page__links a {
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .error-page__links a:hover { opacity: 0.85; }
+  .btn-primary-custom {
+    background: #133b5c;
+    color: #fff;
+  }
+  .btn-outline-custom {
+    border: 2px solid #133b5c;
+    color: #133b5c;
+    background: transparent;
+  }
+</style>
+
+<div class="error-page">
+  <div class="error-page__inner">
+    <div class="error-page__code">404</div>
+    <h1 class="error-page__title">Page Not Found</h1>
+    <p class="error-page__text">
+      The page you are looking for doesn't exist or has been moved.
+      Try navigating to one of the sections below.
+    </p>
+    <div class="error-page__links">
+      <a href="/" class="btn-primary-custom">Home</a>
+      <a href="/our-products" class="btn-outline-custom">Products</a>
+      <a href="/solutions" class="btn-outline-custom">Solutions</a>
+      <a href="/contact" class="btn-outline-custom">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

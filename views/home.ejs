@@ -1,4 +1,46 @@
-<%- include('partials/header',{currentTitle: 'Home'}) %>
+<%- include('partials/header', {
+  currentTitle: 'Home',
+  metaDescription: 'Vardhman Airport Solutions — India\'s leading manufacturer and supplier of airfield lighting systems, runway lights, PAPI, AVDGS, air traffic management equipment, and turnkey airport solutions for civil and defense aviation.',
+  canonicalUrl: 'https://vardhmanairports.com/',
+  ogImage: 'https://vardhmanairports.com/images/6.jpg'
+}) %>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Vardhman Airport Solutions",
+      "url": "https://vardhmanairports.com",
+      "logo": "https://vardhmanairports.com/favicon/1.svg",
+      "description": "India's leading manufacturer and supplier of airfield lighting, PAPI systems, AVDGS, air traffic management, and defense airport solutions.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://vardhmanairports.com/contact"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "name": "Vardhman Airport Solutions",
+      "url": "https://vardhmanairports.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://vardhmanairports.com/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
 
 
     <br><br><br>

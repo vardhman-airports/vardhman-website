@@ -56,6 +56,14 @@ const limiter = rateLimit({
   skip: (req) => req.path === '/health' // Skip rate limiting for health checks
 });
 
+// Redirect www → non-www (canonicalization)
+app.use((req, res, next) => {
+  if (req.hostname === 'www.vardhmanairports.com') {
+    return res.redirect(301, `https://vardhmanairports.com${req.url}`);
+  }
+  next();
+});
+
 app.use(cors());
 app.disable('x-powered-by');
 app.use(
@@ -224,6 +232,11 @@ app.use("/search", searchRouter);
 // app.use("/metar",METARRouter);
 app.use("/pov", povRouter);
 app.use("/", productsRouter);
+
+// 404 handler — must be after all routes
+app.use((req, res) => {
+  res.status(404).render('404');
+});
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
