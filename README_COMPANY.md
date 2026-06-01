@@ -167,6 +167,24 @@ All images are inside the `public/images/` folder, organized by section:
 
 This requires a developer because the image also needs to be referenced in the page template or product data. Contact your developer.
 
+### Converting Images to WebP (Faster Loading)
+
+The website loads faster when images are in **WebP format** — a modern format that makes image files 25–35% smaller without any visible quality difference. After you add or replace any images, you should run the converter.
+
+**How to convert (one double-click):**
+
+1. Open the project folder on your computer
+2. Find the file called **`CONVERT TO WEBP.bat`**
+3. Double-click it
+4. A black window will appear and show the progress — wait for it to finish
+5. When it says **"Done!"**, press any key to close it
+
+That's it. The original `.jpg` / `.png` files are kept — nothing is deleted. The converter simply creates an additional `.webp` version of each image alongside the original.
+
+> **When to run it:** Any time you add or replace images on the website, run the converter once before pushing the changes live.
+
+> **First time only:** The first time you run it, it will install a small helper tool automatically. This may take about a minute and requires an internet connection.
+
 ---
 
 ## 6. Changing Text on a Page
