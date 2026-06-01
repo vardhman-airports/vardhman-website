@@ -168,6 +168,24 @@ app.use(
 
 
 app.use(limiter);
+
+// Transparently serve .webp to browsers that support it.
+// Falls back to the original .jpg/.png automatically — no template changes needed.
+// Non-tech staff can drop any image format; if they run the converter bat file the
+// WebP version is picked up here on the next request with no further action required.
+app.use((req, res, next) => {
+  if (/^\/images\/.+\.(jpe?g|png)$/i.test(req.path)) {
+    const accept = req.headers['accept'] || '';
+    if (accept.includes('image/webp')) {
+      const webpPath = req.path.replace(/\.(jpe?g|png)$/i, '.webp');
+      if (fs.existsSync(path.join(__dirname, 'public', webpPath))) {
+        req.url = webpPath;
+      }
+    }
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "public")))
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(express.json({ limit: '10kb' }));
