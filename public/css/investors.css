@@ -1,0 +1,425 @@
+/* ================================================================
+   INVESTORS — Global
+   ================================================================ */
+.top-br { display: block; }
+@media (max-width: 480px) { .top-br { display: none; } }
+
+/* Style-toggle bar (for director preview only — remove after sign-off) */
+.inv-preview-bar {
+    background: #1e293b;
+    padding: 0.55rem 0;
+}
+.inv-preview-bar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.82rem;
+    color: #94a3b8;
+    flex-wrap: wrap;
+}
+.inv-preview-bar-inner strong { color: #e2e8f0; margin-right: 0.25rem; }
+.inv-preview-btn {
+    padding: 0.25rem 0.85rem;
+    border-radius: 20px;
+    border: 1px solid #475569;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+    line-height: 1.6;
+}
+.inv-preview-btn:hover { color: #fff; border-color: #2563eb; background: #2563eb; text-decoration: none; }
+.inv-preview-btn.inv-preview-active { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+/* ================================================================
+   SHARED HERO
+   ================================================================ */
+.inv-hero {
+    padding: 5rem 0 3.5rem;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #2563eb 100%);
+}
+.inv-hero h1 {
+    color: #fff;
+    font-size: 2.8rem;
+    margin: 0 0 0.75rem;
+}
+.inv-hero p {
+    color: rgba(255,255,255,0.78);
+    font-size: 1.05rem;
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ================================================================
+   OPTION A — Modern Card Grid
+   ================================================================ */
+.inv-section-a {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+.inv-section-heading {
+    text-align: center;
+    font-size: 1.7rem;
+    color: #1e293b;
+    margin-bottom: 0.4rem;
+}
+.inv-section-sub {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+}
+
+.inv-grid-a {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.inv-card-a {
+    position: relative;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-top: 4px solid #2563eb;
+    border-radius: 12px;
+    padding: 1.7rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-top-color 0.25s ease;
+}
+.inv-card-a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 36px rgba(37, 99, 235, 0.13);
+    border-top-color: #f59e0b;
+    color: inherit;
+    text-decoration: none;
+}
+.inv-card-a-ext {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.2rem;
+    font-size: 0.85rem;
+    color: #93c5fd;
+    transition: transform 0.2s;
+}
+.inv-card-a:hover .inv-card-a-ext { transform: translate(2px, -2px); color: #2563eb; }
+
+.inv-card-a-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(37,99,235,0.06));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    color: #2563eb;
+    margin-bottom: 0.3rem;
+}
+.inv-card-a h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    font-family: "Lato", sans-serif;
+}
+.inv-card-a p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.55;
+}
+
+/* ================================================================
+   OPTION B — Classic / Traditional Grouped Layout
+   ================================================================ */
+.inv-section-b {
+    padding: 3.5rem 0;
+    background: #f8f9fa;
+}
+.inv-groups-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+.inv-group {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.inv-group-header {
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.9rem 1.5rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.inv-group-header i { color: #2563eb; }
+.inv-grid-b {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    padding: 1rem;
+    gap: 0.75rem;
+}
+.inv-card-b {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #1e293b;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    background: #fdfdfe;
+}
+.inv-card-b:hover {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    color: #1d4ed8;
+    text-decoration: none;
+}
+.inv-card-b-icon {
+    width: 34px;
+    height: 34px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.92rem;
+    color: #64748b;
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.inv-card-b:hover .inv-card-b-icon {
+    background: #dbeafe;
+    color: #2563eb;
+    border-color: #93c5fd;
+}
+
+/* ================================================================
+   DOCUMENT LIST PAGE — Grey Hero (BracePort style, site-coloured)
+   ================================================================ */
+.inv-doc-hero {
+    background: #64748b;
+    padding: 3.5rem 0 2.5rem;
+}
+.inv-doc-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.inv-doc-hero h1 {
+    color: #fff;
+    font-size: 2.2rem;
+    margin: 0;
+    font-family: "Playfair Display", Georgia, serif;
+}
+.inv-breadcrumb {
+    font-size: 0.83rem;
+    color: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+.inv-breadcrumb a { color: rgba(255,255,255,0.85); text-decoration: none; }
+.inv-breadcrumb a:hover { color: #fff; }
+.inv-breadcrumb span { color: rgba(255,255,255,0.4); }
+
+/* Document content area */
+.inv-docs-section {
+    padding: 3.5rem 0 4rem;
+    background: #fff;
+}
+.inv-docs-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Grid of document items */
+.inv-docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 0.5rem 3rem;
+}
+
+/* Each document row: circle icon + label (BracePort) */
+.inv-doc-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid #f0f4f8;
+    text-decoration: none;
+    color: #374151;
+    transition: color 0.2s;
+}
+.inv-doc-row:hover { color: #2563eb; text-decoration: none; }
+
+.inv-doc-circle {
+    width: 62px;
+    height: 62px;
+    border: 2px solid #d1d5db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #9ca3af;
+    flex-shrink: 0;
+    transition: border-color 0.2s, color 0.2s;
+}
+.inv-doc-row:hover .inv-doc-circle { border-color: #93c5fd; color: #2563eb; }
+
+.inv-doc-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+/* Empty state */
+.inv-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 5rem 2rem;
+    color: #94a3b8;
+}
+.inv-empty-state i { font-size: 3rem; display: block; margin-bottom: 1rem; }
+.inv-empty-state p { font-size: 1rem; margin: 0; }
+
+/* ================================================================
+   GRIEVANCE PAGE
+   ================================================================ */
+.inv-grievance-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+.inv-grievance-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.inv-grievance-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 28px rgba(30,41,59,0.10);
+    padding: 2.5rem 2.5rem 2rem;
+}
+.inv-grievance-card h2 {
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin: 0 0 0.4rem;
+}
+.inv-grievance-card > p {
+    color: #64748b;
+    font-size: 0.92rem;
+    margin-bottom: 2rem;
+}
+.inv-reg-box {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 10px;
+    padding: 1rem 1.4rem;
+    margin-bottom: 2rem;
+    font-size: 0.88rem;
+    color: #0369a1;
+    line-height: 1.6;
+}
+.inv-reg-box strong { display: block; margin-bottom: 0.25rem; color: #075985; font-size: 0.9rem; }
+.inv-form-group { margin-bottom: 1.1rem; }
+.inv-form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 0.35rem;
+}
+.inv-form-group input,
+.inv-form-group textarea,
+.inv-form-group select {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1.5px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    font-family: "Lato", sans-serif;
+    color: #1e293b;
+    background: #f8fafc;
+    transition: border-color 0.2s, background 0.2s;
+}
+.inv-form-group input:focus,
+.inv-form-group textarea:focus,
+.inv-form-group select:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #fff;
+}
+.inv-form-group textarea { resize: vertical; min-height: 110px; }
+.inv-submit-btn {
+    width: 100%;
+    padding: 0.85rem;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: "Lato", sans-serif;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+}
+.inv-submit-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    transform: translateY(-1px);
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 768px) {
+    .inv-hero h1 { font-size: 2rem; }
+    .inv-doc-hero h1 { font-size: 1.7rem; }
+    .inv-doc-hero-inner { flex-direction: column; align-items: flex-start; }
+    .inv-grid-a, .inv-groups-wrapper, .inv-docs-inner { padding: 0 1rem; }
+    .inv-grid-a { grid-template-columns: 1fr; }
+    .inv-docs-grid { grid-template-columns: 1fr; gap: 0; }
+    .inv-grievance-card { padding: 1.5rem 1.2rem; }
+    .inv-preview-bar-inner { padding: 0 1rem; }
+}

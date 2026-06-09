@@ -1,0 +1,81 @@
+<%- include('../partials/header', { currentTitle: 'Investor Grievance' }) %>
+<link rel="stylesheet" href="/css/investors.css">
+
+<br><br>
+<div class="top-br"><br><br></div>
+
+<!-- Grey hero banner -->
+<section class="inv-doc-hero">
+    <div class="inv-doc-hero-inner">
+        <h1>Investor Grievance</h1>
+        <nav class="inv-breadcrumb" aria-label="breadcrumb">
+            <span>You are here:</span>
+            <% breadcrumb.forEach(function(crumb, i) { %>
+                <% if (crumb.href) { %>
+                    <a href="<%= crumb.href %>"><%= crumb.label %></a>
+                <% } else { %>
+                    <strong style="color:#fff"><%= crumb.label %></strong>
+                <% } %>
+                <% if (i < breadcrumb.length - 1) { %><span>/</span><% } %>
+            <% }) %>
+        </nav>
+    </div>
+</section>
+
+<section class="inv-grievance-section">
+    <div class="inv-grievance-inner">
+        <div class="inv-grievance-card">
+            <h2>Submit a Grievance</h2>
+            <p>Investors may raise their complaints or queries using the form below. For SEBI-registered grievances, please use the SCORES portal.</p>
+
+            <!-- Registrar / SCORES info -->
+            <div class="inv-reg-box">
+                <strong>Registrar &amp; Transfer Agent</strong>
+                Name, address, and contact details will be updated here.
+                <br><br>
+                <strong>SEBI SCORES Portal</strong>
+                Investors can also file complaints at <a href="https://scores.sebi.gov.in" target="_blank" rel="noopener noreferrer">scores.sebi.gov.in</a> or call the SEBI helpline at 1800 266 7575.
+            </div>
+
+            <!-- Grievance form (static — wire to backend when ready) -->
+            <form action="#" method="POST">
+                <div class="inv-form-group">
+                    <label for="inv-name">Full Name *</label>
+                    <input type="text" id="inv-name" name="name" placeholder="Your full name" required>
+                </div>
+                <div class="inv-form-group">
+                    <label for="inv-email">Email Address *</label>
+                    <input type="email" id="inv-email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="inv-form-group">
+                    <label for="inv-phone">Phone Number</label>
+                    <input type="tel" id="inv-phone" name="phone" placeholder="+91 XXXXX XXXXX">
+                </div>
+                <div class="inv-form-group">
+                    <label for="inv-folio">Folio / DP-Client ID</label>
+                    <input type="text" id="inv-folio" name="folio" placeholder="Folio number or DP-Client ID">
+                </div>
+                <div class="inv-form-group">
+                    <label for="inv-subject">Nature of Grievance *</label>
+                    <select id="inv-subject" name="subject" required>
+                        <option value="" disabled selected>Select category</option>
+                        <option>Non-receipt of Dividend</option>
+                        <option>Non-receipt of Annual Report</option>
+                        <option>Non-receipt of Share Certificate</option>
+                        <option>Transfer / Transmission of Shares</option>
+                        <option>Demat / Remat Issues</option>
+                        <option>Change of Address / Bank Details</option>
+                        <option>Others</option>
+                    </select>
+                </div>
+                <div class="inv-form-group">
+                    <label for="inv-message">Details *</label>
+                    <textarea id="inv-message" name="message" placeholder="Describe your grievance in detail..." required></textarea>
+                </div>
+                <button type="submit" class="inv-submit-btn">Submit Grievance</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>

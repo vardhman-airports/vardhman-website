@@ -53,7 +53,7 @@
         crossorigin="anonymous">
 
     <!-- Google Fonts (consolidated into one request) -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=League+Spartan:wght@700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:wght@600&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;600&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@600;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=League+Spartan:wght@400;700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:wght@600&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;600&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -131,6 +131,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/about">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/our-team">Our Team</a>
                         </li>
                         <li class="nav-item dropdown">
                             <div class="dropdown-toggle-wrapper">
@@ -520,8 +523,159 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/news">News</a>
+                        <li class="nav-item dropdown">
+                            <div class="dropdown-toggle-wrapper">
+                                <a class="nav-link" href="/investors" id="investorsDropdown">
+                                    Investors
+                                </a>
+                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="investorsDropdown">
+
+                                <!-- Notices -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/notices">Notices</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/investors/notices/agm-egm">AGM / EGM Notices</a></li>
+                                        <li><a class="dropdown-item" href="/investors/notices/postal-ballot">Postal Ballot Notices</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- Annual Report -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/annual-report">Annual Report</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <!-- Financial Results -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/financial-results">Financial Results</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/investors/financial-results/quarterly">Quarterly Results</a></li>
+                                        <li><a class="dropdown-item" href="/investors/financial-results/half-yearly">Half-Yearly Results</a></li>
+                                        <li><a class="dropdown-item" href="/investors/financial-results/annual">Annual Results</a></li>
+                                        <li><a class="dropdown-item" href="/investors/financial-results/board-report">Board Report</a></li>
+                                        <li><a class="dropdown-item" href="/investors/financial-results/form-aoc4">Form AOC-4</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- Board Meeting Outcome -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/board-meeting-outcome">Board Meeting Outcome</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <!-- Voting Results -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/voting-results">Voting Results</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <!-- Shareholding Pattern -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/shareholding-pattern">Shareholding Pattern</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <!-- Annual Return -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/annual-return">Annual Return</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <!-- Corporate Governance -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/corporate-governance">Corporate Governance</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/investors/corporate-governance/compliance">Compliance Reports</a></li>
+                                        <li><a class="dropdown-item" href="/investors/corporate-governance/committees">Committee Composition</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- Company Policies -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/company-policies">Company Policies</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <!-- Offer Documents (IPO) -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/offer-documents">Offer Documents (IPO)</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/investors/offer-documents/drhp">Draft Red Herring Prospectus</a></li>
+                                        <li><a class="dropdown-item" href="/investors/offer-documents/rhp">Red Herring Prospectus</a></li>
+                                        <li><a class="dropdown-item" href="/investors/offer-documents/prospectus">Prospectus</a></li>
+                                        <li><a class="dropdown-item" href="/investors/offer-documents/statement-of-deviation">Statement of Deviation</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- SEBI Disclosures -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/disclosures">Disclosures (SEBI LODR Reg. 46)</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <!-- Investor Grievance -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/investor-grievance">Investor Grievance</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/pov">Downloads</a>

@@ -18,6 +18,8 @@ import searchRouter from './routes/search.routes.js'
 // import METARRouter from './routes/METAR.routes.js'
 import homeRouter from './routes/home.routes.js'
 import povRouter from './routes/pov.routes.js'
+import investorsRouter from './routes/investors.routes.js'
+import teamRouter from './routes/team.routes.js'
 
 const PORT = process.env.PORT || 4444;
 const app = express();
@@ -190,6 +192,8 @@ app.use('/images', (req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, "public")))
+app.use('/manufacturing', express.static(path.join(__dirname, 'manufacturing')));
+app.use('/downloads', express.static(path.join(__dirname, 'data/downloads')));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(express.json({ limit: '10kb' }));
 
@@ -250,6 +254,8 @@ app.use("/contact", contactRouter);
 app.use("/search", searchRouter);
 // app.use("/metar",METARRouter);
 app.use("/pov", povRouter);
+app.use("/investors", investorsRouter);
+app.use("/our-team", teamRouter);
 app.use("/", productsRouter);
 
 // 404 handler — must be after all routes
