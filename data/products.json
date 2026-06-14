@@ -2144,17 +2144,7 @@
                         "FAA AC 150/5390-2B Heliport Design Guide"
                     ]
                 }
-            ],
-            "downloads": {
-                "datasheet": [
-                    {
-                        "title": "Datasheet - LED Surface Heliport Flood Light",
-                        "url": "fhls.pdf"
-                    }
-                ],
-                "manual": [],
-                "certification": []
-            }
+            ]
         },
         "air-traffic-management-system": {
             "title": "Air Traffic Management System",
@@ -2212,7 +2202,17 @@
             ],
             "sector": "defense",
             "category": "air-traffic-management",
-            "subcategory": "air-traffic-management-system"
+            "subcategory": "air-traffic-management-system",
+            "downloads": {
+                "datasheet": [
+                    {
+                        "title": "Datasheet - Air Traffic Management System",
+                        "url": "atms.pdf"
+                    }
+                ],
+                "manual": [],
+                "certification": []
+            }
         },
         "automatic-weather-observation-system": {
             "title": "Automatic Weather Observation System (AWOS)",
