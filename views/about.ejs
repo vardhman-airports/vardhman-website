@@ -73,7 +73,7 @@
     .timeline-container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 80px 20px;
+      padding: 40px 20px;
       position: relative;
     }
 
@@ -94,7 +94,7 @@
     }
 
     .timeline-item {
-      margin-bottom: 60px;
+      margin-bottom: 20px;
       position: relative;
       opacity: 0;
       transform: translateY(20px);
@@ -118,7 +118,7 @@
 
     .timeline-content {
       background: white;
-      padding: 35px;
+      padding: 16px 20px;
       border-radius: 16px;
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
       position: relative;
@@ -132,11 +132,11 @@
     }
 
     .timeline-item:nth-child(odd) .timeline-content {
-      margin-right: 35px;
+      margin-right: 20px;
     }
 
     .timeline-item:nth-child(even) .timeline-content {
-      margin-left: 35px;
+      margin-left: 20px;
     }
 
     .timeline-content::before {
@@ -189,28 +189,28 @@
       display: inline-block;
       background: #F0F7FF;
       color: #4A90E2;
-      padding: 6px 14px;
+      padding: 4px 10px;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
       letter-spacing: 0.5px;
       border: 1px solid #E3F2FD;
     }
 
     .content-title {
       font-family: "Playfair Display", Georgia, serif;
-      font-size: 1.5rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: #1A202C;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
     }
 
     .content-description {
       color: #4A5568;
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 18px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
     }
 
     .highlight {
@@ -380,77 +380,79 @@
     </div>
   </div>
   <style>
-    .timeline-container, .timeline:before{
-      max-height: 1900px;
+    .timeline-container{
+      max-height: 1050px;
+      overflow: hidden;
+    }
+    .timeline:before{
+      max-height: 1050px;
     }
     .timeline-item-2{
       position: relative;
-      bottom: 10rem;
+      bottom: 5rem;
     }
     .timeline-item-3{
       position: relative;
-      bottom: 20rem;
+      bottom: 10rem;
     }
     .timeline-item-4{
       position: relative;
-      bottom: 30rem;
+      bottom: 15rem;
     }
     .timeline-item-5{
       position: relative;
-      bottom: 40rem;
+      bottom: 20rem;
     }
     .timeline-item-6{
       position: relative;
-      bottom: 50rem;
+      bottom: 25rem;
     }
     .timeline-item-7{
       position: relative;
-      bottom: 60rem;
+      bottom: 30rem;
     }
     .stats-section{
-      margin-top: 100px;
+      margin-top: 20px;
     }
 
     @media (max-width: 1050px){
-      .timeline-container, .timeline:before{
-      max-height: 2050px;
-    }
+      .timeline-container{ max-height: 980px; }
+      .timeline:before{ max-height: 980px; }
     }
     @media (max-width: 1000px){
-      .timeline-container, .timeline:before{
-      max-height: 2100px;
-    }
+      .timeline-container{ max-height: 1060px; }
+      .timeline:before{ max-height: 1060px; }
     }
     @media (max-width: 950px){
-      .timeline-container, .timeline:before{
-      max-height: 2150px;
-    }
+      .timeline-container{ max-height: 1160px; }
+      .timeline:before{ max-height: 1160px; }
     }
     @media (max-width: 900px){
-      .timeline-container, .timeline:before{
-      max-height: 2250px;
-    }
+      .timeline-container{ max-height: 1280px; }
+      .timeline:before{ max-height: 1280px; }
     }
     @media (max-width: 850px){
-      .timeline-container, .timeline:before{
-      max-height: 2350px;
-    }
+      .timeline-container{ max-height: 1420px; }
+      .timeline:before{ max-height: 1420px; }
     }
     @media (max-width: 800px){
-      .timeline-container, .timeline:before{
-      max-height: 2450px;
-    }
+      .timeline-container{ max-height: 1580px; }
+      .timeline:before{ max-height: 1580px; }
     }
     @media (max-width: 768px){
       .timeline-item-2,.timeline-item-3,.timeline-item-4,.timeline-item-5,.timeline-item-6,.timeline-item-7{
         position: initial;
       }
-      .timeline-container, .timeline:before{
+      .timeline-container{
+        max-height: none;
+        overflow: visible;
+      }
+      .timeline:before{
         max-height: none;
       }
       .stats-section{
-      margin-top: 40px;
-    }
+        margin-top: 40px;
+      }
     }
   </style>
 
@@ -460,11 +462,10 @@
         <div class="timeline-marker">2017</div>
         <div class="timeline-content">
           <div class="year-badge">2017</div>
-          <div class="content-title">Foundation & Strategic Partnerships</div>
+          <div class="content-title">Foundation & Partnerships</div>
           <div class="content-description">
-            Established with a vision to revolutionize airfield technology solutions.
-            <span class="highlight">Formed strategic partnerships and distribution agreements</span>
-            with leading global airfield companies including ATG, RLG Docking Corporation Taiwan, and FB Technologies.
+            Founded with a vision to transform airfield technology; partnered with global leaders
+            <span class="highlight">ATG, RLG Docking Corp (Taiwan) & FB Technologies</span>.
           </div>
           <div class="achievement-tag">Foundation Year</div>
         </div>
@@ -476,10 +477,8 @@
           <div class="year-badge">2018</div>
           <div class="content-title">Technological Innovation</div>
           <div class="content-description">
-            Achieved a ground breaking milestone by completing the
-            <span class="highlight">first-ever integration of CCR (Constant Current Regulator) with ALCMS</span>
-            (Airfield Lighting Control and Monitoring System). Successfully deployed AVDGS systems with Tata Projects
-            and Bangalore Airport.
+            Achieved world's first <span class="highlight">CCR-ALCMS integration</span>;
+            deployed AVDGS systems at Bengaluru Airport with Tata Projects.
           </div>
           <div class="achievement-tag">Technical Excellence</div>
         </div>
@@ -491,9 +490,8 @@
           <div class="year-badge">2020</div>
           <div class="content-title">Government Recognition</div>
           <div class="content-description">
-            <span class="highlight">Officially recognized as a startup by DPIIT</span>
-            in the Aeronautics/Aerospace & Defense Industry sector. Honored with the Taxpayer Award by the Ministry of
-            Finance for outstanding contribution to nation building.
+            <span class="highlight">DPIIT-certified startup</span> in Aerospace & Defense;
+            received Taxpayer Award from Ministry of Finance.
           </div>
           <div class="achievement-tag">National Recognition</div>
         </div>
@@ -502,13 +500,11 @@
       <div class="timeline-item timeline-item-4">
         <div class="timeline-marker">2023</div>
         <div class="timeline-content">
-          <div class="year-badge">2020-2023</div>
-          <div class="content-title">Airport Infrastructure Leadership</div>
+          <div class="year-badge">2020–2023</div>
+          <div class="content-title">Market Leadership</div>
           <div class="content-description">
-            Successfully developed and deployed cutting-edge
-            <span class="highlight">LED Taxiway lights and Elevated Runway Edge lights</span>
-            across AAI Airports. Established dominant presence in airport lighting solutions with certified performance
-            excellence.
+            Developed and deployed <span class="highlight">LED Taxiway & Runway Edge Lights</span>
+            across AAI airports, establishing market leadership.
           </div>
           <div class="achievement-tag">Infrastructure Excellence</div>
         </div>
@@ -520,10 +516,9 @@
           <div class="year-badge">2024</div>
           <div class="content-title">Defense & Smart Infrastructure</div>
           <div class="content-description">
-            Received Service Excellence Award from Adani Jaipur International Airport for AVDGS systems.
-            <span class="highlight">Successfully entered defense sector</span> with major contracts for Dehradun (₹45
-            Cr) and Srinagar (₹29 Cr) from army aviation.
-            Expanded into MES smart metering projects worth ₹25 Crores.
+            Service Excellence Award from Adani Jaipur Airport;
+            <span class="highlight">Army Aviation contracts (₹74 Cr)</span>;
+            expanded into MES smart metering (₹25 Cr).
           </div>
           <div class="achievement-tag">₹100+ Crores Portfolio</div>
         </div>
@@ -535,9 +530,8 @@
           <div class="year-badge">2025</div>
           <div class="content-title">Global Expansion</div>
           <div class="content-description">
-            Marked international presence with
-            <span class="highlight">successful completion of first overseas project in Hanimadhoo, Maldives</span>.
-            Exceeded order target of ₹100 Crores in FY 2024-25, establishing strong foundation for global growth.
+            Completed first <span class="highlight">International Airport project in Maldives</span>;
+            crossed ₹100 Cr orders in FY 2024-25.
           </div>
           <div class="achievement-tag">International Success</div>
         </div>
@@ -547,11 +541,9 @@
         <div class="timeline-marker">2026</div>
         <div class="timeline-content">
           <div class="year-badge">2026</div>
-          <div class="content-title">Scaling New Heights</div>
+          <div class="content-title">ATC Excellence</div>
           <div class="content-description">
-            Continuing our trajectory of growth with
-            <span class="highlight">expanded manufacturing capabilities and new strategic partnerships</span>
-            across the defense and civil aviation sectors. Targeting ₹200 Crores revenue milestone and deeper penetration into international markets.
+            Completed first <span class="highlight">ATC upgrade work at Srinagar Airport</span>.
           </div>
           <div class="achievement-tag">Next Chapter</div>
         </div>

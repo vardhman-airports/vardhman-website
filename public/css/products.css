@@ -328,6 +328,13 @@
     flex: 1;
 }
 
+/* Product card image: use contain so product shots aren't cropped */
+.modern-card-img {
+    background-size: contain;
+    background-color: #ffffff;
+    aspect-ratio: 4/3;
+}
+
 /* Modern Card Styles */
 .modern-card {
     background: #ffffff;

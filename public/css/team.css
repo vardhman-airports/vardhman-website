@@ -64,7 +64,7 @@ body::after {
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
-body:has(.team-card:hover)::after,
+body:has(.team-card:not(.team-card--static):hover)::after,
 body:has(.team-card.tapped)::after {
     opacity: 1;
     pointer-events: auto; /* clicking the dim dismisses on mobile */
