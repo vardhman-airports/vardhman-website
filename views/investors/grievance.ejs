@@ -1,4 +1,4 @@
-<%- include('../partials/header', { currentTitle: 'Investor Grievance' }) %>
+<%- include('../partials/header', { currentTitle: locals.currentTitle || 'Investor Enquiry' }) %>
 <link rel="stylesheet" href="/css/investors.css">
 
 <br><br>
@@ -7,7 +7,7 @@
 <!-- Grey hero banner -->
 <section class="inv-doc-hero">
     <div class="inv-doc-hero-inner">
-        <h1>Investor Grievance</h1>
+        <h1><%= breadcrumb[breadcrumb.length - 1].label %></h1>
         <nav class="inv-breadcrumb" aria-label="breadcrumb">
             <span>You are here:</span>
             <% breadcrumb.forEach(function(crumb, i) { %>
@@ -25,7 +25,7 @@
 <section class="inv-grievance-section">
     <div class="inv-grievance-inner">
         <div class="inv-grievance-card">
-            <h2>Submit a Grievance</h2>
+            <h2>Submit an Enquiry</h2>
             <p>Investors may raise their complaints or queries using the form below. For SEBI-registered grievances, please use the SCORES portal.</p>
 
             <!-- Registrar / SCORES info -->
@@ -72,7 +72,7 @@
                     <label for="inv-message">Details *</label>
                     <textarea id="inv-message" name="message" placeholder="Describe your grievance in detail..." required></textarea>
                 </div>
-                <button type="submit" class="inv-submit-btn">Submit Grievance</button>
+                <button type="submit" class="inv-submit-btn">Submit Enquiry</button>
             </form>
         </div>
     </div>

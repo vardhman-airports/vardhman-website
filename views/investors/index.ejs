@@ -4,16 +4,6 @@
 <br><br>
 <div class="top-br"><br><br></div>
 
-<!-- ── Director preview toggle (remove after sign-off) ─────────────────── -->
-<div class="inv-preview-bar">
-    <div class="inv-preview-bar-inner">
-        <strong>Director Preview:</strong>
-        <a href="/investors?style=a" class="inv-preview-btn <%= style === 'a' ? 'inv-preview-active' : '' %>">Option A — Modern Card Grid</a>
-        <a href="/investors?style=b" class="inv-preview-btn <%= style === 'b' ? 'inv-preview-active' : '' %>">Option B — Classic Grouped</a>
-    </div>
-</div>
-<!-- ────────────────────────────────────────────────────────────────────── -->
-
 <!-- Shared hero banner -->
 <section class="inv-hero">
     <h1>Investor Relations</h1>
@@ -48,7 +38,7 @@
             <i class="fas fa-external-link-alt inv-card-a-ext"></i>
             <div class="inv-card-a-icon"><i class="fas fa-chart-bar"></i></div>
             <h3>Financial Results</h3>
-            <p>Quarterly, half-yearly &amp; annual financials — Board Report, Balance Sheet, Form AOC-4.</p>
+            <p>Board Report, Balance Sheet, and Form AOC-4 for the financial year.</p>
         </a>
 
         <a href="/investors/board-meeting-outcome" class="inv-card-a">
@@ -63,6 +53,13 @@
             <div class="inv-card-a-icon"><i class="fas fa-check-square"></i></div>
             <h3>Voting Results</h3>
             <p>E-voting and poll results for all general and extraordinary meetings.</p>
+        </a>
+
+        <a href="/investors/media-press" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-newspaper"></i></div>
+            <h3>Media &amp; Press</h3>
+            <p>Press releases, media coverage, and news related to Vardhman Airport Solutions.</p>
         </a>
 
         <a href="/investors/shareholding-pattern" class="inv-card-a">
@@ -96,21 +93,14 @@
         <a href="/investors/offer-documents" class="inv-card-a">
             <i class="fas fa-external-link-alt inv-card-a-ext"></i>
             <div class="inv-card-a-icon"><i class="fas fa-file-invoice"></i></div>
-            <h3>Offer Documents (IPO)</h3>
-            <p>DRHP, RHP, Prospectus, and Statement of Deviation related to the public issue.</p>
+            <h3>Offer Documents</h3>
+            <p>DRHP, RHP, Prospectus, and other documents related to the public issue.</p>
         </a>
 
-        <a href="/investors/disclosures" class="inv-card-a">
-            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
-            <div class="inv-card-a-icon"><i class="fas fa-clipboard-list"></i></div>
-            <h3>Disclosures (Reg. 46)</h3>
-            <p>All disclosures mandated under SEBI LODR Regulation 46.</p>
-        </a>
-
-        <a href="/investors/investor-grievance" class="inv-card-a">
+        <a href="/investors/investor-enquiry" class="inv-card-a">
             <i class="fas fa-external-link-alt inv-card-a-ext"></i>
             <div class="inv-card-a-icon"><i class="fas fa-headset"></i></div>
-            <h3>Investor Grievance</h3>
+            <h3>Investor Enquiry</h3>
             <p>Submit queries or complaints. SCORES / SEBI portal information.</p>
         </a>
 
@@ -158,10 +148,6 @@
                     <div class="inv-card-b-icon"><i class="fas fa-redo-alt"></i></div>
                     <span>Annual Return</span>
                 </a>
-                <a href="/investors/disclosures" class="inv-card-b">
-                    <div class="inv-card-b-icon"><i class="fas fa-clipboard-list"></i></div>
-                    <span>Disclosures (Reg. 46)</span>
-                </a>
             </div>
         </div>
 
@@ -185,28 +171,24 @@
         <!-- Group 3: IPO / Offer Documents -->
         <div class="inv-group">
             <div class="inv-group-header">
-                <i class="fas fa-rocket"></i> IPO &amp; Offer Documents
+                <i class="fas fa-rocket"></i> Offer Documents
             </div>
             <div class="inv-grid-b">
-                <a href="/investors/offer-documents" class="inv-card-b">
-                    <div class="inv-card-b-icon"><i class="fas fa-file-invoice"></i></div>
-                    <span>Offer Documents</span>
-                </a>
                 <a href="/investors/offer-documents/drhp" class="inv-card-b">
                     <div class="inv-card-b-icon"><i class="fas fa-file-pdf"></i></div>
-                    <span>Draft Red Herring Prospectus</span>
+                    <span>DRHP</span>
                 </a>
                 <a href="/investors/offer-documents/rhp" class="inv-card-b">
                     <div class="inv-card-b-icon"><i class="fas fa-file-pdf"></i></div>
-                    <span>Red Herring Prospectus</span>
+                    <span>RHP</span>
                 </a>
                 <a href="/investors/offer-documents/prospectus" class="inv-card-b">
                     <div class="inv-card-b-icon"><i class="fas fa-file-pdf"></i></div>
                     <span>Prospectus</span>
                 </a>
-                <a href="/investors/offer-documents/statement-of-deviation" class="inv-card-b">
-                    <div class="inv-card-b-icon"><i class="fas fa-exclamation-circle"></i></div>
-                    <span>Statement of Deviation</span>
+                <a href="/investors/offer-documents/other-documents" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-folder-open"></i></div>
+                    <span>Other Documents</span>
                 </a>
             </div>
         </div>
@@ -217,9 +199,13 @@
                 <i class="fas fa-envelope"></i> Contact &amp; Support
             </div>
             <div class="inv-grid-b">
-                <a href="/investors/investor-grievance" class="inv-card-b">
+                <a href="/investors/investor-enquiry" class="inv-card-b">
                     <div class="inv-card-b-icon"><i class="fas fa-headset"></i></div>
-                    <span>Investor Grievance</span>
+                    <span>Investor Enquiry</span>
+                </a>
+                <a href="/investors/media-press" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-newspaper"></i></div>
+                    <span>Media &amp; Press</span>
                 </a>
             </div>
         </div>

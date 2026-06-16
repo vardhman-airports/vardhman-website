@@ -225,33 +225,30 @@
 }
 
 /* ================================================================
-   DOCUMENT LIST PAGE — Grey Hero (BracePort style, site-coloured)
+   DOCUMENT LIST PAGE — Hero
    ================================================================ */
 .inv-doc-hero {
-    background: #64748b;
-    padding: 3.5rem 0 2.5rem;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #2563eb 100%);
+    padding: 5rem 0 3.5rem;
+    text-align: center;
 }
 .inv-doc-hero-inner {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 1rem;
 }
 .inv-doc-hero h1 {
     color: #fff;
-    font-size: 2.2rem;
-    margin: 0;
-    font-family: "Playfair Display", Georgia, serif;
+    font-size: 2.4rem;
+    margin: 0 0 1rem;
+    font-weight: 700;
 }
 .inv-breadcrumb {
     font-size: 0.83rem;
     color: rgba(255,255,255,0.7);
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 0.3rem;
 }
@@ -415,11 +412,65 @@
    ================================================================ */
 @media (max-width: 768px) {
     .inv-hero h1 { font-size: 2rem; }
-    .inv-doc-hero h1 { font-size: 1.7rem; }
-    .inv-doc-hero-inner { flex-direction: column; align-items: flex-start; }
+    .inv-doc-hero h1 { font-size: 1.8rem; }
     .inv-grid-a, .inv-groups-wrapper, .inv-docs-inner { padding: 0 1rem; }
     .inv-grid-a { grid-template-columns: 1fr; }
     .inv-docs-grid { grid-template-columns: 1fr; gap: 0; }
     .inv-grievance-card { padding: 1.5rem 1.2rem; }
     .inv-preview-bar-inner { padding: 0 1rem; }
+}
+
+/* ================================================================
+   INVESTOR ENQUIRY PAGE
+   ================================================================ */
+.inv-enquiry-section {
+    padding: 4rem 0 5rem;
+    background: #fff;
+}
+.inv-enquiry-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.inv-enquiry-accent {
+    width: 3rem;
+    height: 3px;
+    background: linear-gradient(90deg, #2563eb, #38bdf8);
+    border-radius: 2px;
+    margin-bottom: 1rem;
+}
+.inv-enquiry-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    letter-spacing: 0.04em;
+    margin: 0 0 2rem;
+}
+.inv-contact-block {
+    margin-bottom: 2rem;
+}
+.inv-contact-block strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1e293b;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.3rem;
+}
+.inv-contact-block p {
+    color: #374151;
+    font-size: 0.93rem;
+    margin: 0.15rem 0;
+    line-height: 1.6;
+}
+.inv-contact-block a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.inv-contact-block a:hover { text-decoration: underline; }
+.inv-contact-divider {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 1.5rem 0;
 }

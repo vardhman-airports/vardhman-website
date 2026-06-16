@@ -1,7 +1,28 @@
 .about-heading {
-  background: #fff;
-  padding: 2rem 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #2563eb 100%);
+  padding: 5rem 0 3.5rem;
   text-align: center;
+  color: #fff;
+}
+.about-heading .container-fluid {
+  padding: 0;
+}
+.about-heading h1,
+.about-heading .heading {
+  color: #fff !important;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+  text-shadow: none;
+}
+.about-heading .mission-statement {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.05rem;
+  font-weight: 400;
+  max-width: 860px;
+  margin: 0 auto;
+  line-height: 1.65;
+  padding: 0 2rem;
 }
 
 .about-parallax .mission-statement {
