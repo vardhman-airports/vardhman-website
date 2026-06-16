@@ -138,12 +138,12 @@
         <div class="container-fluid">
           <h1 class="heading">Catalogues</h1>
           <div class="pov-grid">
-            <% if (povPosts.length === 0) { %>
+            <% if (catalogues.length === 0) { %>
               <div class="no-posts">
                 <p>No catalogues available at the moment.</p>
               </div>
             <% } else { %>
-              <% povPosts.forEach(post => { %>
+              <% catalogues.forEach(post => { %>
                 <div class="modern-card">
                   <div class="modern-card-content">
                     <div>
@@ -179,11 +179,49 @@
 
     <!-- ======================== BLOGS TAB ======================== -->
     <div id="tab-blogs" class="tab-panel">
-      <div class="empty-section">
-        <div class="empty-icon"><i class="fas fa-pen-nib"></i></div>
-        <h3>Blogs Coming Soon</h3>
-        <p>We are working on insightful articles and industry updates. Check back soon.</p>
-      </div>
+      <% if (blogs.length === 0) { %>
+        <div class="empty-section">
+          <div class="empty-icon"><i class="fas fa-pen-nib"></i></div>
+          <h3>Blogs Coming Soon</h3>
+          <p>We are working on insightful articles and industry updates. Check back soon.</p>
+        </div>
+      <% } else { %>
+        <section id="pov-grid">
+          <div class="container-fluid">
+            <h1 class="heading">Blogs</h1>
+            <div class="pov-grid">
+              <% blogs.forEach(post => { %>
+                <div class="modern-card">
+                  <div class="modern-card-content">
+                    <div>
+                      <h3 class="modern-card-title"><%= post.title %></h3>
+                      <p class="modern-card-description">
+                        <% if (post.description) { %>
+                          <%= post.description.substring(0, 300) %><% if (post.description.length > 300) { %>...<% } %>
+                        <% } else { %>
+                          <%= post.content.substring(0, 300) %><% if (post.content.length > 300) { %>...<% } %>
+                        <% } %>
+                      </p>
+                    </div>
+                    <div>
+                      <div class="modern-card-meta">
+                        <span class="author">By <%= post.author %></span>
+                        <span class="date"><%= new Date(post.created_at_display).toLocaleDateString() %></span>
+                      </div>
+                      <div class="modern-card-actions">
+                        <button class="modern-card-button view-btn" onclick="showPost('<%= post.id %>')">View Details</button>
+                        <% if (post.has_pdf) { %>
+                          <a href="/pov/download/<%= post.id %>" class="modern-card-button download-btn">Download PDF</a>
+                        <% } %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
+          </div>
+        </section>
+      <% } %>
     </div>
 
     <!-- ======================== NEWS TAB ======================== -->

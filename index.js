@@ -192,7 +192,6 @@ app.use('/images', (req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, "public")))
-app.use('/manufacturing', express.static(path.join(__dirname, 'manufacturing')));
 app.use('/downloads', express.static(path.join(__dirname, 'data/downloads')));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(express.json({ limit: '10kb' }));

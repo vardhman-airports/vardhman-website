@@ -56,17 +56,20 @@ const requireAdmin = (req, res, next) => {
 router.get('/', async (req, res) => {
     try {
         const { data: povPosts } = await supabase.from('pov_posts').select('*').order('created_at', { ascending: false });
-        
+
         const formattedPosts = (povPosts || []).map(post => ({
             ...post,
             created_at_display: formatDate(post.created_at),
             updated_at_display: formatDate(post.updated_at),
             has_pdf: !!post.pdf_file
         }));
-        
-        res.render('pov/index', { povPosts: formattedPosts, title: 'Point of View' });
+
+        const catalogues = formattedPosts.filter(p => p.type !== 'blog');
+        const blogs = formattedPosts.filter(p => p.type === 'blog');
+
+        res.render('pov/index', { catalogues, blogs, title: 'Downloads' });
     } catch {
-        res.render('pov/index', { povPosts: [], title: 'Point of View' });
+        res.render('pov/index', { catalogues: [], blogs: [], title: 'Downloads' });
     }
 });
 
@@ -161,27 +164,28 @@ router.get('/admin/add', requireAdmin, (req, res) => {
 
 router.post('/admin/add', requireAdmin, upload.single('pdf'), async (req, res) => {
     try {
-        const { title, description, content, author } = req.body;
-        
+        const { title, description, content, author, type } = req.body;
+        const postType = (type === 'blog') ? 'blog' : 'catalogue';
+
         if (!title || !description || !content || !author) {
             return res.render('pov/admin/add', { error: 'All fields required', title: 'Add New Post' });
         }
 
         let pdfFileName = null;
-        
+
         if (req.file) {
             const fileName = `${Date.now()}-${req.file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
             const { data: uploadData, error } = await supabase.storage
                 .from('pov-pdfs')
                 .upload(fileName, req.file.buffer, { contentType: req.file.mimetype });
-                
+
             if (error) return res.render('pov/admin/add', { error: 'Error uploading PDF', title: 'Add New Post' });
             pdfFileName = uploadData.path;
         }
-        
+
         const currentTime = new Date().toISOString();
         const { error } = await supabase.from('pov_posts').insert([{
-            title, description, content, author, pdf_file: pdfFileName,
+            title, description, content, author, type: postType, pdf_file: pdfFileName,
             created_at: currentTime, updated_at: currentTime
         }]);
             
@@ -214,8 +218,9 @@ router.get('/admin/edit/:id', requireAdmin, async (req, res) => {
 
 router.post('/admin/edit/:id', requireAdmin, upload.single('pdf'), async (req, res) => {
     try {
-        const { title, description, content, author } = req.body;
-        
+        const { title, description, content, author, type } = req.body;
+        const postType = (type === 'blog') ? 'blog' : 'catalogue';
+
         if (!title || !description || !content || !author) {
             const { data: post } = await supabase.from('pov_posts').select('*').eq('id', req.params.id).single();
             return res.render('pov/admin/edit', { post, error: 'All fields required', title: 'Edit Post' });
@@ -241,7 +246,7 @@ router.post('/admin/edit/:id', requireAdmin, upload.single('pdf'), async (req, r
         }
         
         const { error } = await supabase.from('pov_posts').update({
-            title, description, content, author, pdf_file: pdfFileName, updated_at: new Date().toISOString()
+            title, description, content, author, type: postType, pdf_file: pdfFileName, updated_at: new Date().toISOString()
         }).eq('id', req.params.id);
             
         if (error) {
