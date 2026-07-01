@@ -1,0 +1,52 @@
+<%- include('../partials/header', { currentTitle: pageTitle }) %>
+<link rel="stylesheet" href="/css/investors.css">
+
+<br><br>
+<div class="top-br"><br><br></div>
+
+<!-- Grey hero banner with breadcrumb (BracePort-style) -->
+<section class="inv-doc-hero">
+    <div class="inv-doc-hero-inner">
+        <h1><%= pageTitle %></h1>
+        <nav class="inv-breadcrumb" aria-label="breadcrumb">
+            <span>You are here:</span>
+            <% breadcrumb.forEach(function(crumb, i) { %>
+                <% if (crumb.href) { %>
+                    <a href="<%= crumb.href %>"><%= crumb.label %></a>
+                <% } else { %>
+                    <strong style="color:#fff"><%= crumb.label %></strong>
+                <% } %>
+                <% if (i < breadcrumb.length - 1) { %><span>/</span><% } %>
+            <% }) %>
+        </nav>
+    </div>
+</section>
+
+<!-- Document grid -->
+<section class="inv-docs-section">
+    <div class="inv-docs-inner">
+        <% if (documents && documents.length > 0) { %>
+            <div class="inv-docs-grid">
+                <% documents.forEach(function(doc) {
+                    var ext = doc.file.split('.').pop().toLowerCase();
+                    var icon = ext === 'xls' || ext === 'xlsx' ? 'fa-file-excel' :
+                               ext === 'doc' || ext === 'docx' ? 'fa-file-word' : 'fa-file-pdf';
+                %>
+                    <a href="<%= doc.file %>" class="inv-doc-row" target="_blank" rel="noopener noreferrer">
+                        <div class="inv-doc-circle">
+                            <i class="fas <%= icon %>"></i>
+                        </div>
+                        <span class="inv-doc-name"><%= doc.label %></span>
+                    </a>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <div class="inv-empty-state">
+                <i class="fas fa-folder-open"></i>
+                <p>Documents will be available here shortly.</p>
+            </div>
+        <% } %>
+    </div>
+</section>
+
+<%- include('../partials/footer') %>

@@ -511,7 +511,7 @@
                                                     <%= similarProduct.title %>
                                                 </h4>
                                                 <p class="similar-product-description">
-                                                    <%= similarProduct.description.substring(0, 100) %>...
+                                                    <%= similarProduct.description ? similarProduct.description.substring(0, 100) + '...' : '' %>
                                                 </p>
                                                 <a href="/<%= similarProduct.key %>" class="similar-product-link">View
                                                     Details</a>

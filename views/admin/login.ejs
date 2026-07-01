@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+    <br><br><br><br><br>
+    <link rel="stylesheet" href="/css/admin.css">
+
+    <style>
+        .google-signin-wrap { text-align: center; }
+        .google-signin-wrap h2 { margin-bottom: 0.4rem; color: #1e293b; }
+        .google-signin-wrap p { color: #64748b; margin-top: 0; margin-bottom: 1.5rem; }
+        .google-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #fff;
+            color: #3c4043;
+            border: 1px solid #dadce0;
+            border-radius: 0.5rem;
+            padding: 0.7rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: box-shadow 0.2s, background 0.2s;
+        }
+        .google-btn:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.12); background: #f8f9fa; }
+        .google-btn img { width: 20px; height: 20px; }
+    </style>
+
+    <div class="admin-container">
+        <div class="login-form google-signin-wrap">
+            <h2>Admin Login</h2>
+            <p>Sign in with an authorized Google account to continue.</p>
+            <a class="google-btn" href="/auth/google?returnTo=<%= encodeURIComponent(returnTo) %>">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="">
+                Sign in with Google
+            </a>
+        </div>
+    </div>
+
+    <%- include('../partials/footer') %>

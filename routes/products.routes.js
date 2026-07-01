@@ -255,6 +255,11 @@ router.get('/our-products', (req, res) => {
   });
 });
 
+// Redirect portable-lighting classification directly to its single product
+router.get('/portable-lighting', (req, res) => {
+  res.redirect('/portable-aviation-runway-lighting-fixture');
+});
+
 // Dynamic route handler for SEO-friendly URLs
 router.get('/:slug', (req, res) => {
   const slug = req.params.slug;
@@ -339,7 +344,7 @@ router.get('/:slug', (req, res) => {
     const sidebarData = getSidebarData();
 
     return res.render('products/index', {
-      title: `${slug.charAt(0).toUpperCase() + slug.slice(1)} Products`,
+      title: `${slug === 'railways' ? 'MES & Railways' : slug.charAt(0).toUpperCase() + slug.slice(1)} Products`,
       products: filteredProducts,
       sidebar: sidebarData,
       filters,

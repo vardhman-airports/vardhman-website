@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /careers/admin/
+Disallow: /pov/admin/
+Disallow: /api/
+Disallow: /health
+Disallow: /healthz
+Disallow: /out/
+
+Sitemap: https://vardhmanairports.com/sitemap.xml

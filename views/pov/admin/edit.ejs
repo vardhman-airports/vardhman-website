@@ -15,6 +15,14 @@
             
             <form method="POST" action="/pov/admin/edit/<%= post.id %>" enctype="multipart/form-data" class="post-form">
                 <div class="form-group">
+                    <label for="type">Type:</label>
+                    <select id="type" name="type" required>
+                        <option value="catalogue" <%= (post.type === 'catalogue' || !post.type) ? 'selected' : '' %>>Catalogue</option>
+                        <option value="blog" <%= post.type === 'blog' ? 'selected' : '' %>>Blog</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="title">Title:</label>
                     <input type="text" id="title" name="title" value="<%= post.title %>" required>
                 </div>
@@ -36,11 +44,14 @@
                 
                 <div class="form-group">
                     <label for="pdf">PDF File:</label>
-                    <% if (post.pdfFile) { %>
-                        <p>Current PDF: <%= post.pdfFile %></p>
+                    <% if (post.pdf_file) { %>
+                        <p style="margin: 0 0 0.4rem;">Current PDF: <%= post.pdf_file %></p>
+                        <label style="font-weight: 400; display: block; margin-bottom: 0.5rem;">
+                            <input type="checkbox" name="removePdf"> Remove current PDF
+                        </label>
                     <% } %>
                     <input type="file" id="pdf" name="pdf" accept=".pdf">
-                    <small>Leave empty to keep current PDF</small>
+                    <small>Leave empty to keep current PDF. Uploading a new file replaces it; check "Remove" to delete it.</small>
                 </div>
                 
                 <button type="submit" class="btn-primary">Update Post</button>

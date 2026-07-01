@@ -4,6 +4,8 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import session from 'express-session';
 import FileStore from 'session-file-store';
+import connectPgSimple from 'connect-pg-simple';
+import pg from 'pg';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import cors from "cors";
@@ -18,7 +20,10 @@ import searchRouter from './routes/search.routes.js'
 // import METARRouter from './routes/METAR.routes.js'
 import homeRouter from './routes/home.routes.js'
 import povRouter from './routes/pov.routes.js'
-import vinRouter from './routes/vin.routes.js'
+import investorsRouter from './routes/investors.routes.js'
+import teamRouter from './routes/team.routes.js'
+import authRouter from './routes/auth.routes.js'
+import passport from './config/passport.js'
 
 const PORT = process.env.PORT || 4444;
 const app = express();
@@ -56,6 +61,14 @@ const limiter = rateLimit({
   skip: (req) => req.path === '/health' // Skip rate limiting for health checks
 });
 
+// Redirect www → non-www (canonicalization)
+app.use((req, res, next) => {
+  if (req.hostname === 'www.vardhmanairports.com') {
+    return res.redirect(301, `https://vardhmanairports.com${req.url}`);
+  }
+  next();
+});
+
 app.use(cors());
 app.disable('x-powered-by');
 app.use(
@@ -76,6 +89,7 @@ app.use(
           "https://code.jquery.com",
           "https://widgets.sociablekit.com",
           "https://elfsightcdn.com",
+          "https://*.elfsightcdn.com",
           "https://static.elfsight.com",
           "https://*.elfsight.com",
           "https://www.googletagmanager.com",
@@ -160,7 +174,29 @@ app.use(
 
 
 app.use(limiter);
+
+// Transparently serve .webp to browsers that support it.
+// Mounted at /images so req.path is the sub-path (e.g. /6.jpg).
+// Uses res.sendFile() directly — no req.url rewriting, guaranteed to work.
+// Falls back to the original via next() if WebP is unavailable or unsupported.
+// Vary: Accept tells CDNs to cache WebP and non-WebP responses separately.
+app.use('/images', (req, res, next) => {
+  if (/\.(jpe?g|png)$/i.test(req.path)) {
+    const accept = req.headers['accept'] || '';
+    if (accept.includes('image/webp')) {
+      const webpPath = req.path.replace(/\.(jpe?g|png)$/i, '.webp');
+      const fullPath = path.join(__dirname, 'public', 'images', webpPath);
+      if (fs.existsSync(fullPath)) {
+        res.set('Vary', 'Accept');
+        return res.sendFile(fullPath);
+      }
+    }
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname, "public")))
+app.use('/downloads', express.static(path.join(__dirname, 'data/downloads')));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(express.json({ limit: '10kb' }));
 
@@ -168,37 +204,77 @@ app.use(express.json({ limit: '10kb' }));
 app.use(
   '/api',
   express.json({ limit: '5mb' }),
-  express.urlencoded({ extended: true, limit: '5mb' }),
-  vinRouter
+  express.urlencoded({ extended: true, limit: '5mb' })
 );
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 
-// Configure session with fallback to memory store
+// Session store selection:
+//  - Postgres (Supabase) when DATABASE_URL is set — survives restarts,
+//    redeploys, and multiple instances. Preferred for production.
+//  - File store otherwise, or if the Postgres connection fails (local dev).
+// The in-memory store is only a last resort, so admins stay logged in
+// across restarts whenever possible.
+const buildFileStore = () => {
+  try {
+    const store = new fileStore({
+      path: sessionDir, // Use the actual path variable
+      ttl: 86400, // 1 day
+      retries: 0, // Don't retry failed operations
+      logFn: function () { } // Disable logging
+    });
+    console.log('Session store: file (out/sessions)');
+    return store;
+  } catch (error) {
+    console.error('Failed to initialize file store, using in-memory store:', error);
+    return undefined; // Last-resort fallback
+  }
+};
+
 let sessionStore;
-try {
-  sessionStore = new fileStore({
-    path: sessionDir, // Use the actual path variable
-    ttl: 86400, // 1 day
-    retries: 0, // Don't retry failed operations
-    logFn: function () { } // Disable logging
+if (process.env.DATABASE_URL) {
+  const pgPool = new pg.Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }, // Supabase requires SSL
   });
-} catch (error) {
-  console.error('Failed to initialize file store, using memory store:', error);
-  sessionStore = undefined; // Will use default memory store
+  // Don't let an idle-client connection error crash the process.
+  pgPool.on('error', (err) => console.error('Postgres pool error:', err.message));
+
+  try {
+    // Verify the connection before committing to the Postgres store.
+    await pgPool.query('SELECT 1');
+    const PgSession = connectPgSimple(session);
+    sessionStore = new PgSession({
+      pool: pgPool,
+      tableName: 'user_sessions',
+      createTableIfMissing: true,
+    });
+    console.log('Session store: Postgres (user_sessions)');
+  } catch (error) {
+    console.error(
+      `Postgres session store unavailable (${error.message}). Falling back to file store — ` +
+      `check DATABASE_URL (password / host / port).`
+    );
+    await pgPool.end().catch(() => {});
+    sessionStore = buildFileStore();
+  }
+} else {
+  sessionStore = buildFileStore();
 }
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'vardhman-secret-key',
   resave: false,
   saveUninitialized: false,
-  store: process.env.NODE_ENV === 'production' ? undefined : sessionStore, // Use memory store in production
+  store: sessionStore,
   cookie: {
     secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24
   }
 }));
+
+app.use(passport.initialize());
 
 app.get('/health', (req, res) => {
   res.status(200).json({
@@ -213,8 +289,8 @@ app.get('/healthz', (req, res) => {
   res.status(200).send('OK');
 });
 
+app.use("/auth", authRouter);
 app.use("/", homeRouter);
-app.use("/api", vinRouter);
 app.use("/about", aboutRouter);
 app.use("/solutions", solutionsRouter);
 app.use("/news", newsRouter);
@@ -223,7 +299,14 @@ app.use("/contact", contactRouter);
 app.use("/search", searchRouter);
 // app.use("/metar",METARRouter);
 app.use("/pov", povRouter);
+app.use("/investors", investorsRouter);
+app.use("/our-team", teamRouter);
 app.use("/", productsRouter);
+
+// 404 handler — must be after all routes
+app.use((req, res) => {
+  res.status(404).render('404');
+});
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);

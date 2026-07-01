@@ -1,17 +1,37 @@
-# Ignore node_modules (if not already present)
+# Dependencies
 node_modules/
 *node_modules/
-public/videos/
 
-
-# Ignore specific folders in public/ (if you want some parts but not others)
-# Example:
-# public/data/
-# public/images/
-
-# Ignore other folders/files if needed
-*.log
+# Environment
 .env
+
+# OS / editor
 .DS_Store
 Thumbs.db
+~$*.xlsx
+
+# Large media
+public/videos/
 vardhman.mp4
+
+# Dev tools & scripts
+scripts/
+"CONVERT TO WEBP.bat"
+.claude/
+
+# Dev/staging data folders (source content, not served assets)
+Website Data/
+Website Pending Data/
+
+# Script output / test images
+out/
+
+# Reports & office docs (not needed on server)
+Book1.xlsx
+SEO_Audit_Response.docx
+websiteReport.pdf
+README_COMPANY.md
+README_DEV.md
+
+# Logs
+*.log

@@ -1,4 +1,4 @@
-/* General Reset */
+﻿/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -977,4 +977,13 @@ mark {
 .dropdown-item:focus {
     text-overflow: clip;
     overflow: visible;
+}
+/* Investor Enquiry special link */
+.inv-enquiry-link {
+    color: #28a745 !important;
+    font-weight: 600;
+}
+.inv-enquiry-link:hover,
+.inv-enquiry-link:focus {
+    color: #1e7e34 !important;
 }

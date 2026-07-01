@@ -4,46 +4,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="
-    <% if(locals.currentTitle){ %>
-            <%= currentTitle %> |
-        <% } %>
-        Vardhman Airport Solutions
-    ">
-    <link rel="icon" type="image/svg" href="/favicon/1.jpg">
-    <title>
-        <% if(locals.currentTitle){ %>
-            <%= currentTitle %> |
-        <% } %>
-        Vardhman Airport Solutions
-    </title>
-    <!-- Bootstrap CSS and JS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-        crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-    <!-- Font Awesome -->
-    <script defer src="https://kit.fontawesome.com/3f1edf2db4.js" crossorigin="anonymous"></script>
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/navbar.css">
-    <link rel="stylesheet" href="/css/home.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap" rel="stylesheet">
 
+    <%
+      var _title = (locals.currentTitle ? currentTitle + ' | ' : '') + 'Vardhman Airport Solutions';
+      var _desc = locals.metaDescription
+        ? metaDescription
+        : 'Vardhman Airport Solutions — India\'s leading manufacturer of airfield lighting, runway lights, PAPI systems, AVDGS, air traffic management, and defense airport equipment for civil and military aviation.';
+      var _canonical = locals.canonicalUrl ? canonicalUrl : 'https://vardhmanairports.com/';
+      var _ogImage = locals.ogImage ? ogImage : 'https://vardhmanairports.com/images/6.jpg';
+    %>
+
+    <title><%= _title %></title>
+    <meta name="description" content="<%= _desc %>">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="<%= _canonical %>">
+
+    <!-- LCP image preload (passed per-page as preloadImage variable) -->
+    <% if (locals.preloadImage) { %>
+    <link rel="preload" as="image" href="<%= preloadImage %>">
+    <% } %>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vardhman Airport Solutions">
+    <meta property="og:title" content="<%= _title %>">
+    <meta property="og:description" content="<%= _desc %>">
+    <meta property="og:url" content="<%= _canonical %>">
+    <meta property="og:image" content="<%= _ogImage %>">
+    <meta property="og:locale" content="en_IN">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= _title %>">
+    <meta name="twitter:description" content="<%= _desc %>">
+    <meta name="twitter:image" content="<%= _ogImage %>">
+
+    <link rel="icon" type="image/svg" href="/favicon/1.jpg">
+
+    <!-- Preconnect before any external resource loads -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+
+    <!-- Google Fonts (consolidated into one request) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@600;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=League+Spartan:wght@400;700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:wght@600&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@400;600&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- Deferred scripts -->
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script defer src="https://kit.fontawesome.com/3f1edf2db4.js" crossorigin="anonymous"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/home.css">
+
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4W9G8MND65"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-4W9G8MND65');
     </script>
 </head>
@@ -103,6 +132,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/about">About Us</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/our-team">Our Team</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <div class="dropdown-toggle-wrapper">
                                 <a class="nav-link" href="/our-products" id="productsDropdown">
@@ -155,6 +187,7 @@
                                                 <li><a class="dropdown-item"
                                                         href="/inset-threshold-runway-end-lights">Inset Threshold Runway
                                                         End Lights</a></li>
+                                                <li><a class="dropdown-item" href="/sequenced-flashing-lighting-system">Sequenced Flashing Lighting System</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown-submenu">
@@ -208,6 +241,7 @@
                                                 <li><a class="dropdown-item" href="/elevated-omni-directional-light">Halogen Taxiway Edge Light</a></li>
                                                 <li><a class="dropdown-item" href="/taxiway-apron-edge-elevated-omni-directional-light">Taxiway & apron edge Light</a></li>
                                                 <li><a class="dropdown-item" href="/inset-omni-directional-apron-light">Aircraft Stand Manoeuvring Guidance Light</a></li>
+                                                <li><a class="dropdown-item" href="/portable-aviation-led-light">Obstruction Aviation LED Light</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown-submenu">
@@ -256,8 +290,8 @@
                                                 </span>
                                             </div>
                                             <ul class="dropdown-menu submenu-level-2">
-                                                <li><a class="dropdown-item" href="/micro-100-ccr">Micro Processor Controlled CCR</a>
-                                                </li>
+                                                <li><a class="dropdown-item" href="/micro-100-ccr">Constant Current Regulator</a></li>
+                                                <li><a class="dropdown-item" href="/mpccr">Micro Processor CCR</a></li>
                                                 <li><a class="dropdown-item"
                                                         href="/multiway-circuit-selector-switch">Multiway Circuit
                                                         Selector Switch</a></li>
@@ -268,7 +302,7 @@
                                         </li>
                                         <li class="dropdown-submenu">
                                             <div class="dropdown-toggle-wrapper">
-                                                <a class="dropdown-item" href="/portable-lighting">Portable Lighting</a>
+                                                <a class="dropdown-item" href="/portable-aviation-runway-lighting-fixture">Portable Lighting</a>
                                                 <span class="dropdown-toggle-arrow" tabindex="0">
                                                     <i class="fa fa-caret-down"></i>
                                                 </span>
@@ -491,8 +525,86 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/news">News</a>
+                        <li class="nav-item dropdown">
+                            <div class="dropdown-toggle-wrapper">
+                                <a class="nav-link" href="/investors" id="investorsDropdown">
+                                    Investors
+                                </a>
+                                <span class="dropdown-toggle-arrow" tabindex="0">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                            </div>
+                            <ul class="dropdown-menu" aria-labelledby="investorsDropdown">
+
+                                <!-- Notices -->
+                                <li><a class="dropdown-item" href="/investors/notices">Notices</a></li>
+
+                                <!-- Annual Report -->
+                                <li><a class="dropdown-item" href="/investors/annual-report">Annual Report</a></li>
+
+                                <!-- Board Meeting Outcome -->
+                                <li><a class="dropdown-item" href="/investors/board-meeting-outcome">Board Meeting Outcome</a></li>
+
+                                <!-- Voting Results -->
+                                <li><a class="dropdown-item" href="/investors/voting-results">Voting Results</a></li>
+
+                                <!-- Financial Results -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/financial-results">Financial Results</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/investors/financial-results/board-report">Board Report</a></li>
+                                        <li><a class="dropdown-item" href="/investors/financial-results/balance-sheet">Balance Sheet</a></li>
+                                        <li><a class="dropdown-item" href="/investors/financial-results/form-aoc4">Form AOC-4</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- Shareholding Pattern -->
+                                <li><a class="dropdown-item" href="/investors/shareholding-pattern">Shareholding Pattern</a></li>
+
+                                <!-- Annual Return -->
+                                <li><a class="dropdown-item" href="/investors/annual-return">Annual Return</a></li>
+
+                                <!-- Corporate Governance -->
+                                <li><a class="dropdown-item" href="/investors/corporate-governance">Corporate Governance</a></li>
+
+                                <!-- Company Policies -->
+                                <li><a class="dropdown-item" href="/investors/company-policies">Company Policies</a></li>
+
+                                <!-- Offer Documents -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/offer-documents">Offer Documents</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="dropdown-menu submenu">
+                                        <li><a class="dropdown-item" href="/investors/offer-documents/drhp">DRHP</a></li>
+                                        <li><a class="dropdown-item" href="/investors/offer-documents/rhp">RHP</a></li>
+                                        <li><a class="dropdown-item" href="/investors/offer-documents/prospectus">Prospectus</a></li>
+                                        <li><a class="dropdown-item" href="/investors/offer-documents/other-documents">Other Documents</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- Investor Enquiry -->
+                                <li><a class="dropdown-item inv-enquiry-link" href="/investors/investor-enquiry">Investor Enquiry</a></li>
+
+                                <!-- Media & Press -->
+                                <li class="dropdown-submenu">
+                                    <div class="dropdown-toggle-wrapper">
+                                        <a class="dropdown-item" href="/investors/media-press">Media &amp; Press</a>
+                                        <span class="dropdown-toggle-arrow" tabindex="0">
+                                            <i class="fa fa-caret-down"></i>
+                                        </span>
+                                    </div>
+                                </li>
+
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/pov">Downloads</a>

@@ -2,6 +2,11 @@
     <br><br><br><br><br>
 
     <link rel="stylesheet" href="/css/admin.css">
+    <style>
+        .type-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; text-transform: capitalize; }
+        .type-catalogue { background: #dbeafe; color: #1d4ed8; }
+        .type-blog { background: #dcfce7; color: #15803d; }
+    </style>
 
     <div class="admin-container">
         <div class="admin-header">
@@ -24,6 +29,7 @@
                             <thead>
                                 <tr>
                                     <th>Title</th>
+                                    <th>Type</th>
                                     <th>Author</th>
                                     <th>Created</th>
                                     <th>PDF</th>
@@ -35,6 +41,11 @@
                                     <tr>
                                         <td>
                                             <%= post.title %>
+                                        </td>
+                                        <td>
+                                            <span class="type-badge type-<%= post.type || 'catalogue' %>">
+                                                <%= (post.type === 'blog') ? 'Blog' : 'Catalogue' %>
+                                            </span>
                                         </td>
                                         <td>
                                             <%= post.author %>

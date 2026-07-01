@@ -1,0 +1,66 @@
+<%- include('../../partials/header') %>
+    <br><br><br><br><br>
+
+    <link rel="stylesheet" href="/css/admin.css">
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>Add Document</h1>
+            <a href="/investors/admin" class="btn-secondary">Back to Dashboard</a>
+        </div>
+
+        <div class="admin-content">
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="error"><%= error %></div>
+            <% } %>
+
+            <form method="POST" action="/investors/admin/add" enctype="multipart/form-data" class="post-form">
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <optgroup label="Filings & Disclosures">
+                            <option value="notices">Notices</option>
+                            <option value="annual-report">Annual Report</option>
+                            <option value="board-meeting-outcome">Board Meeting Outcome</option>
+                            <option value="voting-results">Voting Results</option>
+                            <option value="shareholding-pattern">Shareholding Pattern</option>
+                            <option value="annual-return">Annual Return</option>
+                        </optgroup>
+                        <optgroup label="Financial Results">
+                            <option value="financial-results/board-report">Board Report</option>
+                            <option value="financial-results/balance-sheet">Balance Sheet</option>
+                            <option value="financial-results/aoc4">Form AOC-4</option>
+                        </optgroup>
+                        <optgroup label="Governance & Policies">
+                            <option value="corporate-governance">Corporate Governance</option>
+                            <option value="company-policies">Company Policies</option>
+                        </optgroup>
+                        <optgroup label="Offer Documents">
+                            <option value="offer-documents/drhp">DRHP</option>
+                            <option value="offer-documents/rhp">RHP</option>
+                            <option value="offer-documents/prospectus">Prospectus</option>
+                            <option value="offer-documents/other-documents">Other Documents</option>
+                        </optgroup>
+                        <optgroup label="Other">
+                            <option value="media-press">Media & Press</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="label">Document Label:</label>
+                    <input type="text" id="label" name="label" placeholder="e.g. AGM Notice — 2025" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="file">File (PDF, DOC, DOCX, XLS, XLSX):</label>
+                    <input type="file" id="file" name="file" accept=".pdf,.doc,.docx,.xls,.xlsx" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Upload & Save</button>
+            </form>
+        </div>
+    </div>
+
+    <%- include('../../partials/footer') %>

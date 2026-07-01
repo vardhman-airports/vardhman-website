@@ -97,7 +97,7 @@
                                     <input type="radio" id="sector-<%= sector %>" name="sector" value="<%= sector %>"
                                         <%=filters.sector===sector ? 'checked' : '' %>>
                                     <label for="sector-<%= sector %>">
-                                        <%= sector.charAt(0).toUpperCase() + sector.slice(1) %>
+                                        <%= sector === 'railways' ? 'MES & Railways' : sector.charAt(0).toUpperCase() + sector.slice(1) %>
                                     </label>
                                 </div>
                                 <% }); %>
@@ -206,16 +206,13 @@
                                 <% if (products.length> 0) { %>
                                     <% products.forEach(product=> { %>
                                         <div class="modern-card">
+                                            <% if(product.image) { %>
+                                            <div class="modern-card-img" style="background-image: url('<%= product.image %>');"></div>
+                                            <% } %>
                                             <div class="modern-card-content">
                                                 <h3 class="modern-card-title">
                                                     <%= product.title %>
                                                 </h3>
-                                                <p class="modern-card-description">
-                                                    <%= product.description.substring(0, 150) %>
-                                                        <% if(product.description.length> 150) { %>
-                                                            ...
-                                                            <% } %>
-                                                </p>
                                                 <div class="product-meta">
                                                     <% if(product.type) { %>
                                                         <span class="product-type">

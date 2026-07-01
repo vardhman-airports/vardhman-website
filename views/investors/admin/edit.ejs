@@ -1,0 +1,48 @@
+<%- include('../../partials/header') %>
+    <br><br><br><br><br>
+
+    <link rel="stylesheet" href="/css/admin.css">
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>Edit Document</h1>
+            <a href="/investors/admin" class="btn-secondary">Back to Dashboard</a>
+        </div>
+
+        <div class="admin-content">
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="error"><%= error %></div>
+            <% } %>
+
+            <form method="POST" action="/investors/admin/edit/<%= doc.id %>" enctype="multipart/form-data" class="post-form">
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" required>
+                        <% Object.keys(categoryLabels).forEach(function(key) { %>
+                            <option value="<%= key %>" <%= doc.category === key ? 'selected' : '' %>>
+                                <%= categoryLabels[key] %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="label">Document Label:</label>
+                    <input type="text" id="label" name="label" value="<%= doc.label %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="file">Replace File (optional):</label>
+                    <input type="file" id="file" name="file" accept=".pdf,.doc,.docx,.xls,.xlsx">
+                    <p style="margin: 0.4rem 0 0; font-size: 0.85rem; color: #64748b;">
+                        Current file: <%= doc.file_url %><br>
+                        Leave empty to keep the existing file.
+                    </p>
+                </div>
+
+                <button type="submit" class="btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <%- include('../../partials/footer') %>

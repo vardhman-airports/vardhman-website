@@ -73,7 +73,7 @@
     .timeline-container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 80px 20px;
+      padding: 40px 20px;
       position: relative;
     }
 
@@ -94,7 +94,7 @@
     }
 
     .timeline-item {
-      margin-bottom: 60px;
+      margin-bottom: 20px;
       position: relative;
       opacity: 0;
       transform: translateY(20px);
@@ -118,7 +118,7 @@
 
     .timeline-content {
       background: white;
-      padding: 35px;
+      padding: 16px 20px;
       border-radius: 16px;
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
       position: relative;
@@ -132,11 +132,11 @@
     }
 
     .timeline-item:nth-child(odd) .timeline-content {
-      margin-right: 35px;
+      margin-right: 20px;
     }
 
     .timeline-item:nth-child(even) .timeline-content {
-      margin-left: 35px;
+      margin-left: 20px;
     }
 
     .timeline-content::before {
@@ -189,28 +189,28 @@
       display: inline-block;
       background: #F0F7FF;
       color: #4A90E2;
-      padding: 6px 14px;
+      padding: 4px 10px;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
       letter-spacing: 0.5px;
       border: 1px solid #E3F2FD;
     }
 
     .content-title {
       font-family: "Playfair Display", Georgia, serif;
-      font-size: 1.5rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: #1A202C;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
     }
 
     .content-description {
       color: #4A5568;
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 18px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
     }
 
     .highlight {
@@ -380,73 +380,79 @@
     </div>
   </div>
   <style>
-    .timeline-container, .timeline:before{
-      max-height: 1600px;
+    .timeline-container{
+      max-height: 1050px;
+      overflow: hidden;
+    }
+    .timeline:before{
+      max-height: 1050px;
     }
     .timeline-item-2{
       position: relative;
-      bottom: 10rem;
+      bottom: 5rem;
     }
     .timeline-item-3{
       position: relative;
-      bottom: 20rem;
+      bottom: 10rem;
     }
     .timeline-item-4{
       position: relative;
-      bottom: 30rem;
+      bottom: 15rem;
     }
     .timeline-item-5{
       position: relative;
-      bottom: 40rem;
+      bottom: 20rem;
     }
     .timeline-item-6{
       position: relative;
-      bottom: 50rem;
+      bottom: 25rem;
+    }
+    .timeline-item-7{
+      position: relative;
+      bottom: 30rem;
     }
     .stats-section{
-      margin-top: 100px;
+      margin-top: 20px;
     }
 
     @media (max-width: 1050px){
-      .timeline-container, .timeline:before{
-      max-height: 1750px;
-    }
+      .timeline-container{ max-height: 980px; }
+      .timeline:before{ max-height: 980px; }
     }
     @media (max-width: 1000px){
-      .timeline-container, .timeline:before{
-      max-height: 1800px;
-    }
+      .timeline-container{ max-height: 1060px; }
+      .timeline:before{ max-height: 1060px; }
     }
     @media (max-width: 950px){
-      .timeline-container, .timeline:before{
-      max-height: 1850px;
-    }
+      .timeline-container{ max-height: 1160px; }
+      .timeline:before{ max-height: 1160px; }
     }
     @media (max-width: 900px){
-      .timeline-container, .timeline:before{
-      max-height: 1950px;
-    }
+      .timeline-container{ max-height: 1280px; }
+      .timeline:before{ max-height: 1280px; }
     }
     @media (max-width: 850px){
-      .timeline-container, .timeline:before{
-      max-height: 2050px;
-    }
+      .timeline-container{ max-height: 1420px; }
+      .timeline:before{ max-height: 1420px; }
     }
     @media (max-width: 800px){
-      .timeline-container, .timeline:before{
-      max-height: 2150px;
-    }
+      .timeline-container{ max-height: 1580px; }
+      .timeline:before{ max-height: 1580px; }
     }
     @media (max-width: 768px){
-      .timeline-item-2,.timeline-item-3,.timeline-item-4,.timeline-item-5,.timeline-item-6{
+      .timeline-item-2,.timeline-item-3,.timeline-item-4,.timeline-item-5,.timeline-item-6,.timeline-item-7{
         position: initial;
       }
-      .timeline-container, .timeline:before{
+      .timeline-container{
+        max-height: none;
+        overflow: visible;
+      }
+      .timeline:before{
         max-height: none;
       }
       .stats-section{
-      margin-top: 40px;
-    }
+        margin-top: 40px;
+      }
     }
   </style>
 
@@ -456,11 +462,10 @@
         <div class="timeline-marker">2017</div>
         <div class="timeline-content">
           <div class="year-badge">2017</div>
-          <div class="content-title">Foundation & Strategic Partnerships</div>
+          <div class="content-title">Foundation & Partnerships</div>
           <div class="content-description">
-            Established with a vision to revolutionize airfield technology solutions.
-            <span class="highlight">Formed strategic partnerships and distribution agreements</span>
-            with leading global airfield companies including ATG, RLG Docking Corporation Taiwan, and FB Technologies.
+            Founded with a vision to transform airfield technology; partnered with global leaders
+            <span class="highlight">ATG, RLG Docking Corp (Taiwan) & FB Technologies</span>.
           </div>
           <div class="achievement-tag">Foundation Year</div>
         </div>
@@ -472,10 +477,8 @@
           <div class="year-badge">2018</div>
           <div class="content-title">Technological Innovation</div>
           <div class="content-description">
-            Achieved a ground breaking milestone by completing the
-            <span class="highlight">first-ever integration of CCR (Constant Current Regulator) with ALCMS</span>
-            (Airfield Lighting Control and Monitoring System). Successfully deployed AVDGS systems with Tata Projects
-            and Bangalore Airport.
+            Achieved world's first <span class="highlight">CCR-ALCMS integration</span>;
+            deployed AVDGS systems at Bengaluru Airport with Tata Projects.
           </div>
           <div class="achievement-tag">Technical Excellence</div>
         </div>
@@ -487,9 +490,8 @@
           <div class="year-badge">2020</div>
           <div class="content-title">Government Recognition</div>
           <div class="content-description">
-            <span class="highlight">Officially recognized as a startup by DPIIT</span>
-            in the Aeronautics/Aerospace & Defense Industry sector. Honored with the Taxpayer Award by the Ministry of
-            Finance for outstanding contribution to nation building.
+            <span class="highlight">DPIIT-certified startup</span> in Aerospace & Defense;
+            received Taxpayer Award from Ministry of Finance.
           </div>
           <div class="achievement-tag">National Recognition</div>
         </div>
@@ -498,13 +500,11 @@
       <div class="timeline-item timeline-item-4">
         <div class="timeline-marker">2023</div>
         <div class="timeline-content">
-          <div class="year-badge">2020-2023</div>
-          <div class="content-title">Airport Infrastructure Leadership</div>
+          <div class="year-badge">2020–2023</div>
+          <div class="content-title">Market Leadership</div>
           <div class="content-description">
-            Successfully developed and deployed cutting-edge
-            <span class="highlight">LED Taxiway lights and Elevated Runway Edge lights</span>
-            across AAI Airports. Established dominant presence in airport lighting solutions with certified performance
-            excellence.
+            Developed and deployed <span class="highlight">LED Taxiway & Runway Edge Lights</span>
+            across AAI airports, establishing market leadership.
           </div>
           <div class="achievement-tag">Infrastructure Excellence</div>
         </div>
@@ -516,10 +516,9 @@
           <div class="year-badge">2024</div>
           <div class="content-title">Defense & Smart Infrastructure</div>
           <div class="content-description">
-            Received Service Excellence Award from Adani Jaipur International Airport for AVDGS systems.
-            <span class="highlight">Successfully entered defense sector</span> with major contracts for Dehradun (₹45
-            Cr) and Srinagar (₹29 Cr) from army aviation.
-            Expanded into MES smart metering projects worth ₹25 Crores.
+            Service Excellence Award from Adani Jaipur Airport;
+            <span class="highlight">Army Aviation contracts (₹74 Cr)</span>;
+            expanded into MES smart metering (₹25 Cr).
           </div>
           <div class="achievement-tag">₹100+ Crores Portfolio</div>
         </div>
@@ -531,11 +530,22 @@
           <div class="year-badge">2025</div>
           <div class="content-title">Global Expansion</div>
           <div class="content-description">
-            Marked international presence with
-            <span class="highlight">successful completion of first overseas project in Hanimadhoo, Maldives</span>.
-            Exceeded order target of ₹100 Crores in FY 2024-25, establishing strong foundation for global growth.
+            Completed first <span class="highlight">International Airport project in Maldives</span>;
+            crossed ₹100 Cr orders in FY 2024-25.
           </div>
           <div class="achievement-tag">International Success</div>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item-7">
+        <div class="timeline-marker">2026</div>
+        <div class="timeline-content">
+          <div class="year-badge">2026</div>
+          <div class="content-title">ATC Excellence</div>
+          <div class="content-description">
+            Completed first <span class="highlight">ATC upgrade work at Srinagar Airport</span>.
+          </div>
+          <div class="achievement-tag">Next Chapter</div>
         </div>
       </div>
     </div>
@@ -548,7 +558,7 @@
         <div class="stat-label">Years of Excellence</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">100+</div>
+        <div class="stat-number">90+</div>
         <div class="stat-label">Crores Revenue</div>
       </div>
       <div class="stat-item">
@@ -638,7 +648,7 @@
         <div class="modern-card">
           <div class="modern-card-img" style="background-image: url('/images/about/3.jpg');"></div>
           <div class="modern-card-content">
-            <h3 class="modern-card-title">Railways/MES</h3>
+            <h3 class="modern-card-title">MES & Railways</h3>
             <p class="modern-card-description"> Provides Smart metering solutions with 10-year SITC + O&M contracts. Secured projects in Gangtok, Prayagraj, Lucknow (₹25 Cr+). Class A MES contractor, partnered with L&T and Panasonic.
             </p>
             <a href="/railways" class="modern-card-button">View Details</a>
@@ -702,40 +712,6 @@
         </div>
       </div>
     </section> -->
-  <section id="director">
-    <div class="container-fluid">
-      <h1 class="heading"> Directors </h1>
-
-      <div class="directors-grid">
-        <!-- Card 1 -->
-        <div class="modern-card">
-          <div class="modern-card-img" style="background-image: url('/images/director/1.png');"></div>
-          <div class="modern-card-content">
-            <h3 class="modern-card-title">Sushim Jain</h3>
-            <p class="modern-card-description">Sushim Jain is an accomplished leader with over 25 years of experience driving significant growth and profitability. As a Director at Vardhman Airport Solutions, he engineered a remarkable 14X revenue and 38X PAT growth, building a 230-member team while maintaining strong profitability. His extensive expertise spans finance, strategy, product development, and project management. Sushim holds degrees from IIM Mumbai and MIT Manipal.  </p>
-            <a target="_blank" href="https://www.linkedin.com/in/sushimjain/" class="modern-card-button">LinkedIn</a>
-          </div>
-        </div>
-        <div class="modern-card">
-          <div class="modern-card-img" style="background-image: url('/images/director/2.png');"></div>
-          <div class="modern-card-content">
-            <h3 class="modern-card-title">Anshul Jain</h3>
-            <p class="modern-card-description">Anshul Jain serves as a Director at Vardhman Airport Solutions Ltd, bringing over a decade of expertise in airport automation, security, and ground lighting. He is highly regarded for strengthening companies in competitive markets and excels in sales, business development, and strategic alliances. Anshul is recognized for his exceptional drive and ability to consistently exceed performance goals. He effectively manages key accounts, including DIAL and AAI, and is instrumental in delivering significant projects.</p>
-            <a target="_blank" href="https://www.linkedin.com/in/anshulzen/" class="modern-card-button">LinkedIn</a>
-          </div>
-        </div>
-        <div class="modern-card">
-          <div class="modern-card-img" style="background-image: url('/images/director/3.jpg');"></div>
-          <div class="modern-card-content">
-            <h3 class="modern-card-title">Praveen Dubey </h3>
-            <p class="modern-card-description">Praveen Dubey at Vardhman Airport Solutions brings over two decades of extensive experience in project management and infrastructure. He's renowned for consistently delivering prestigious projects on time and within budget. Praveen's core expertise covers Airfield Ground Lighting (AGL) and Visual Docking Guidance Systems (VDGS), from design and installation to the maintenance of complex airport systems. He also played a pivotal role in establishing Vardhman's defense vertical, with his portfolio showcasing a track record of successfully executing significant infrastructure projects.</p>
-            <a target="_blank" href="https://www.linkedin.com/in/praveen-dubey-03781117/"
-              class="modern-card-button">LinkedIn</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
 
   <style>
@@ -748,16 +724,74 @@
     }
   </style>
   <section class="about-alt-section">
-    <!-- <div class="about-alt-row">
-        <div class="about-alt-img" style="background-image: url('/images/1.png');"></div>
-        <div class="about-alt-content">
-          <h2 class="about-alt-title">Key Offerings</h2>
-          <p>
-            Vardhman Airport Solutions delivers advanced, scalable solutions for airfield infrastructure, navigational
-            aids, and secure communications, tailored for mission-critical operations.
-          </p>
+
+    <!-- Manufacturing Unit (first) -->
+    <div id="manufacturing-unit" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
+      <h1 class="heading" style="text-align: center;">Manufacturing Unit</h1>
+      <p style="text-align:center; color:#4A5568; font-size:1.05rem; max-width:700px; margin: 0 auto 1.5rem auto;">
+        A glimpse inside our state-of-the-art manufacturing facility — where precision engineering meets the highest quality standards to deliver world-class airfield solutions.
+      </p>
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="4" aria-label="Slide 5"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="5" aria-label="Slide 6"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="6" aria-label="Slide 7"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="7" aria-label="Slide 8"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="8" aria-label="Slide 9"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="9" aria-label="Slide 10"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="10" aria-label="Slide 11"></button>
+        <button type="button" data-bs-target="#manufacturing-unit" data-bs-slide-to="11" aria-label="Slide 12"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/1.jpg');"></div>
         </div>
-      </div> -->
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/2.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/3.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/4.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/5.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/6.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/7.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/8.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/9.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/10.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/11.jpg');"></div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/manufacturing/12.jpg');"></div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#manufacturing-unit" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#manufacturing-unit" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
 
     <div id="customerEngagementCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
       data-bs-interval="3000" >
@@ -810,19 +844,8 @@
           aria-label="Slide 3"></button>
         <button type="button" data-bs-target="#trainingProgramsCarousel" data-bs-slide-to="3"
           aria-label="Slide 4"></button>
-        <!-- <button type="button" data-bs-target="#trainingProgramsCarousel" data-bs-slide-to="4"
-          aria-label="Slide 5"></button>
-        <button type="button" data-bs-target="#trainingProgramsCarousel" data-bs-slide-to="5"
-          aria-label="Slide 6"></button> -->
       </div>
       <div class="carousel-inner">
-        <!-- <div class="carousel-item active">
-          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/training/1.png');">
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="carousel-div alt-carousel-img" style="background-image: url('/images/training/2.jpg');"></div>
-        </div> -->
         <div class="carousel-item active">
           <div class="carousel-div alt-carousel-img" style="background-image: url('/images/training/3.jpg');"></div>
         </div>
@@ -848,22 +871,6 @@
       </button>
     </div>
 
-
-
-
-    <!-- Example Bootstrap Carousel (right side) -->
-    <!-- <div class="about-alt-row reverse">
-        <div class="about-alt-img" style="background-image: url('/images/2.png');"></div>
-        <div class="about-alt-content">
-          <h2 class="about-alt-title">Our Portfolio</h2>
-          <p>
-            Explore our diverse portfolio through this interactive showcase of successful deployments and innovative
-            projects.
-          </p>
-
-        </div>
-      </div> -->
-    <!-- Repeat as needed -->
   </section>
 
 

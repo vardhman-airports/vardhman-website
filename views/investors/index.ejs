@@ -1,0 +1,217 @@
+<%- include('../partials/header', { currentTitle: 'Investors' }) %>
+<link rel="stylesheet" href="/css/investors.css">
+
+<br><br>
+<div class="top-br"><br><br></div>
+
+<!-- Shared hero banner -->
+<section class="inv-hero">
+    <h1>Investor Relations</h1>
+    <p>Transparency. Governance. Growth.<br>Access all regulatory filings, reports, and disclosures for Vardhman Airport Solutions Limited.</p>
+</section>
+
+<% if (style === 'a') { %>
+<!-- ================================================================
+     OPTION A — Modern Card Grid  (KRN / site-consistent style)
+     ================================================================ -->
+<section class="inv-section-a">
+    <h2 class="inv-section-heading">Browse All Sections</h2>
+    <p class="inv-section-sub">Select a category to access filings and documents</p>
+
+    <div class="inv-grid-a">
+
+        <a href="/investors/notices" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-bell"></i></div>
+            <h3>Notices</h3>
+            <p>AGM, EGM, and postal ballot notices for shareholders.</p>
+        </a>
+
+        <a href="/investors/annual-report" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-file-alt"></i></div>
+            <h3>Annual Report</h3>
+            <p>Year-wise comprehensive annual reports of the company.</p>
+        </a>
+
+        <a href="/investors/financial-results" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-chart-bar"></i></div>
+            <h3>Financial Results</h3>
+            <p>Board Report, Balance Sheet, and Form AOC-4 for the financial year.</p>
+        </a>
+
+        <a href="/investors/board-meeting-outcome" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-gavel"></i></div>
+            <h3>Board Meeting Outcome</h3>
+            <p>Outcomes and resolutions from all board meetings as per SEBI LODR.</p>
+        </a>
+
+        <a href="/investors/voting-results" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-check-square"></i></div>
+            <h3>Voting Results</h3>
+            <p>E-voting and poll results for all general and extraordinary meetings.</p>
+        </a>
+
+        <a href="/investors/media-press" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-newspaper"></i></div>
+            <h3>Media &amp; Press</h3>
+            <p>Press releases, media coverage, and news related to Vardhman Airport Solutions.</p>
+        </a>
+
+        <a href="/investors/shareholding-pattern" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-users"></i></div>
+            <h3>Shareholding Pattern</h3>
+            <p>Quarterly shareholding disclosures as mandated by SEBI.</p>
+        </a>
+
+        <a href="/investors/annual-return" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-redo-alt"></i></div>
+            <h3>Annual Return</h3>
+            <p>MGT-7 filings as per Companies Act, 2013.</p>
+        </a>
+
+        <a href="/investors/corporate-governance" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-building"></i></div>
+            <h3>Corporate Governance</h3>
+            <p>Compliance reports &amp; committee compositions per SEBI LODR Reg. 27.</p>
+        </a>
+
+        <a href="/investors/company-policies" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-scroll"></i></div>
+            <h3>Company Policies</h3>
+            <p>Code of conduct, whistle-blower, RPT, CSR, and other statutory policies.</p>
+        </a>
+
+        <a href="/investors/offer-documents" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-file-invoice"></i></div>
+            <h3>Offer Documents</h3>
+            <p>DRHP, RHP, Prospectus, and other documents related to the public issue.</p>
+        </a>
+
+        <a href="/investors/investor-enquiry" class="inv-card-a">
+            <i class="fas fa-external-link-alt inv-card-a-ext"></i>
+            <div class="inv-card-a-icon"><i class="fas fa-headset"></i></div>
+            <h3>Investor Enquiry</h3>
+            <p>Submit queries or complaints. SCORES / SEBI portal information.</p>
+        </a>
+
+    </div>
+</section>
+
+<% } else { %>
+<!-- ================================================================
+     OPTION B — Classic Grouped Layout  (BracePort / traditional IR)
+     ================================================================ -->
+<section class="inv-section-b">
+    <div class="inv-groups-wrapper">
+
+        <!-- Group 1: Filings & Disclosures -->
+        <div class="inv-group">
+            <div class="inv-group-header">
+                <i class="fas fa-folder-open"></i> Filings &amp; Disclosures
+            </div>
+            <div class="inv-grid-b">
+                <a href="/investors/notices" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-bell"></i></div>
+                    <span>Notices</span>
+                </a>
+                <a href="/investors/annual-report" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-file-alt"></i></div>
+                    <span>Annual Report</span>
+                </a>
+                <a href="/investors/financial-results" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-chart-bar"></i></div>
+                    <span>Financial Results</span>
+                </a>
+                <a href="/investors/board-meeting-outcome" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-gavel"></i></div>
+                    <span>Board Meeting Outcome</span>
+                </a>
+                <a href="/investors/voting-results" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-check-square"></i></div>
+                    <span>Voting Results</span>
+                </a>
+                <a href="/investors/shareholding-pattern" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-users"></i></div>
+                    <span>Shareholding Pattern</span>
+                </a>
+                <a href="/investors/annual-return" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-redo-alt"></i></div>
+                    <span>Annual Return</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Group 2: Governance & Policies -->
+        <div class="inv-group">
+            <div class="inv-group-header">
+                <i class="fas fa-shield-alt"></i> Governance &amp; Policies
+            </div>
+            <div class="inv-grid-b">
+                <a href="/investors/corporate-governance" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-building"></i></div>
+                    <span>Corporate Governance</span>
+                </a>
+                <a href="/investors/company-policies" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-scroll"></i></div>
+                    <span>Company Policies</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Group 3: IPO / Offer Documents -->
+        <div class="inv-group">
+            <div class="inv-group-header">
+                <i class="fas fa-rocket"></i> Offer Documents
+            </div>
+            <div class="inv-grid-b">
+                <a href="/investors/offer-documents/drhp" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-file-pdf"></i></div>
+                    <span>DRHP</span>
+                </a>
+                <a href="/investors/offer-documents/rhp" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-file-pdf"></i></div>
+                    <span>RHP</span>
+                </a>
+                <a href="/investors/offer-documents/prospectus" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-file-pdf"></i></div>
+                    <span>Prospectus</span>
+                </a>
+                <a href="/investors/offer-documents/other-documents" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-folder-open"></i></div>
+                    <span>Other Documents</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Group 4: Contact & Support -->
+        <div class="inv-group">
+            <div class="inv-group-header">
+                <i class="fas fa-envelope"></i> Contact &amp; Support
+            </div>
+            <div class="inv-grid-b">
+                <a href="/investors/investor-enquiry" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-headset"></i></div>
+                    <span>Investor Enquiry</span>
+                </a>
+                <a href="/investors/media-press" class="inv-card-b">
+                    <div class="inv-card-b-icon"><i class="fas fa-newspaper"></i></div>
+                    <span>Media &amp; Press</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+<% } %>
+
+<%- include('../partials/footer') %>

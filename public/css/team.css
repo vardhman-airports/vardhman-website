@@ -1,0 +1,257 @@
+/* ================================================================
+   OUR TEAM PAGE
+   ================================================================ */
+
+/* Hero */
+.team-hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #2563eb 100%);
+    padding: 5.5rem 0 4.5rem;
+    text-align: center;
+    color: #fff;
+}
+.team-hero h1 {
+    color: #fff;
+    font-size: 2.8rem;
+    margin: 0 0 0.75rem;
+}
+.team-hero p {
+    color: rgba(255,255,255,0.78);
+    font-size: 1.2rem;
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.65;
+}
+
+/* Section wrapper */
+.team-section {
+    padding: 4.5rem 0;
+}
+.team-section:nth-child(even) { background: #f8fafc; }
+.team-section:nth-child(odd)  { background: #fff; }
+
+.team-section-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+}
+.team-section-heading {
+    font-size: 1.75rem;
+    color: #1e293b;
+    margin: 0;
+    font-family: "Playfair Display", Georgia, serif;
+}
+.team-section-divider {
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, #2563eb, #38bdf8);
+    border-radius: 2px;
+    margin: 0.65rem 0 0.6rem;
+}
+.team-section-sub {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin: 0 0 2.5rem;
+}
+
+/* ── Full-page dim overlay ───────────────────────────────── */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 40;          /* above page, below hovered card (z-index: 100) */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+body:has(.team-card:not(.team-card--static):hover)::after,
+body:has(.team-card.tapped)::after {
+    opacity: 1;
+    pointer-events: auto; /* clicking the dim dismisses on mobile */
+}
+
+/* ── Card Grid ───────────────────────────────────────────── */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.6rem;
+    /* bottom padding so the floating bio panel has room */
+    padding-bottom: 2rem;
+}
+
+/* ── Card shell ──────────────────────────────────────────── */
+.team-card {
+    position: relative;   /* anchor for the floating bio panel */
+    z-index: 1;           /* establish individual stacking contexts per card */
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    /* NO overflow:hidden here — panel must escape the card */
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    transition: box-shadow 0.3s ease, transform 0.3s ease,
+                border-radius 0.01s ease;
+    cursor: default;
+}
+.team-card:hover,
+.team-card.tapped {
+    z-index: 100;         /* lift above every other card so bio panel clears the next row */
+    box-shadow: 0 14px 36px rgba(37,99,235,0.14);
+    transform: translateY(-4px);
+    /* flatten the bottom corners so the panel connects seamlessly */
+    border-radius: 14px 14px 0 0;
+}
+
+/* ── Photo wrapper — clips the zoom effect ───────────────── */
+.team-card-photo-wrap {
+    overflow: hidden;
+    border-radius: 13px 13px 0 0;   /* 1px less than card to sit inside border */
+    height: 260px;
+}
+.team-card-photo {
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    background-size: cover;
+    background-position: center top;
+    transition: transform 0.42s ease;
+}
+.team-card:hover .team-card-photo,
+.team-card.tapped .team-card-photo {
+    transform: scale(1.05);
+}
+
+/* ── Always-visible name strip ───────────────────────────── */
+.team-card-info {
+    padding: 1.1rem 1.3rem 1rem;
+}
+.team-card-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1e293b;
+    margin: 0 0 0.22rem;
+    font-family: "Lato", sans-serif;
+    line-height: 1.3;
+}
+.team-card-designation {
+    color: #2563eb;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+/* ── Bio panel — floats OVER the cards below ─────────────── */
+.team-card-bio-panel {
+    position: absolute;
+    /* sits flush against the card's bottom edge */
+    top: 100%;
+    left: -1px;    /* align with card border */
+    right: -1px;
+    z-index: 50;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-top: none;              /* merges visually with the card */
+    border-radius: 0 0 14px 14px;
+    padding: 0.9rem 1.3rem 1.2rem;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.11);
+    /* hidden by default */
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+}
+.team-card:hover .team-card-bio-panel,
+.team-card.tapped .team-card-bio-panel {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.team-card-bio {
+    font-size: 0.84rem;
+    color: #475569;
+    line-height: 1.65;
+    margin: 0 0 0.9rem;
+}
+.team-card-linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #2563eb;
+    color: #fff;
+    padding: 0.45rem 0.95rem;
+    border-radius: 6px;
+    font-size: 0.79rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.2s;
+}
+.team-card-linkedin:hover {
+    background: #1d4ed8;
+    color: #fff;
+    text-decoration: none;
+}
+.team-card-linkedin i { font-size: 0.88rem; }
+
+.team-card-noprofile {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-style: italic;
+}
+
+/* ── Mobile tap hint ─────────────────────────────────────── */
+.team-card-tap-hint { display: none; }
+@media (hover: none) {
+    .team-card-tap-hint {
+        display: block;
+        position: absolute;
+        top: 0.65rem;
+        right: 0.75rem;
+        background: rgba(37,99,235,0.82);
+        color: #fff;
+        font-size: 0.67rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        padding: 0.18rem 0.5rem;
+        border-radius: 20px;
+        text-transform: uppercase;
+        pointer-events: none;
+        z-index: 5;
+    }
+    .team-card.tapped .team-card-tap-hint { display: none; }
+}
+
+/* ── Static cards (no hover/tap interaction) ─────────────── */
+.team-card--static {
+    cursor: default;
+}
+.team-card--static:hover,
+.team-card--static.tapped {
+    z-index: 1;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    transform: none;
+    border-radius: 14px;
+}
+.team-card--static:hover .team-card-photo,
+.team-card--static.tapped .team-card-photo {
+    transform: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .team-grid { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+}
+@media (max-width: 768px) {
+    .team-hero h1 { font-size: 2rem; }
+    .team-section-inner { padding: 0 1.2rem; }
+    .team-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+    .team-card-photo-wrap { height: 200px; }
+}
+@media (max-width: 480px) {
+    .team-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+    .team-card-photo-wrap { height: 170px; }
+    .team-card-info { padding: 0.9rem 1rem 0.8rem; }
+    .team-card-name { font-size: 0.9rem; }
+}

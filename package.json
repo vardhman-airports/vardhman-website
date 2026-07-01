@@ -14,7 +14,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.52.1",
     "axios": "^1.10.0",
-    "bcrypt": "^6.0.0",
+    "connect-pg-simple": "^10.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.0.1",
     "ejs": "^3.1.10",
@@ -25,7 +25,13 @@
     "mongoose": "^8.19.1",
     "multer": "^2.0.1",
     "nodemailer": "^7.0.4",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "pg": "^8.22.0",
     "session-file-store": "^1.5.0",
     "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }
