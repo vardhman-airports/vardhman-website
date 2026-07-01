@@ -1,14 +1,13 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
 import multer from 'multer';
 import { createClient } from '@supabase/supabase-js';
+import requireAdmin from '../middleware/requireAdmin.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
 const router = express.Router();
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // Configure multer
 const upload = multer({ 
@@ -28,28 +27,6 @@ const formatDate = (dateString) => {
             year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
         });
     } catch { return 'Invalid Date'; }
-};
-
-const getAdminData = async () => {
-    try {
-        let { data, error } = await supabase.from('admin_users').select('*').eq('role', 'pov_admin').single();
-        
-        if (!data) {
-            const { data: newAdmin } = await supabase.from('admin_users').insert([{
-                role: 'pov_admin',
-                password_hash: bcrypt.hashSync(ADMIN_PASSWORD, 10),
-                created_at: new Date().toISOString()
-            }]).select().single();
-            return newAdmin;
-        }
-        return data;
-    } catch { return null; }
-};
-
-// Middleware
-const requireAdmin = (req, res, next) => {
-    if (req.session?.isPOVAdmin) return next();
-    res.redirect('/pov/admin/login');
 };
 
 // Public Routes
@@ -114,23 +91,7 @@ router.get('/download/:id', async (req, res) => {
 
 // Admin Routes
 router.get('/admin/login', (req, res) => {
-    res.render('pov/admin/login', { error: null, title: 'Admin Login' });
-}); 
-
-router.post('/admin/login', async (req, res) => {
-    try {
-        const adminData = await getAdminData();
-        const match = adminData && await bcrypt.compare(req.body.password, adminData.password_hash);
-        
-        if (match) {
-            req.session.isPOVAdmin = true;
-            req.session.save(() => res.redirect('/pov/admin'));
-        } else {
-            res.render('pov/admin/login', { error: 'Invalid password', title: 'Admin Login' });
-        }
-    } catch {
-        res.render('pov/admin/login', { error: 'An error occurred', title: 'Admin Login' });
-    }
+    res.redirect('/auth/login?returnTo=' + encodeURIComponent('/pov/admin'));
 });
 
 router.get('/admin', requireAdmin, async (req, res) => {
@@ -230,19 +191,23 @@ router.post('/admin/edit/:id', requireAdmin, upload.single('pdf'), async (req, r
         if (!existingPost) return res.redirect('/pov/admin');
         
         let pdfFileName = existingPost.pdf_file;
-        
+
         if (req.file) {
             const fileName = `${Date.now()}-${req.file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
             const { data: uploadData, error } = await supabase.storage
                 .from('pov-pdfs')
                 .upload(fileName, req.file.buffer, { contentType: req.file.mimetype });
-                
+
             if (error) {
                 return res.render('pov/admin/edit', { post: existingPost, error: 'Error uploading PDF', title: 'Edit Post' });
             }
-            
+
             if (existingPost.pdf_file) await supabase.storage.from('pov-pdfs').remove([existingPost.pdf_file]);
             pdfFileName = uploadData.path;
+        } else if (req.body.removePdf === 'on' && existingPost.pdf_file) {
+            // Remove the current PDF without uploading a replacement.
+            await supabase.storage.from('pov-pdfs').remove([existingPost.pdf_file]);
+            pdfFileName = null;
         }
         
         const { error } = await supabase.from('pov_posts').update({

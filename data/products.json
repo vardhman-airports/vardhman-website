@@ -79,7 +79,6 @@
                     "products": [
                         "series-circuit-isolating-transformers",
                         "primary-connector-kits-2",
-                        "primary-connector-kits-resin-type",
                         "secondary-connector-kits",
                         "shallow-base"
                     ]
@@ -1308,8 +1307,41 @@
             "downloads": {
                 "datasheet": [
                     {
-                        "title": "Datasheet - Datasheet - Sign Board Slim edge lit- LED",
+                        "title": "Datasheet - Sign Board Ultra Slim edge lit- LED",
                         "url": "mis.pdf"
+                    }
+                ],
+                "manual": [],
+                "certification": []
+            },
+            "sector": [
+                "airport"
+            ],
+            "category": "airfield-ground-lights",
+            "subcategory": "airfield-guidance-signs"
+        },
+        "double-side-sign-board": {
+            "title": "Airfield Guidance Double Side Sign Board (LED)",
+            "description": "The VAS-DS-L is a double side display LED airfield guidance sign board used for providing guidance and information on runways and taxiways. Built with a light weight, corrosion resistant anodized aluminium alloy extruded profile and edge lit Osram LED modules, it is designed for use in harsh environments.",
+            "image": "/images/airport/dssb.jpg",
+            "portfolioLines": [
+                "Double Side Display Sign Board with depth 140-145 mm",
+                "Aluminium alloy extruded profile, light weight, corrosion resistant anodized, designed for use in harsh environments",
+                "Equipped with edge lit Osram LED Modules (6500K colour temperature, life > 60,000 hrs)",
+                "UV resistant Poly Carbonate sheet (4 mm) with self adhesive vinyl film (make 3M & Avery Dennison)",
+                "Integrated electronic converter for Series circuit (2.8-6.6A input) or 230VAC input circuit",
+                "Long-life LED lighting technology with low power consumption and power factor typically >0.90",
+                "Signs can withstand jet blast and high wind pressure up to 260 knots",
+                "Protection Degree IP66, working temperature -40°C to +55°C",
+                "Easy installation and easy maintenance at low cost",
+                "Any topology of CCRs designed in accordance with ICAO or FAA requirements can be used",
+                "Compliance: ICAO Annex 14 Volume-I, ICAO Aerodrome Design Manual Doc 9157 Part 4 & 6, FAA AC 150/5345-44"
+            ],
+            "downloads": {
+                "datasheet": [
+                    {
+                        "title": "Datasheet - Double Side Sign Board (LED)",
+                        "url": "dssb.pdf"
                     }
                 ],
                 "manual": [],
@@ -1339,6 +1371,16 @@
                 "Double sided: 4mm polycarbonate",
                 "Coated in RAL 1007 aviation yellow"
             ],
+            "downloads": {
+                "datasheet": [
+                    {
+                        "title": "Datasheet - Runway Distance Marker",
+                        "url": "rdm.pdf"
+                    }
+                ],
+                "manual": [],
+                "certification": []
+            },
             "sector": [
                 "airport"
             ],
@@ -1403,30 +1445,6 @@
                 "manual": [],
                 "certification": []
             },
-            "sector": [
-                "airport"
-            ],
-            "category": "airfield-ground-lights",
-            "subcategory": "transformers-connector-kits"
-        },
-        "primary-connector-kits-resin-type": {
-            "title": "Primary Connector Kits (Resin Type)",
-            "image": "/images/airport/pckr.png",
-            "description": "To provide separable waterproof connections between all classes of armoured or un-armoured airfield lighting cable and polychloroprene encapsulated transformers. To make separable waterproof splice in all classes of armoured or un-armoured airfield lighting cable.",
-            "sections": [
-                {
-                    "title": "Type",
-                    "para": "Model CEG-52 – 5kV (or less), suitable for copper or brass tape screened and steel wire armour."
-                },
-                {
-                    "title": "Compliance with Standard",
-                    "para": "FAA L-823, AC 150/5345-26D"
-                },
-                {
-                    "title": "Description",
-                    "para": "Each kit contains a plug housing and a receptacle housing, each with screen continuity provision for use with a copper or brass tape screen, crimp applied connector for screen continuity, and crimp applied electrical pin and socket contacts dimensionally identical to FAA specification L-823 contacts, plus incorporating a locking system that will withstand a static pull load of 155N (35 pounds) without separating. These kits mate with the moulded-on primary connectors of an isolating transformer. The use of these connectors provides a test point at every isolating transformer. One kit is required for each splice or transformer installation."
-                }
-            ],
             "sector": [
                 "airport"
             ],
@@ -1796,6 +1814,16 @@
                 "System power supply: 220 Vac",
                 "Sensors strip (if provided) àWeight : 8 Kg / Dimension : 1m x 16cm x 12 cm (L x W x H)"
             ],
+            "downloads": {
+                "datasheet": [
+                    {
+                        "title": "Datasheet - Workshop photometry controller",
+                        "url": "pac.pdf"
+                    }
+                ],
+                "manual": [],
+                "certification": []
+            },
             "sector": [
                 "airport"
             ],
@@ -1962,6 +1990,16 @@
                 "Night and Day operations (see special conditions).",
                 "Full measurement (angles data, isocandela and azimutal opening) of the entire PAPI bar in less than one hour."
             ],
+            "downloads": {
+                "datasheet": [
+                    {
+                        "title": "Datasheet - PAPI Photometric Calibration System",
+                        "url": "pacpi.pdf"
+                    }
+                ],
+                "manual": [],
+                "certification": []
+            },
             "sector": [
                 "airport"
             ],
@@ -2044,7 +2082,7 @@
                 "datasheet": [
                     {
                         "title": "Datasheet - Helicopter Approach Path Indicator",
-                        "url": "hapi.pdf"
+                        "url": "hapiNew.pdf"
                     }
                 ],
                 "manual": [],

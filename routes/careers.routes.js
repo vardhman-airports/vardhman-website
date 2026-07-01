@@ -1,9 +1,9 @@
 import express from 'express';
 import multer from 'multer';
-import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import nodemailer from 'nodemailer';
 import { createClient } from '@supabase/supabase-js';
+import isAdmin from '../middleware/requireAdmin.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -11,7 +11,6 @@ const router = express.Router();
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
 const supabaseAdmin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // Configure multer
 const upload = multer({
@@ -22,28 +21,6 @@ const upload = multer({
         cb(allowed ? null : new Error('Only PDF, DOC, and DOCX files allowed'), allowed);
     }
 });
-
-// Helper functions
-const getAdminData = async () => {
-    try {
-        let { data } = await supabase.from('admin_users').select('*').eq('role', 'career_admin').single();
-        
-        if (!data) {
-            const { data: newAdmin } = await supabase.from('admin_users').insert([{
-                role: 'career_admin',
-                password_hash: bcrypt.hashSync(ADMIN_PASSWORD, 10),
-                created_at: new Date().toISOString()
-            }]).select().single();
-            return newAdmin;
-        }
-        return data;
-    } catch { return null; }
-};
-
-const isAdmin = (req, res, next) => {
-    if (req.session?.isCareerAdmin) return next();
-    res.redirect('/careers/admin/login');
-};
 
 // Public Routes
 router.get('/', async (req, res) => {
@@ -149,23 +126,8 @@ router.post('/apply/:id', upload.single('resume'), async (req, res) => {
 });
 
 // Admin Routes
-router.get('/admin/login', (req, res) => res.render('careers/admin/login'));
-
-router.post('/admin/login', async (req, res) => {
-    try {
-        const adminData = await getAdminData();
-        const match = adminData && await bcrypt.compare(req.body.password, adminData.password_hash);
-        
-        if (match) {
-            req.session.isCareerAdmin = true;
-            req.session.save(() => res.redirect('/careers/admin'));
-        } else {
-            res.render('careers/admin/login', { error: 'Invalid password' });
-        }
-    } catch {
-        res.render('careers/admin/login', { error: 'An error occurred' });
-    }
-});
+router.get('/admin/login', (req, res) =>
+    res.redirect('/auth/login?returnTo=' + encodeURIComponent('/careers/admin')));
 
 router.get('/admin', isAdmin, async (req, res) => {
     try {

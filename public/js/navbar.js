@@ -257,6 +257,7 @@ const searchData = [
     // Airfield Ground Lights - Airfield Guidance Signs
     { title: "Mandory/Information Signs", category: "Airfield Guidance Signs", url: "/mandatory-information-signs", description: "It is LED airfield guidance sign is the latest model of airfield sign to be manufactured by Vardhman airports. This sign is specifically designed to meet the ICAO requirements for Mandatory and Information airfield guidance signs." },
     { title: "Runway Distance Marker", category: "Airfield Guidance Signs", url: "/runway-distance-marker", description: "Illuminated Runway Distance Markers indicate the distance to the end of the active runway to the pilot." },
+    { title: "Double Side Sign Board", category: "Airfield Guidance Signs", url: "/double-side-sign-board", description: "The VAS-DS-L is a double side display LED airfield guidance sign board used for providing guidance and information on runways and taxiways." },
 
     // Airfield Ground Lights - Transformers & Connector Kits
     { title: "Series Circuit Isolating Transformers", category: "Transformers & Connector Kits", url: "/series-circuit-isolating-transformers", description: "Series circuit airfield lighting isolating transformers are featuring plug-in connectors to simplify installation and maintenance." },

@@ -1,15 +1,15 @@
 import { Router } from "express";
-import bcrypt from 'bcrypt';
 import multer from 'multer';
 import { createClient } from '@supabase/supabase-js';
+import requireAdmin from '../middleware/requireAdmin.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
 const router = Router();
-// anon key for auth/DB; service role for storage (private bucket, no RLS restrictions)
+// anon key for public reads; service role for privileged admin writes and
+// storage (private bucket) — bypasses RLS on the investor_documents table.
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
-const supabaseStorage = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const supabaseAdmin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 const upload = multer({
     storage: multer.memoryStorage(),
@@ -59,26 +59,6 @@ const getDocsByCategory = async (categories) => {
     }));
 };
 
-// ── Auth ───────────────────────────────────────────────────────────────────
-
-const requireAdmin = (req, res, next) => {
-    if (req.session?.isInvestorsAdmin) return next();
-    res.redirect('/investors/admin/login');
-};
-
-const getAdminData = async () => {
-    let { data } = await supabase.from('admin_users').select('*').eq('role', 'investors_admin').single();
-    if (!data) {
-        const { data: newAdmin } = await supabase.from('admin_users').insert([{
-            role: 'investors_admin',
-            password_hash: bcrypt.hashSync(ADMIN_PASSWORD, 10),
-            created_at: new Date().toISOString()
-        }]).select().single();
-        data = newAdmin;
-    }
-    return data;
-};
-
 // ── Serve uploaded files ───────────────────────────────────────────────────
 
 router.get('/doc/:id', async (req, res) => {
@@ -91,7 +71,7 @@ router.get('/doc/:id', async (req, res) => {
 
         if (!doc) return res.status(404).send('Document not found');
 
-        const { data: fileData } = await supabaseStorage.storage
+        const { data: fileData } = await supabaseAdmin.storage
             .from('investor-docs')
             .download(doc.file_url);
 
@@ -116,22 +96,7 @@ router.get('/doc/:id', async (req, res) => {
 // ── Admin routes ───────────────────────────────────────────────────────────
 
 router.get('/admin/login', (req, res) => {
-    res.render('investors/admin/login', { error: null, title: 'Investors Admin Login' });
-});
-
-router.post('/admin/login', async (req, res) => {
-    try {
-        const adminData = await getAdminData();
-        const match = adminData && await bcrypt.compare(req.body.password, adminData.password_hash);
-        if (match) {
-            req.session.isInvestorsAdmin = true;
-            req.session.save(() => res.redirect('/investors/admin'));
-        } else {
-            res.render('investors/admin/login', { error: 'Invalid password', title: 'Investors Admin Login' });
-        }
-    } catch {
-        res.render('investors/admin/login', { error: 'An error occurred', title: 'Investors Admin Login' });
-    }
+    res.redirect('/auth/login?returnTo=' + encodeURIComponent('/investors/admin'));
 });
 
 router.post('/admin/logout', (req, res) => {
@@ -182,7 +147,7 @@ router.post('/admin/add', requireAdmin, upload.single('file'), async (req, res) 
         const safeName = req.file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_');
         const storagePath = `${category.replace(/\//g, '-')}/${Date.now()}-${safeName}`;
 
-        const { data: uploadData, error: uploadError } = await supabaseStorage.storage
+        const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
             .from('investor-docs')
             .upload(storagePath, req.file.buffer, { contentType: req.file.mimetype });
 
@@ -190,7 +155,7 @@ router.post('/admin/add', requireAdmin, upload.single('file'), async (req, res) 
             return res.render('investors/admin/add', { categoryLabels: CATEGORY_LABELS, error: 'Error uploading file to storage', title: 'Add Document' });
         }
 
-        const { error: dbError } = await supabase.from('investor_documents').insert([{
+        const { error: dbError } = await supabaseAdmin.from('investor_documents').insert([{
             label,
             category,
             file_url: uploadData.path,
@@ -198,7 +163,7 @@ router.post('/admin/add', requireAdmin, upload.single('file'), async (req, res) 
         }]);
 
         if (dbError) {
-            await supabaseStorage.storage.from('investor-docs').remove([uploadData.path]);
+            await supabaseAdmin.storage.from('investor-docs').remove([uploadData.path]);
             return res.render('investors/admin/add', { categoryLabels: CATEGORY_LABELS, error: 'Error saving document record', title: 'Add Document' });
         }
 
@@ -208,13 +173,77 @@ router.post('/admin/add', requireAdmin, upload.single('file'), async (req, res) 
     }
 });
 
+router.get('/admin/edit/:id', requireAdmin, async (req, res) => {
+    try {
+        const { data: doc } = await supabaseAdmin.from('investor_documents').select('*').eq('id', req.params.id).single();
+        if (!doc) return res.redirect('/investors/admin');
+        res.render('investors/admin/edit', { doc, categoryLabels: CATEGORY_LABELS, error: null, title: 'Edit Document' });
+    } catch {
+        res.redirect('/investors/admin');
+    }
+});
+
+router.post('/admin/edit/:id', requireAdmin, upload.single('file'), async (req, res) => {
+    try {
+        const { label, category } = req.body;
+
+        const { data: doc } = await supabaseAdmin.from('investor_documents').select('*').eq('id', req.params.id).single();
+        if (!doc) return res.redirect('/investors/admin');
+
+        if (!label || !category) {
+            return res.render('investors/admin/edit', { doc, categoryLabels: CATEGORY_LABELS, error: 'Label and category are required', title: 'Edit Document' });
+        }
+        if (!CATEGORY_LABELS[category]) {
+            return res.render('investors/admin/edit', { doc, categoryLabels: CATEGORY_LABELS, error: 'Invalid category selected', title: 'Edit Document' });
+        }
+
+        let fileUrl = doc.file_url;
+
+        // A new file is optional — only replace when one is uploaded.
+        if (req.file) {
+            const safeName = req.file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_');
+            const storagePath = `${category.replace(/\//g, '-')}/${Date.now()}-${safeName}`;
+
+            const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
+                .from('investor-docs')
+                .upload(storagePath, req.file.buffer, { contentType: req.file.mimetype });
+
+            if (uploadError) {
+                return res.render('investors/admin/edit', { doc, categoryLabels: CATEGORY_LABELS, error: 'Error uploading file to storage', title: 'Edit Document' });
+            }
+            fileUrl = uploadData.path;
+        }
+
+        const { error: dbError } = await supabaseAdmin.from('investor_documents')
+            .update({ label, category, file_url: fileUrl })
+            .eq('id', req.params.id);
+
+        if (dbError) {
+            // Roll back the newly uploaded file if the DB update failed.
+            if (req.file && fileUrl !== doc.file_url) {
+                await supabaseAdmin.storage.from('investor-docs').remove([fileUrl]);
+            }
+            return res.render('investors/admin/edit', { doc, categoryLabels: CATEGORY_LABELS, error: 'Error saving changes', title: 'Edit Document' });
+        }
+
+        // Remove the old stored file once the replacement is committed.
+        if (req.file && doc.file_url && doc.file_url !== fileUrl) {
+            await supabaseAdmin.storage.from('investor-docs').remove([doc.file_url]);
+        }
+
+        res.redirect('/investors/admin');
+    } catch {
+        res.redirect('/investors/admin');
+    }
+});
+
 router.post('/admin/delete/:id', requireAdmin, async (req, res) => {
     try {
-        const { data: doc } = await supabase.from('investor_documents').select('*').eq('id', req.params.id).single();
+        const { data: doc } = await supabaseAdmin.from('investor_documents').select('*').eq('id', req.params.id).single();
         if (doc) {
-            await supabaseStorage.storage.from('investor-docs').remove([doc.file_url]);
+            await supabaseAdmin.storage.from('investor-docs').remove([doc.file_url]);
         }
-        await supabase.from('investor_documents').delete().eq('id', req.params.id);
+        await supabaseAdmin.from('investor_documents').delete().eq('id', req.params.id);
     } catch {}
 
     res.redirect('/investors/admin');

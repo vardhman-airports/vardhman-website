@@ -42,6 +42,7 @@
                                         <tr>
                                             <td><%= doc.label %></td>
                                             <td>
+                                                <a href="/investors/admin/edit/<%= doc.id %>" class="btn-secondary" style="margin-right: 0.4rem;">Edit / Replace</a>
                                                 <form method="POST" action="/investors/admin/delete/<%= doc.id %>"
                                                     style="display: inline;"
                                                     onsubmit="return confirm('Delete this document?')">
