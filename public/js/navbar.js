@@ -376,7 +376,7 @@ const searchData = [
     // Sectors
     { title: "Defense Solutions", category: "Sector", url: "/our-products?sector=defense", description: "Explore defense-grade airport systems, radar, lighting, ATC shelters and tactical equipment." },
     { title: "Airport Infrastructure", category: "Sector", url: "/our-products?sector=airport", description: "Advanced airport solutions for lighting, docking, communication, and navigation systems." },
-    { title: "Railway Systems", category: "Sector", url: "/our-products?sector=railways", description: "Smart metering and communication systems tailored for rail infrastructure." },
+    { title: "MES & Railways", category: "Sector", url: "/our-products?sector=railways", description: "Smart metering and communication systems tailored for rail infrastructure." },
     { title: "Smart Infrastructure", category: "Sector", url: "/our-products?sector=smart-infrastructure", description: "Integrated lighting, energy, and monitoring systems for modern infrastructure needs." },
 
     // Solutions
@@ -449,7 +449,7 @@ const searchData = [
     // Industries
     { title: "Airport Industry", category: "Industry", url: "/our-products?sector=airport", description: "Advanced airport solutions for lighting, docking, communication, and navigation systems." },
     { title: "Defense Industry", category: "Industry", url: "/our-products?sector=defense", description: "Defense-grade systems, radar, lighting, ATC shelters and tactical equipment." },
-    { title: "Railway Industry", category: "Industry", url: "/our-products?sector=railways", description: "Smart metering and communication systems for rail infrastructure." },
+    { title: "MES & Railways", category: "Industry", url: "/our-products?sector=railways", description: "Smart metering and communication systems for rail infrastructure." },
 
 ];
 

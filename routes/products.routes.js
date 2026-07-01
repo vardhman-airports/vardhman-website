@@ -344,7 +344,7 @@ router.get('/:slug', (req, res) => {
     const sidebarData = getSidebarData();
 
     return res.render('products/index', {
-      title: `${slug.charAt(0).toUpperCase() + slug.slice(1)} Products`,
+      title: `${slug === 'railways' ? 'MES & Railways' : slug.charAt(0).toUpperCase() + slug.slice(1)} Products`,
       products: filteredProducts,
       sidebar: sidebarData,
       filters,

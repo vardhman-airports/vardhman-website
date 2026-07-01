@@ -97,7 +97,7 @@
                                     <input type="radio" id="sector-<%= sector %>" name="sector" value="<%= sector %>"
                                         <%=filters.sector===sector ? 'checked' : '' %>>
                                     <label for="sector-<%= sector %>">
-                                        <%= sector.charAt(0).toUpperCase() + sector.slice(1) %>
+                                        <%= sector === 'railways' ? 'MES & Railways' : sector.charAt(0).toUpperCase() + sector.slice(1) %>
                                     </label>
                                 </div>
                                 <% }); %>
