@@ -5,7 +5,7 @@
 /* Hero */
 .team-hero {
     background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 55%, #2563eb 100%);
-    padding: 5.5rem 0 4.5rem;
+    padding: 5.5rem 2rem 4.5rem;
     text-align: center;
     color: #fff;
 }
@@ -17,7 +17,7 @@
 .team-hero p {
     color: rgba(255,255,255,0.78);
     font-size: 1.2rem;
-    max-width: 620px;
+    max-width: 860px;
     margin: 0 auto;
     line-height: 1.65;
 }

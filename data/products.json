@@ -67,7 +67,7 @@
                 },
                 "airfield-guidance-signs": {
                     "title": "Airfield Guidance Signs",
-                    "description": "Vardhman airports offer a range of airfield guidance signs,LED Runway guidance signs, LED taxiway guidance signs, RHAG markers, Mandatory Instruction Signs, Information Signs, Vor Aerodome checkpoint signs, Aerodome Identification Signs, Aircraft stand number indicators, Road holding position signs and parking stop signs.",
+                    "description": "Vardhman airports offer a range of airfield guidance signs,LED Runway guidance signs, LED taxiway guidance signs, RHAG markers, Mandatory Instruction Signs, Information Signs, VOR Aerodrome checkpoint signs, Aerodrome Identification Signs, Aircraft stand number indicators, Road holding position signs and parking stop signs.",
                     "products": [
                         "mandatory-information-signs",
                         "runway-distance-marker"
@@ -1735,7 +1735,7 @@
             "image": "/images/airport/alcms.jpeg",
             "description": "",
             "features" : [
-                "VAS-ALCMS enables control and monitoring of airfield lighting and other visual aids installed at the airport, providing increased safety of ground operations. The system architecture provides for a wide range of functionalities to support the needs of airport operations and allows for easy integration with other airport systems.", "VAS-ALCMS is a distributed, scalable electrical vault computer system that gives you control and monitoring of airport lighting equipment, with high speed operation redundancy and easy subsystem integration. It offers touchscreen HMIs, for ATC and airfield operations system with numerous functions to make daily work easier more efficient while ensuring airport lighting systems can be fully monitored.", "Reliable high speed operation including switching of field circuits in accordance with FAA requirements. All the alarms and events related to ALCMS and CCRs can be stored in ALCMS hard disk and backing up data.", "VAS-ALCMS is software controlled in order to ensure flexibility for expansion with complete ground movement guidance systems fully supported by AGL configuration. The system has fail safe features (maintain last / state) to ensures all equipments goes to fail safe state if the network or power fails."
+                "VAS-ALCMS enables control and monitoring of airfield lighting and other visual aids installed at the airport, providing increased safety of ground operations. The system architecture provides for a wide range of functionalities to support the needs of airport operations and allows for easy integration with other airport systems.", "VAS-ALCMS is a distributed, scalable electrical vault computer system that gives you control and monitoring of airport lighting equipment, with high speed operation redundancy and easy subsystem integration. It offers touchscreen HMIs, for ATC and airfield operations system with numerous functions to make daily work easier more efficient while ensuring airport lighting systems can be fully monitored.", "Reliable high speed operation including switching of field circuits in accordance with FAA requirements. All the alarms and events related to ALCMS and CCRs can be stored in ALCMS hard disk and backing up data.", "VAS-ALCMS is software controlled in order to ensure flexibility for expansion with complete ground movement guidance systems fully supported by AGL configuration. The system has fail safe features (maintain last / state) to ensure all equipment goes to fail safe state if the network or power fails."
             ],
             "sections" : [
                 {
@@ -1984,7 +1984,7 @@
                 "High accuracy and precision.",
                 "Easy to use and to handle.",
                 "Automatic mode and procedure.",
-                "Instant dialog to provide the operator with the correction for a precise alignement.",
+                "Instant dialog to provide the operator with the correction for a precise alignment.",
                 "Using a database system to manage and record data used and collected during the measurement session.",
                 "Hand portable.",
                 "Night and Day operations (see special conditions).",
@@ -2577,7 +2577,7 @@
                 "Ruggedized structure for defense utility and mobility."
             ],
             "features": [
-                "Power: Provision and supply of silent generator along with power change over switch and module to take on load of all Equipments and electronic items",
+                "Power: Provision and supply of silent generator along with power change over switch and module to take on load of all Equipment and electronic items",
                 "Lighting: Sufficient lighting to meet Day & Night operational requirement. Also, to fit Aerodrome beacon light",
                 "Earthing Protection: ATC Cabin must have sufficient earthing points for safety",
                 "Fire Safety: Fire retardant interior material Provision of fitment for adequate and suitable firefighting equipment",
@@ -2681,7 +2681,7 @@
                 "Optional mobility allows rapid deployment for field operations and tactical scenarios.",
                 "Integrated with backup power and connectivity to ensure uninterrupted functionality.",
                 "Security: Lockable doors, reinforced structures, and sometimes surveillance systems to protect against theft and vandalism",
-                "Centralised Monitoring to keep track of all airport and heliport equipments."
+                "Centralised Monitoring to keep track of all airport and heliport equipment."
             ],
             "sector": "defense",
             "category": "support-equipment",
