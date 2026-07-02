@@ -21,6 +21,7 @@ import searchRouter from './routes/search.routes.js'
 import homeRouter from './routes/home.routes.js'
 import povRouter from './routes/pov.routes.js'
 import investorsRouter from './routes/investors.routes.js'
+import groupCompaniesRouter from './routes/group-companies.routes.js'
 import teamRouter from './routes/team.routes.js'
 import authRouter from './routes/auth.routes.js'
 import passport from './config/passport.js'
@@ -300,6 +301,7 @@ app.use("/search", searchRouter);
 // app.use("/metar",METARRouter);
 app.use("/pov", povRouter);
 app.use("/investors", investorsRouter);
+app.use("/group-companies", groupCompaniesRouter);
 app.use("/our-team", teamRouter);
 app.use("/", productsRouter);
 

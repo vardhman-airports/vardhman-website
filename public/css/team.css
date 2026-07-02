@@ -35,17 +35,14 @@
     padding: 0 2.5rem;
 }
 .team-section-heading {
-    font-size: 1.75rem;
+    font-size: 2.5rem;
+    font-weight: 700;
     color: #1e293b;
     margin: 0;
     font-family: "Playfair Display", Georgia, serif;
 }
 .team-section-divider {
-    width: 48px;
-    height: 3px;
-    background: linear-gradient(90deg, #2563eb, #38bdf8);
-    border-radius: 2px;
-    margin: 0.65rem 0 0.6rem;
+    display: none;
 }
 .team-section-sub {
     color: #64748b;

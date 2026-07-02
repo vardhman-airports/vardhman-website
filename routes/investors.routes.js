@@ -30,9 +30,11 @@ const CATEGORY_LABELS = {
     'company-policies':               'Company Policies',
     'offer-documents/drhp':           'Offer Documents → DRHP',
     'offer-documents/rhp':            'Offer Documents → RHP',
-    'offer-documents/prospectus':     'Offer Documents → Prospectus',
+    'offer-documents/prospectus':     'Offer Documents → Draft Abridged Prospectus',
     'offer-documents/other-documents':'Offer Documents → Other Documents',
     'media-press':                    'Media & Press',
+    // Group Companies — managed here in the Investors admin, shown on /group-companies
+    'group-companies/rlg-docking/audited-financials': 'Group Companies → RLG Docking Systems → Audited Financial Statements',
 };
 
 const docPage = (title, breadcrumb, documents = []) => ({
@@ -380,8 +382,8 @@ router.get("/offer-documents/rhp", async (req, res) => {
 
 router.get("/offer-documents/prospectus", async (req, res) => {
     res.render("investors/document-list.ejs", docPage(
-        "Prospectus",
-        [inv("Investors", "/investors"), inv("Offer Documents", "/investors/offer-documents"), inv("Prospectus")],
+        "Draft Abridged Prospectus",
+        [inv("Investors", "/investors"), inv("Offer Documents", "/investors/offer-documents"), inv("Draft Abridged Prospectus")],
         await getDocsByCategory('offer-documents/prospectus')
     ));
 });
