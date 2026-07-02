@@ -200,6 +200,7 @@ a {
     border-radius: 4px;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: 0.88rem;
 }
 
 .dropdown-item::before {
