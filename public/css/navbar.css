@@ -72,13 +72,15 @@ a {
 }
 
 .nav-item {
-    margin-left: 1rem;
+    margin-left: 0.2rem;
     font-size: 1rem;
 }
 
 /* Navigation Link Styles with Underline Animation */
 .nav-link {
-    font-size: large;
+    font-size: 0.95rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     position: relative;
     transition: color 0.3s ease;
     overflow: hidden;
@@ -198,6 +200,7 @@ a {
     border-radius: 4px;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: 0.88rem;
 }
 
 .dropdown-item::before {

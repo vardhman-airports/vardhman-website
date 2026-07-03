@@ -22,6 +22,9 @@ scripts/
 # Dev/staging data folders (source content, not served assets)
 Website Data/
 Website Pending Data/
+INVESTOR/
+GROUP COMPANIES/
+DISCLAIMER PAGE ON FRONT/
 
 # Script output / test images
 out/

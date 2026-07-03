@@ -1,0 +1,149 @@
+<!-- Investor Disclaimer Gate (SEBI ICDR) — shown on all public investor pages -->
+<style>
+    .vas-disc-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.65);
+        z-index: 100000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+    }
+    .vas-disc-overlay.is-open { display: flex; }
+    body.vas-disc-lock { overflow: hidden; }
+    .vas-disc-modal {
+        background: #fff;
+        width: 100%;
+        max-width: 960px;
+        max-height: 90vh;
+        border-radius: 10px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        padding: 1.75rem 2rem 2rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .vas-disc-title {
+        color: #0b1f4d;
+        font-size: 1.7rem;
+        font-weight: 800;
+        margin: 0 0 1rem;
+    }
+    .vas-disc-scroll {
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 1.25rem 1.5rem;
+        overflow-y: auto;
+        flex: 1 1 auto;
+        min-height: 0;
+    }
+    .vas-disc-scroll p { margin: 0 0 1rem; color: #374151; font-size: 0.95rem; line-height: 1.65; }
+    .vas-disc-scroll p:last-child { margin-bottom: 0; }
+    .vas-disc-intro { color: #0b1f4d !important; font-weight: 700 !important; text-transform: uppercase; }
+    .vas-disc-important {
+        background: #fdecec;
+        color: #b91c1c !important;
+        font-weight: 600 !important;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+    }
+    .vas-disc-check {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        font-size: 0.9rem;
+        color: #374151;
+        line-height: 1.5;
+        margin: 1rem 0 0;
+        cursor: pointer;
+    }
+    .vas-disc-check input { margin-top: 0.2rem; flex: 0 0 auto; width: 1rem; height: 1rem; cursor: pointer; }
+    .vas-disc-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+    .vas-disc-btn {
+        padding: 0.85rem 1.75rem;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.15s ease, opacity 0.15s ease;
+    }
+    .vas-disc-confirm { background: #16a34a; color: #fff; }
+    .vas-disc-confirm:hover:not(:disabled) { background: #15803d; }
+    .vas-disc-confirm:disabled { background: #9ca3af; cursor: not-allowed; opacity: 0.8; }
+    .vas-disc-deny { background: #d1d5db; color: #374151; }
+    .vas-disc-deny:hover { background: #c3c8cf; }
+    @media (max-width: 600px) {
+        .vas-disc-modal { padding: 1.25rem 1.1rem 1.5rem; }
+        .vas-disc-title { font-size: 1.4rem; }
+        .vas-disc-btn { flex: 1 1 100%; }
+    }
+</style>
+
+<div id="vasDisclaimerOverlay" class="vas-disc-overlay is-open" role="dialog" aria-modal="true" aria-labelledby="vasDiscTitle">
+    <div class="vas-disc-modal">
+        <h2 id="vasDiscTitle" class="vas-disc-title">Disclaimer</h2>
+        <div class="vas-disc-scroll" tabindex="0">
+            <p class="vas-disc-intro">These materials are not directed at or intended to be accessed by persons located outside India. These materials are being made available on this website to comply with Securities and Exchange Board of India (Issue of Capital and Disclosure Requirements) Regulations, 2018, as amended.</p>
+            <p class="vas-disc-important"><strong>IMPORTANT:</strong> You must read and agree with the terms and conditions of the following disclaimer before continuing.</p>
+            <p>The following disclaimer applies to the draft red herring prospectus of Vardhman Airport Solutions Limited (&ldquo;Company&rdquo;) dated June 30, 2026 (&ldquo;Draft Red Herring Prospectus&rdquo;) filed with the Securities and Exchange Board of India (&ldquo;SEBI&rdquo;) and hosted on this website in connection with the initial public offering of the equity shares of the Company (&ldquo;Issue&rdquo;). You are advised to read the following notice carefully before accessing the Draft Red Herring Prospectus. In accessing the Draft Red Herring Prospectus, you agree to be bound by the following terms and conditions, including any modifications to them from time to time. The Draft Red Herring Prospectus is directed at, and is intended for distribution to, and use by, residents of India only. The information in this portion of our website, including the Draft Red Herring Prospectus, is not for publication or distribution, directly or indirectly, in or into the United States. No part of the contents of the Draft Red Herring Prospectus shall be copied or duplicated in any form by any means or redistributed.</p>
+            <p>The Draft Red Herring Prospectus has been hosted on this website as prescribed under Regulation 26(1) of the Securities and Exchange Board of India (Issue of Capital and Disclosure Requirements) Regulations, 2018, as amended (&ldquo;SEBI ICDR Regulations&rdquo;). Our Company has taken all necessary steps to ensure that the contents of the Draft Red Herring Prospectus as appearing on this website are identical to the Draft Red Herring Prospectus filed with the SEBI. You are reminded that documents transmitted in electronic form may be altered or changed during the process of transmission and consequently, neither the Company nor any of its affiliates accepts any liability or responsibility whatsoever in respect of alterations or changes which have taken place during the course of transmission of electronic data.</p>
+            <p>The Draft Red Herring Prospectus does not constitute an offer to sell or an invitation to subscribe to the securities offered in any jurisdiction to any person to whom it is unlawful to make an offer or invitation in such jurisdiction and is not intended for distribution to, or use by, any person or entity in any jurisdiction or country where (a) distribution or use of such information would be contrary to law or regulation; or (b) the Company or any of its affiliates would by virtue of such distribution become subject to new or additional registration, licensing or other regulatory requirements. The equity shares offered in the Issue have not been and will not be registered under the U.S. Securities Act of 1933, as amended (&ldquo;U.S. Securities Act&rdquo;) or any state securities laws in the United States, and unless so registered may not be offered or sold within the United States, except pursuant to an exemption from, or in a transaction not subject to, the registration requirements of the U.S. Securities Act and applicable state securities laws. Accordingly, such equity shares are being offered and sold outside the United States in offshore transactions as defined in and in reliance on Regulation S under the U.S. Securities Act and the applicable laws of the jurisdiction where those offers and sales occur.</p>
+            <p>Any person into whose possession the Draft Red Herring Prospectus comes is required to inform himself or herself about and to observe any such restrictions. Neither the Company nor any of its affiliates is soliciting any action based on the Draft Red Herring Prospectus, and it should not be construed as an offer to sell or the solicitation of an offer to buy any securities. Potential investors should not rely on the Draft Red Herring Prospectus for any investment decision. Any decision on whether to invest in the equity shares described in the Draft Red Herring Prospectus may only be made after a red herring prospectus has been filed with the Registrar of Companies, Delhi II and the SEBI and must be made solely on the basis of such red herring prospectus, as there may be material changes in the red herring prospectus compared to the Draft Red Herring Prospectus. Invitations to subscribe to or purchase the equity shares in the Issue will be made only pursuant to the red herring prospectus if the recipient is in India or the preliminary offering memorandum for the Issue, which comprises the red herring prospectus and the preliminary international wrap for the Issue, if the recipient is outside India. No person outside India is eligible to Bid for equity shares in the Issue unless that person has received the preliminary offering memorandum for the Issue, which shall contain the selling restrictions for the Issue outside India.</p>
+            <p>Any potential investor should note that investment in equity shares involves a high degree of risk and for details relating to such risk, please see the section titled &lsquo;Risk Factors&rsquo; of the red herring prospectus, when available. Neither the Company nor any of its affiliates will be responsible for any loss or damage that could result from interception and interpretation by any third parties of any information being made available to you through this website. The Company and its affiliates cannot and do not guarantee the accuracy, timeliness or completeness of the information being made available to you in the Draft Red Herring Prospectus beyond the date of the Draft Red Herring Prospectus. The information contained in the Draft Red Herring Prospectus may not be updated since its original publication date and may not reflect the latest updates. The Company and its affiliates will not be responsible for any loss to any person or entity caused by any shortcoming, defect or inaccuracy which may have inadvertently or otherwise crept into the website.</p>
+            <p>Neither the Company, any of its affiliates nor their directors, officers and employees will be liable or have any responsibility of any kind for any loss or damage that you incur in the event of any failure or disruption of this website, or resulting from the act or omission of any other party involved in making this website or the data contained therein available to you, or from any other cause relating to your access to, inability to access, or use of the website or these materials. To access this information, you must confirm by pressing on the button marked &lsquo;Confirm and Proceed&rsquo; that, at the time of access you are located and resident in India. If you cannot make this confirmation, you must press the button marked &lsquo;Do Not Confirm&rsquo;. The documentation contained in these pages is posted solely to comply with Indian legal and regulatory requirements. Making the information contained herein available in electronic format does not constitute an offer to sell, the solicitation of an offer to buy, or a recommendation to buy or sell securities of the Company in the United States or in any other jurisdiction, including without limitation, India.</p>
+        </div>
+
+        <label class="vas-disc-check">
+            <input type="checkbox" id="vasDiscChk1">
+            <span>I hereby declare that I am a resident of India, and there are no restrictions on my accessing or receiving the information contained on this website.</span>
+        </label>
+        <label class="vas-disc-check">
+            <input type="checkbox" id="vasDiscChk2">
+            <span>I have read the Legal Disclaimer and am entitled to receive information contained in this website.</span>
+        </label>
+
+        <div class="vas-disc-actions">
+            <button type="button" id="vasDiscConfirm" class="vas-disc-btn vas-disc-confirm" disabled>Confirm and Proceed</button>
+            <button type="button" id="vasDiscDeny" class="vas-disc-btn vas-disc-deny">Do Not Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var KEY = 'vasInvestorDisclaimerAccepted';
+        var overlay = document.getElementById('vasDisclaimerOverlay');
+        if (!overlay) return;
+
+        // Already acknowledged in this browser session — don't gate again.
+        if (sessionStorage.getItem(KEY) === 'yes') {
+            overlay.classList.remove('is-open');
+            return;
+        }
+        document.body.classList.add('vas-disc-lock');
+
+        var chk1 = document.getElementById('vasDiscChk1');
+        var chk2 = document.getElementById('vasDiscChk2');
+        var confirmBtn = document.getElementById('vasDiscConfirm');
+        var denyBtn = document.getElementById('vasDiscDeny');
+
+        function sync() { confirmBtn.disabled = !(chk1.checked && chk2.checked); }
+        chk1.addEventListener('change', sync);
+        chk2.addEventListener('change', sync);
+
+        confirmBtn.addEventListener('click', function () {
+            if (chk1.checked && chk2.checked) {
+                sessionStorage.setItem(KEY, 'yes');
+                overlay.classList.remove('is-open');
+                document.body.classList.remove('vas-disc-lock');
+            }
+        });
+
+        denyBtn.addEventListener('click', function () {
+            window.location.href = '/';
+        });
+    })();
+</script>

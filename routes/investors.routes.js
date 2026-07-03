@@ -30,9 +30,10 @@ const CATEGORY_LABELS = {
     'company-policies':               'Company Policies',
     'offer-documents/drhp':           'Offer Documents → DRHP',
     'offer-documents/rhp':            'Offer Documents → RHP',
-    'offer-documents/prospectus':     'Offer Documents → Prospectus',
-    'offer-documents/other-documents':'Offer Documents → Other Documents',
+    'offer-documents/prospectus':     'Offer Documents → Draft Abridged Prospectus',
     'media-press':                    'Media & Press',
+    // Group Companies — managed here in the Investors admin, shown on /group-companies
+    'group-companies/rlg-docking/audited-financials': 'Group Companies → RLG Docking Systems → Audited Financial Statements',
 };
 
 const docPage = (title, breadcrumb, documents = []) => ({
@@ -358,7 +359,7 @@ router.get("/offer-documents", async (req, res) => {
     res.render("investors/document-list.ejs", docPage(
         "Offer Documents",
         [inv("Investors", "/investors"), inv("Offer Documents")],
-        await getDocsByCategory(['offer-documents/drhp', 'offer-documents/rhp', 'offer-documents/prospectus', 'offer-documents/other-documents'])
+        await getDocsByCategory(['offer-documents/drhp', 'offer-documents/rhp', 'offer-documents/prospectus'])
     ));
 });
 
@@ -380,17 +381,9 @@ router.get("/offer-documents/rhp", async (req, res) => {
 
 router.get("/offer-documents/prospectus", async (req, res) => {
     res.render("investors/document-list.ejs", docPage(
-        "Prospectus",
-        [inv("Investors", "/investors"), inv("Offer Documents", "/investors/offer-documents"), inv("Prospectus")],
+        "Draft Abridged Prospectus",
+        [inv("Investors", "/investors"), inv("Offer Documents", "/investors/offer-documents"), inv("Draft Abridged Prospectus")],
         await getDocsByCategory('offer-documents/prospectus')
-    ));
-});
-
-router.get("/offer-documents/other-documents", async (req, res) => {
-    res.render("investors/document-list.ejs", docPage(
-        "Other Documents",
-        [inv("Investors", "/investors"), inv("Offer Documents", "/investors/offer-documents"), inv("Other Documents")],
-        await getDocsByCategory('offer-documents/other-documents')
     ));
 });
 
