@@ -38,3 +38,6 @@ README_DEV.md
 
 # Logs
 *.log
+
+# Personal interview prep (private, do not commit)
+interview-prep/
