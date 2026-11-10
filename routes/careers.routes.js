@@ -10,7 +10,6 @@ dotenv.config();
 const router = express.Router();
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
-const supabaseAdmin = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 // Configure multer
 const upload = multer({
@@ -53,15 +52,9 @@ router.post('/apply/:id', upload.single('resume'), async (req, res) => {
             return res.status(400).json({ error: 'All required fields must be filled' });
         }
 
-        // Upload resume
-        const resumeFileName = `${Date.now()}-${uuidv4()}-${req.file.originalname}`;
-        const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
-            .from('resumes')
-            .upload(resumeFileName, req.file.buffer, { contentType: req.file.mimetype });
-            
-        if (uploadError) return res.status(500).json({ error: 'Error uploading resume' });
-
-        // Store application
+        // Resumes are NOT stored in Supabase storage — the email to the careers
+        // inbox (with the resume attached) is the only copy. resume_file keeps
+        // just the original filename for reference.
         const applicationData = {
             id: uuidv4(),
             job_id: job.id,
@@ -69,19 +62,13 @@ router.post('/apply/:id', upload.single('resume'), async (req, res) => {
             name, email, mobile,
             message: message || '',
             reference: reference || '',
-            resume_file: uploadData.path,
+            resume_file: req.file.originalname,
             status: 'pending',
             created_at: new Date().toISOString()
         };
 
-        const { error } = await supabase.from('applications').insert([applicationData]);
-
-        if (error) {
-            await supabaseAdmin.storage.from('resumes').remove([uploadData.path]);
-            return res.status(500).json({ error: 'Error storing application' });
-        }
-
-        // Send email notification
+        // Send email first; if it fails, the resume would be lost, so ask the
+        // applicant to retry instead of reporting success.
         try {
             if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
                 throw new Error('Email service not configured');
@@ -117,7 +104,11 @@ router.post('/apply/:id', upload.single('resume'), async (req, res) => {
             });
         } catch (emailError) {
             console.error('Email error:', emailError);
+            return res.status(500).json({ error: 'Could not submit your application right now. Please try again later.' });
         }
+
+        const { error } = await supabase.from('applications').insert([applicationData]);
+        if (error) console.error('Error storing application record:', error.message);
 
         res.json({ success: true, message: 'Application submitted successfully!', applicationId: applicationData.id });
     } catch {
@@ -234,19 +225,6 @@ router.post('/admin/applications/:id/status', isAdmin, async (req, res) => {
         }).eq('id', req.params.id);
     } catch {}
     res.redirect('/careers/admin/applications');
-});
-
-router.get('/admin/download-resume/:id', isAdmin, async (req, res) => {
-    try {
-        const { data: application } = await supabase.from('applications').select('*').eq('id', req.params.id).single();
-        
-        if (!application?.resume_file) return res.status(404).send('Resume not found');
-        
-        const { data: signedUrlData } = await supabase.storage.from('resumes').createSignedUrl(application.resume_file, 60);
-        res.redirect(signedUrlData.signedUrl);
-    } catch {
-        res.status(500).send('Internal server error');
-    }
 });
 
 export default router;
